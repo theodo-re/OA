@@ -1,0 +1,692 @@
+2020-11-25 19:48:12.891  INFO 9860 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 9860 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 19:48:12.899  INFO 9860 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 19:48:14.551  WARN 9860 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[cn.bdqn.oaproject]' package. Please check your configuration.
+2020-11-25 19:48:15.358  INFO 9860 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 19:48:15.383  INFO 9860 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 19:48:15.384  INFO 9860 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 19:48:15.602  INFO 9860 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 19:48:15.603  INFO 9860 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2539 ms
+2020-11-25 19:48:15.759  WARN 9860 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'logController': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'usersServiceImpl': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'cn.bdqn.oaproject.dao.UsersDao' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@javax.annotation.Resource(shareable=true, lookup=, name=, description=, authenticationType=CONTAINER, type=class java.lang.Object, mappedName=)}
+2020-11-25 19:48:15.764  INFO 9860 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2020-11-25 19:48:15.788  WARN 9860 --- [main] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:144)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+2020-11-25 19:48:15.819  INFO 9860 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2020-11-25 19:48:16.155 ERROR 9860 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+A component required a bean of type 'cn.bdqn.oaproject.dao.UsersDao' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'cn.bdqn.oaproject.dao.UsersDao' in your configuration.
+
+2020-11-25 19:50:31.594  INFO 10732 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 10732 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 19:50:31.658  INFO 10732 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 19:50:33.455  WARN 10732 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[cn.bdqn.oaproject]' package. Please check your configuration.
+2020-11-25 19:50:34.283  INFO 10732 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 19:50:34.301  INFO 10732 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 19:50:34.302  INFO 10732 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 19:50:34.447  INFO 10732 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 19:50:34.447  INFO 10732 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2663 ms
+2020-11-25 19:50:34.564  WARN 10732 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'logController': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'usersServiceImpl': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'cn.bdqn.oaproject.dao.UsersDao' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@javax.annotation.Resource(shareable=true, lookup=, name=, description=, authenticationType=CONTAINER, type=class java.lang.Object, mappedName=)}
+2020-11-25 19:50:34.571  INFO 10732 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2020-11-25 19:50:34.588  WARN 10732 --- [main] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:144)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+2020-11-25 19:50:34.608  INFO 10732 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2020-11-25 19:50:34.757 ERROR 10732 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+A component required a bean of type 'cn.bdqn.oaproject.dao.UsersDao' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'cn.bdqn.oaproject.dao.UsersDao' in your configuration.
+
+2020-11-25 19:51:09.440  INFO 3788 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 3788 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 19:51:09.450  INFO 3788 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 19:51:11.805  INFO 3788 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 19:51:11.821  INFO 3788 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 19:51:11.822  INFO 3788 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 19:51:11.950  INFO 3788 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 19:51:11.951  INFO 3788 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2377 ms
+2020-11-25 19:51:12.516  WARN 3788 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'logController': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'usersServiceImpl': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'usersDao' defined in file [D:\OA项目\target\classes\cn\bdqn\oaproject\dao\UsersDao.class]: Unsatisfied dependency expressed through bean property 'sqlSessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\OA项目\target\classes\dao\afficheMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: org.apache.ibatis.builder.BuilderException: Mapper's namespace cannot be empty
+2020-11-25 19:51:12.522  INFO 3788 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2020-11-25 19:51:12.542  INFO 3788 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2020-11-25 19:51:12.561 ERROR 3788 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'logController': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'usersServiceImpl': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'usersDao' defined in file [D:\OA项目\target\classes\cn\bdqn\oaproject\dao\UsersDao.class]: Unsatisfied dependency expressed through bean property 'sqlSessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\OA项目\target\classes\dao\afficheMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: org.apache.ibatis.builder.BuilderException: Mapper's namespace cannot be empty
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessProperties(CommonAnnotationBeanPostProcessor.java:321) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1420) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:897) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:879) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:551) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141) ~[spring-boot-2.2.11.RELEASE.jar:2.2.11.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:747) [spring-boot-2.2.11.RELEASE.jar:2.2.11.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:405) [spring-boot-2.2.11.RELEASE.jar:2.2.11.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315) [spring-boot-2.2.11.RELEASE.jar:2.2.11.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) [spring-boot-2.2.11.RELEASE.jar:2.2.11.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) [spring-boot-2.2.11.RELEASE.jar:2.2.11.RELEASE]
+	at cn.bdqn.oaproject.OaprojectApplication.main(OaprojectApplication.java:12) [classes/:na]
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'usersServiceImpl': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'usersDao' defined in file [D:\OA项目\target\classes\cn\bdqn\oaproject\dao\UsersDao.class]: Unsatisfied dependency expressed through bean property 'sqlSessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\OA项目\target\classes\dao\afficheMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: org.apache.ibatis.builder.BuilderException: Mapper's namespace cannot be empty
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessProperties(CommonAnnotationBeanPostProcessor.java:321) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1420) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1307) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1227) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:521) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:497) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:650) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:239) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:130) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessProperties(CommonAnnotationBeanPostProcessor.java:318) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	... 17 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'usersDao' defined in file [D:\OA项目\target\classes\cn\bdqn\oaproject\dao\UsersDao.class]: Unsatisfied dependency expressed through bean property 'sqlSessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\OA项目\target\classes\dao\afficheMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: org.apache.ibatis.builder.BuilderException: Mapper's namespace cannot be empty
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireByType(AbstractAutowireCapableBeanFactory.java:1524) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1404) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1307) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1227) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:521) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:497) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:650) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:239) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:130) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessProperties(CommonAnnotationBeanPostProcessor.java:318) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	... 33 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\OA项目\target\classes\dao\afficheMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: org.apache.ibatis.builder.BuilderException: Mapper's namespace cannot be empty
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:655) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:635) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1336) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1176) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:556) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1307) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1227) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireByType(AbstractAutowireCapableBeanFactory.java:1509) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	... 49 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\OA项目\target\classes\dao\afficheMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: org.apache.ibatis.builder.BuilderException: Mapper's namespace cannot be empty
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:185) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:650) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	... 62 common frames omitted
+Caused by: org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\OA项目\target\classes\dao\afficheMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: org.apache.ibatis.builder.BuilderException: Mapper's namespace cannot be empty
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:522) ~[mybatis-spring-1.3.0.jar:1.3.0]
+	at org.mybatis.spring.SqlSessionFactoryBean.afterPropertiesSet(SqlSessionFactoryBean.java:381) ~[mybatis-spring-1.3.0.jar:1.3.0]
+	at org.mybatis.spring.SqlSessionFactoryBean.getObject(SqlSessionFactoryBean.java:546) ~[mybatis-spring-1.3.0.jar:1.3.0]
+	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration.sqlSessionFactory(MybatisAutoConfiguration.java:130) ~[mybatis-spring-boot-autoconfigure-1.1.1.jar:1.1.1]
+	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$$EnhancerBySpringCGLIB$$13e63721.CGLIB$sqlSessionFactory$0(<generated>) ~[mybatis-spring-boot-autoconfigure-1.1.1.jar:1.1.1]
+	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$$EnhancerBySpringCGLIB$$13e63721$$FastClassBySpringCGLIB$$ea4d0a64.invoke(<generated>) ~[mybatis-spring-boot-autoconfigure-1.1.1.jar:1.1.1]
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:244) ~[spring-core-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331) ~[spring-context-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	at org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$$EnhancerBySpringCGLIB$$13e63721.sqlSessionFactory(<generated>) ~[mybatis-spring-boot-autoconfigure-1.1.1.jar:1.1.1]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_271]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_271]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_271]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_271]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154) ~[spring-beans-5.2.10.RELEASE.jar:5.2.10.RELEASE]
+	... 63 common frames omitted
+Caused by: org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: org.apache.ibatis.builder.BuilderException: Mapper's namespace cannot be empty
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:120) ~[mybatis-3.4.0.jar:3.4.0]
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.parse(XMLMapperBuilder.java:92) ~[mybatis-3.4.0.jar:3.4.0]
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:520) ~[mybatis-spring-1.3.0.jar:1.3.0]
+	... 76 common frames omitted
+Caused by: org.apache.ibatis.builder.BuilderException: Mapper's namespace cannot be empty
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:110) ~[mybatis-3.4.0.jar:3.4.0]
+	... 78 common frames omitted
+
+2020-11-25 20:00:52.083  INFO 7676 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 7676 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 20:00:52.118  INFO 7676 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 20:00:54.428  INFO 7676 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 20:00:54.442  INFO 7676 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 20:00:54.443  INFO 7676 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 20:00:54.559  INFO 7676 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 20:00:54.559  INFO 7676 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2341 ms
+2020-11-25 20:00:55.386  INFO 7676 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 20:00:55.488  INFO 7676 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 20:00:55.931  INFO 7676 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2020-11-25 20:00:55.941  INFO 7676 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2020-11-25 20:00:55.947 ERROR 7676 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2020-11-25 20:00:55.952  INFO 7676 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-11-25 20:06:10.044  INFO 5756 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 5756 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 20:06:10.054  INFO 5756 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 20:06:11.866  INFO 5756 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 20:06:11.886  INFO 5756 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 20:06:11.886  INFO 5756 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 20:06:12.016  INFO 5756 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 20:06:12.016  INFO 5756 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1852 ms
+2020-11-25 20:06:12.946  INFO 5756 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 20:06:13.052  INFO 5756 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 20:06:13.492  INFO 5756 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 20:06:13.502  INFO 5756 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 4.763 seconds (JVM running for 7.087)
+2020-11-25 20:06:56.718  INFO 5756 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 20:06:56.718  INFO 5756 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 20:06:56.736  INFO 5756 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 17 ms
+2020-11-25 20:06:56.793  INFO 5756 --- [http-nio-8080-exec-1] c.b.oaproject.controller.LogController   : 转登录页面==============================
+2020-11-25 20:07:54.529  INFO 4376 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 4376 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 20:07:54.625  INFO 4376 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 20:07:57.183  INFO 4376 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 20:07:57.202  INFO 4376 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 20:07:57.202  INFO 4376 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 20:07:57.402  INFO 4376 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 20:07:57.403  INFO 4376 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2646 ms
+2020-11-25 20:07:59.262  INFO 4376 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 20:07:59.359  INFO 4376 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 20:08:00.243  INFO 4376 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 20:08:00.250  INFO 4376 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 6.587 seconds (JVM running for 7.945)
+2020-11-25 20:08:26.786  INFO 4376 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 20:08:26.787  INFO 4376 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 20:08:26.802  INFO 4376 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 13 ms
+2020-11-25 20:08:26.840  INFO 4376 --- [http-nio-8080-exec-1] c.b.oaproject.controller.LogController   : 转登录页面==============================
+2020-11-25 20:08:39.559  INFO 4376 --- [http-nio-8080-exec-1] c.b.oaproject.controller.LogController   : 转登录页面==============================
+2020-11-25 20:11:23.291  INFO 4092 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 4092 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 20:11:23.297  INFO 4092 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 20:11:27.402  INFO 4092 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 20:11:27.681  INFO 4092 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 20:11:27.682  INFO 4092 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 20:11:30.297  INFO 4092 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 20:11:30.298  INFO 4092 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 6877 ms
+2020-11-25 20:11:32.526  INFO 4092 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 20:11:32.748  INFO 4092 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 20:11:33.274  INFO 4092 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 20:11:33.278  INFO 4092 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 10.679 seconds (JVM running for 11.957)
+2020-11-25 20:11:40.531  INFO 4092 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 20:11:40.532  INFO 4092 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 20:11:40.544  INFO 4092 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 12 ms
+2020-11-25 20:11:40.654  INFO 4092 --- [http-nio-8080-exec-1] c.b.oaproject.controller.LogController   : 转登录页面==============================
+2020-11-25 20:11:46.227  INFO 4092 --- [http-nio-8080-exec-4] c.b.oaproject.controller.LogController   : 登录页面==============================
+2020-11-25 20:11:46.282  INFO 4092 --- [http-nio-8080-exec-4] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-11-25 20:11:46.703  INFO 4092 --- [http-nio-8080-exec-4] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-11-25 20:12:13.878  INFO 4092 --- [http-nio-8080-exec-7] c.b.oaproject.controller.LogController   : 登录页面==============================
+2020-11-25 20:16:06.896  INFO 6728 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 6728 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 20:16:06.902  INFO 6728 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 20:16:09.135  INFO 6728 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 20:16:09.150  INFO 6728 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 20:16:09.150  INFO 6728 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 20:16:09.257  INFO 6728 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 20:16:09.257  INFO 6728 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2223 ms
+2020-11-25 20:16:09.991  INFO 6728 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 20:16:10.069  INFO 6728 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 20:16:10.499  INFO 6728 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 20:16:10.504  INFO 6728 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 4.355 seconds (JVM running for 5.874)
+2020-11-25 20:16:15.525  INFO 6728 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 20:16:15.526  INFO 6728 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 20:16:15.540  INFO 6728 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 14 ms
+2020-11-25 20:16:15.575  INFO 6728 --- [http-nio-8080-exec-1] c.b.oaproject.controller.LogController   : 转登录页面==============================
+2020-11-25 20:16:24.787  INFO 6728 --- [http-nio-8080-exec-8] c.b.oaproject.controller.LogController   : 登录页面==============================
+2020-11-25 20:16:24.815  INFO 6728 --- [http-nio-8080-exec-8] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-11-25 20:16:25.074  INFO 6728 --- [http-nio-8080-exec-8] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-11-25 20:16:25.084 DEBUG 6728 --- [http-nio-8080-exec-8] c.b.oaproject.dao.UsersDao.findCByName   : ==>  Preparing: select * from users where uName=? 
+2020-11-25 20:16:25.111 DEBUG 6728 --- [http-nio-8080-exec-8] c.b.oaproject.dao.UsersDao.findCByName   : ==> Parameters: null
+2020-11-25 20:16:25.128 DEBUG 6728 --- [http-nio-8080-exec-8] c.b.oaproject.dao.UsersDao.findCByName   : <==      Total: 0
+2020-11-25 20:17:15.117  INFO 7696 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 7696 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 20:17:15.137  INFO 7696 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 20:17:17.300  INFO 7696 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 20:17:17.317  INFO 7696 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 20:17:17.317  INFO 7696 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 20:17:17.457  INFO 7696 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 20:17:17.458  INFO 7696 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2217 ms
+2020-11-25 20:17:18.270  INFO 7696 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 20:17:18.344  INFO 7696 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 20:17:18.737  INFO 7696 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 20:17:18.741  INFO 7696 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 4.306 seconds (JVM running for 5.475)
+2020-11-25 20:17:31.449  INFO 7696 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 20:17:31.452  INFO 7696 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 20:17:31.470  INFO 7696 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 17 ms
+2020-11-25 20:17:31.499  INFO 7696 --- [http-nio-8080-exec-1] c.b.oaproject.controller.LogController   : 转登录页面==============================
+2020-11-25 20:17:40.475  INFO 7696 --- [http-nio-8080-exec-4] c.b.oaproject.controller.LogController   : 登录页面==============================
+2020-11-25 20:17:40.504  INFO 7696 --- [http-nio-8080-exec-4] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-11-25 20:17:40.757  INFO 7696 --- [http-nio-8080-exec-4] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-11-25 20:17:40.766 DEBUG 7696 --- [http-nio-8080-exec-4] c.b.oaproject.dao.UsersDao.findCByName   : ==>  Preparing: select * from users where uName=? 
+2020-11-25 20:17:40.797 DEBUG 7696 --- [http-nio-8080-exec-4] c.b.oaproject.dao.UsersDao.findCByName   : ==> Parameters: ZS(String)
+2020-11-25 20:17:40.821 DEBUG 7696 --- [http-nio-8080-exec-4] c.b.oaproject.dao.UsersDao.findCByName   : <==      Total: 1
+2020-11-25 20:18:36.524  INFO 7664 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 7664 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 20:18:36.533  INFO 7664 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 20:18:39.451  INFO 7664 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 20:18:39.476  INFO 7664 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 20:18:39.477  INFO 7664 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 20:18:39.627  INFO 7664 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 20:18:39.627  INFO 7664 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2964 ms
+2020-11-25 20:18:40.929  INFO 7664 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 20:18:41.057  INFO 7664 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 20:18:41.511  INFO 7664 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 20:18:41.517  INFO 7664 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 5.806 seconds (JVM running for 7.328)
+2020-11-25 20:18:52.929  INFO 7664 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 20:18:52.930  INFO 7664 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 20:18:52.946  INFO 7664 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 16 ms
+2020-11-25 20:20:18.526  INFO 7344 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 7344 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 20:20:18.537  INFO 7344 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 20:20:20.998  INFO 7344 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 20:20:21.015  INFO 7344 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 20:20:21.015  INFO 7344 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 20:20:21.159  INFO 7344 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 20:20:21.160  INFO 7344 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2494 ms
+2020-11-25 20:20:22.344  INFO 7344 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 20:20:22.427  INFO 7344 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 20:20:22.970  INFO 7344 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 20:20:23.003  INFO 7344 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 5.5 seconds (JVM running for 6.931)
+2020-11-25 20:20:34.409  INFO 7344 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 20:20:34.410  INFO 7344 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 20:20:34.420  INFO 7344 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2020-11-25 20:21:46.758  INFO 1320 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 1320 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 20:21:46.776  INFO 1320 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 20:21:49.259  INFO 1320 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 20:21:49.271  INFO 1320 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 20:21:49.271  INFO 1320 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 20:21:49.390  INFO 1320 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 20:21:49.391  INFO 1320 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2511 ms
+2020-11-25 20:21:50.109  INFO 1320 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 20:21:50.187  INFO 1320 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 20:21:50.580  INFO 1320 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 20:21:50.584  INFO 1320 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 4.511 seconds (JVM running for 6.186)
+2020-11-25 20:22:02.071  INFO 1320 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 20:22:02.072  INFO 1320 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 20:22:02.083  INFO 1320 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
+2020-11-25 20:24:05.435  INFO 7156 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 7156 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 20:24:05.450  INFO 7156 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 20:24:07.580  INFO 7156 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 20:24:07.594  INFO 7156 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 20:24:07.595  INFO 7156 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 20:24:07.703  INFO 7156 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 20:24:07.704  INFO 7156 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2134 ms
+2020-11-25 20:24:08.510  INFO 7156 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 20:24:08.589  INFO 7156 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 20:24:08.947  INFO 7156 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 20:24:08.951  INFO 7156 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 4.203 seconds (JVM running for 5.465)
+2020-11-25 20:24:22.607  INFO 7156 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 20:24:22.608  INFO 7156 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 20:24:22.623  INFO 7156 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 15 ms
+2020-11-25 20:24:58.790  INFO 3848 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 3848 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 20:24:58.790  INFO 3848 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 20:25:01.737  INFO 3848 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 20:25:01.766  INFO 3848 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 20:25:01.767  INFO 3848 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 20:25:02.007  INFO 3848 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 20:25:02.009  INFO 3848 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3058 ms
+2020-11-25 20:25:03.008  INFO 3848 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 20:25:03.097  INFO 3848 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 20:25:03.512  INFO 3848 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 20:25:03.516  INFO 3848 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 5.404 seconds (JVM running for 6.876)
+2020-11-25 20:25:06.041  INFO 3848 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 20:25:06.042  INFO 3848 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 20:25:06.051  INFO 3848 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2020-11-25 20:25:06.080  INFO 3848 --- [http-nio-8080-exec-1] c.b.oaproject.controller.LogController   : 转登录页面==============================
+2020-11-25 20:25:11.517  INFO 3848 --- [http-nio-8080-exec-4] c.b.oaproject.controller.LogController   : 登录页面==============================
+2020-11-25 20:25:11.570  INFO 3848 --- [http-nio-8080-exec-4] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-11-25 20:25:11.941  INFO 3848 --- [http-nio-8080-exec-4] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-11-25 20:25:11.957 DEBUG 3848 --- [http-nio-8080-exec-4] c.b.oaproject.dao.UsersDao.findCByName   : ==>  Preparing: select * from users where uName=? 
+2020-11-25 20:25:11.985 DEBUG 3848 --- [http-nio-8080-exec-4] c.b.oaproject.dao.UsersDao.findCByName   : ==> Parameters: ZS(String)
+2020-11-25 20:25:12.027 DEBUG 3848 --- [http-nio-8080-exec-4] c.b.oaproject.dao.UsersDao.findCByName   : <==      Total: 1
+2020-11-25 20:25:42.612  INFO 3848 --- [http-nio-8080-exec-8] c.b.oaproject.controller.LogController   : 转登录页面==============================
+2020-11-25 20:26:09.430  INFO 6732 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 6732 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 20:26:09.437  INFO 6732 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 20:26:12.698  INFO 6732 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 20:26:12.717  INFO 6732 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 20:26:12.718  INFO 6732 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 20:26:12.867  INFO 6732 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 20:26:12.868  INFO 6732 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3243 ms
+2020-11-25 20:26:14.022  INFO 6732 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 20:26:14.116  INFO 6732 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 20:26:14.664  INFO 6732 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 20:26:14.669  INFO 6732 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 6.041 seconds (JVM running for 7.278)
+2020-11-25 20:26:14.847  INFO 6732 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 20:26:14.847  INFO 6732 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 20:26:14.860  INFO 6732 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 12 ms
+2020-11-25 20:26:14.904  INFO 6732 --- [http-nio-8080-exec-1] c.b.oaproject.controller.LogController   : 转登录页面==============================
+2020-11-25 20:26:26.109  INFO 6732 --- [http-nio-8080-exec-6] c.b.oaproject.controller.LogController   : 登录页面==============================
+2020-11-25 20:26:26.137  INFO 6732 --- [http-nio-8080-exec-6] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-11-25 20:26:26.423  INFO 6732 --- [http-nio-8080-exec-6] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-11-25 20:26:26.437 DEBUG 6732 --- [http-nio-8080-exec-6] c.b.oaproject.dao.UsersDao.findCByName   : ==>  Preparing: select * from users where uName=? 
+2020-11-25 20:26:26.466 DEBUG 6732 --- [http-nio-8080-exec-6] c.b.oaproject.dao.UsersDao.findCByName   : ==> Parameters: ZS(String)
+2020-11-25 20:26:26.489 DEBUG 6732 --- [http-nio-8080-exec-6] c.b.oaproject.dao.UsersDao.findCByName   : <==      Total: 1
+2020-11-25 20:27:00.927  INFO 3140 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 3140 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 20:27:00.933  INFO 3140 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 20:27:03.162  INFO 3140 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 20:27:03.173  INFO 3140 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 20:27:03.174  INFO 3140 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 20:27:03.286  INFO 3140 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 20:27:03.286  INFO 3140 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2238 ms
+2020-11-25 20:27:03.959  INFO 3140 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 20:27:04.062  INFO 3140 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 20:27:04.620  INFO 3140 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 20:27:04.620  INFO 3140 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 4.379 seconds (JVM running for 5.631)
+2020-11-25 20:27:06.014  INFO 3140 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 20:27:06.015  INFO 3140 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 20:27:06.024  INFO 3140 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
+2020-11-25 20:27:06.049  INFO 3140 --- [http-nio-8080-exec-1] c.b.oaproject.controller.LogController   : 转登录页面==============================
+2020-11-25 20:27:08.359  INFO 3140 --- [http-nio-8080-exec-3] c.b.oaproject.controller.LogController   : 转登录页面==============================
+2020-11-25 20:27:10.327  INFO 3140 --- [http-nio-8080-exec-9] c.b.oaproject.controller.LogController   : 登录页面==============================
+2020-11-25 20:27:10.355  INFO 3140 --- [http-nio-8080-exec-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-11-25 20:27:10.715  INFO 3140 --- [http-nio-8080-exec-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-11-25 20:27:10.731 DEBUG 3140 --- [http-nio-8080-exec-9] c.b.oaproject.dao.UsersDao.findCByName   : ==>  Preparing: select * from users where uName=? 
+2020-11-25 20:27:10.768 DEBUG 3140 --- [http-nio-8080-exec-9] c.b.oaproject.dao.UsersDao.findCByName   : ==> Parameters: ZS(String)
+2020-11-25 20:27:10.805 DEBUG 3140 --- [http-nio-8080-exec-9] c.b.oaproject.dao.UsersDao.findCByName   : <==      Total: 1
+2020-11-25 20:29:30.267  INFO 8092 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 8092 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 20:29:30.273  INFO 8092 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 20:29:32.268  INFO 8092 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 20:29:32.280  INFO 8092 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 20:29:32.280  INFO 8092 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 20:29:32.380  INFO 8092 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 20:29:32.380  INFO 8092 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2003 ms
+2020-11-25 20:29:33.097  INFO 8092 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 20:29:33.174  INFO 8092 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 20:29:33.575  INFO 8092 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 20:29:33.580  INFO 8092 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 4.048 seconds (JVM running for 5.167)
+2020-11-25 20:33:32.412  INFO 6704 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 6704 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 20:33:32.419  INFO 6704 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 20:33:36.111  INFO 6704 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 20:33:36.123  INFO 6704 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 20:33:36.124  INFO 6704 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 20:33:36.226  INFO 6704 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 20:33:36.227  INFO 6704 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3339 ms
+2020-11-25 20:33:36.951  INFO 6704 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 20:33:37.031  INFO 6704 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 20:33:37.474  INFO 6704 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 20:33:37.478  INFO 6704 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 5.805 seconds (JVM running for 7.119)
+2020-11-25 20:33:42.559  INFO 6704 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 20:33:42.561  INFO 6704 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 20:33:42.572  INFO 6704 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
+2020-11-25 20:33:42.603  INFO 6704 --- [http-nio-8080-exec-1] c.b.oaproject.controller.LogController   : 转登录页面==============================
+2020-11-25 20:33:44.957  INFO 6704 --- [http-nio-8080-exec-4] c.b.oaproject.controller.LogController   : 转登录页面==============================
+2020-11-25 20:33:46.741  INFO 6704 --- [http-nio-8080-exec-6] c.b.oaproject.controller.LogController   : 登录页面==============================
+2020-11-25 20:33:46.769  INFO 6704 --- [http-nio-8080-exec-6] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-11-25 20:33:47.080  INFO 6704 --- [http-nio-8080-exec-6] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-11-25 20:33:47.099 DEBUG 6704 --- [http-nio-8080-exec-6] c.b.oaproject.dao.UsersDao.findCByName   : ==>  Preparing: select * from users where uName=? 
+2020-11-25 20:33:47.144 DEBUG 6704 --- [http-nio-8080-exec-6] c.b.oaproject.dao.UsersDao.findCByName   : ==> Parameters: ZS(String)
+2020-11-25 20:33:47.189 DEBUG 6704 --- [http-nio-8080-exec-6] c.b.oaproject.dao.UsersDao.findCByName   : <==      Total: 1
+2020-11-25 20:35:00.888  INFO 8008 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 8008 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 20:35:00.951  INFO 8008 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 20:35:03.138  INFO 8008 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 20:35:03.150  INFO 8008 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 20:35:03.150  INFO 8008 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 20:35:03.257  INFO 8008 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 20:35:03.258  INFO 8008 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2171 ms
+2020-11-25 20:35:03.974  INFO 8008 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 20:35:04.050  INFO 8008 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 20:35:04.462  INFO 8008 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 20:35:04.466  INFO 8008 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 4.437 seconds (JVM running for 5.596)
+2020-11-25 20:35:09.889  INFO 8008 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 20:35:09.890  INFO 8008 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 20:35:09.905  INFO 8008 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 13 ms
+2020-11-25 20:41:18.071  INFO 6608 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 6608 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 20:41:18.079  INFO 6608 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 20:41:20.170  INFO 6608 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 20:41:20.181  INFO 6608 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 20:41:20.182  INFO 6608 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 20:41:20.288  INFO 6608 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 20:41:20.289  INFO 6608 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2058 ms
+2020-11-25 20:41:20.988  INFO 6608 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 20:41:21.083  INFO 6608 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 20:41:21.487  INFO 6608 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 20:41:21.492  INFO 6608 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 4.157 seconds (JVM running for 5.232)
+2020-11-25 20:41:26.966  INFO 6608 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 20:41:26.967  INFO 6608 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 20:41:26.976  INFO 6608 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2020-11-25 20:42:21.278  INFO 5520 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 5520 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 20:42:21.284  INFO 5520 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 20:42:23.357  INFO 5520 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 20:42:23.368  INFO 5520 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 20:42:23.368  INFO 5520 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 20:42:23.469  INFO 5520 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 20:42:23.469  INFO 5520 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2041 ms
+2020-11-25 20:42:24.162  INFO 5520 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 20:42:24.235  INFO 5520 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 20:42:24.608  INFO 5520 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 20:42:24.612  INFO 5520 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 4.033 seconds (JVM running for 5.111)
+2020-11-25 20:42:33.810  INFO 5520 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 20:42:33.810  INFO 5520 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 20:42:33.820  INFO 5520 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2020-11-25 20:44:41.799  INFO 7428 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 7428 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 20:44:41.805  INFO 7428 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 20:44:44.540  INFO 7428 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 20:44:44.563  INFO 7428 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 20:44:44.565  INFO 7428 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 20:44:44.694  INFO 7428 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 20:44:44.695  INFO 7428 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2759 ms
+2020-11-25 20:44:45.456  INFO 7428 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 20:44:45.531  INFO 7428 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 20:44:45.931  INFO 7428 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 20:44:45.935  INFO 7428 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 4.896 seconds (JVM running for 5.986)
+2020-11-25 20:44:47.540  INFO 7428 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 20:44:47.541  INFO 7428 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 20:44:47.552  INFO 7428 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
+2020-11-25 20:54:35.484  INFO 7996 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 7996 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 20:54:35.512  INFO 7996 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 20:54:38.007  INFO 7996 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 20:54:38.034  INFO 7996 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 20:54:38.035  INFO 7996 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 20:54:38.236  INFO 7996 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 20:54:38.236  INFO 7996 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2610 ms
+2020-11-25 20:54:39.170  INFO 7996 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 20:54:39.309  INFO 7996 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 20:54:39.971  INFO 7996 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 20:54:39.980  INFO 7996 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 5.159 seconds (JVM running for 6.218)
+2020-11-25 20:54:43.007  INFO 7996 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 20:54:43.007  INFO 7996 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 20:54:43.020  INFO 7996 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 12 ms
+2020-11-25 21:01:02.301  INFO 8836 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 8836 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 21:01:02.339  INFO 8836 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 21:01:05.772  INFO 8836 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 21:01:05.794  INFO 8836 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 21:01:05.795  INFO 8836 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 21:01:05.984  INFO 8836 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 21:01:05.985  INFO 8836 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3544 ms
+2020-11-25 21:01:07.091  INFO 8836 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 21:01:07.197  INFO 8836 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 21:01:07.616  INFO 8836 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 21:01:07.621  INFO 8836 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 6.141 seconds (JVM running for 7.608)
+2020-11-25 21:01:13.933  INFO 8836 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 21:01:13.933  INFO 8836 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 21:01:13.947  INFO 8836 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 13 ms
+2020-11-25 21:04:37.257  INFO 4312 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 4312 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 21:04:37.422  INFO 4312 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 21:04:42.675  INFO 4312 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 21:04:42.893  INFO 4312 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 21:04:42.893  INFO 4312 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 21:04:43.244  INFO 4312 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 21:04:43.245  INFO 4312 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5648 ms
+2020-11-25 21:04:45.238  INFO 4312 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 21:04:45.347  INFO 4312 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 21:04:45.854  INFO 4312 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 21:04:45.860  INFO 4312 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 9.475 seconds (JVM running for 11.433)
+2020-11-25 21:04:50.216  INFO 4312 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 21:04:50.217  INFO 4312 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 21:04:50.279  INFO 4312 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 60 ms
+2020-11-25 21:05:35.934  INFO 8772 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 8772 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 21:05:35.940  INFO 8772 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 21:05:38.152  INFO 8772 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 21:05:38.169  INFO 8772 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 21:05:38.170  INFO 8772 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 21:05:38.302  INFO 8772 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 21:05:38.302  INFO 8772 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2253 ms
+2020-11-25 21:05:39.126  INFO 8772 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 21:05:39.202  INFO 8772 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 21:05:39.575  INFO 8772 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 21:05:39.579  INFO 8772 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 4.373 seconds (JVM running for 5.718)
+2020-11-25 21:06:02.268  INFO 8772 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 21:06:02.269  INFO 8772 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 21:06:02.280  INFO 8772 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2020-11-25 21:06:32.123  INFO 6260 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 6260 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 21:06:32.129  INFO 6260 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 21:06:34.089  INFO 6260 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 21:06:34.101  INFO 6260 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 21:06:34.101  INFO 6260 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 21:06:34.207  INFO 6260 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 21:06:34.208  INFO 6260 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1972 ms
+2020-11-25 21:06:34.944  INFO 6260 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 21:06:35.020  INFO 6260 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 21:06:35.396  INFO 6260 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 21:06:35.401  INFO 6260 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 4.043 seconds (JVM running for 6.037)
+2020-11-25 21:07:10.692  INFO 6260 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 21:07:10.693  INFO 6260 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 21:07:10.704  INFO 6260 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2020-11-25 21:08:03.303  INFO 4944 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 4944 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 21:08:03.310  INFO 4944 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 21:08:05.429  INFO 4944 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 21:08:05.444  INFO 4944 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 21:08:05.445  INFO 4944 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 21:08:05.561  INFO 4944 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 21:08:05.561  INFO 4944 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2059 ms
+2020-11-25 21:08:06.271  INFO 4944 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 21:08:06.346  INFO 4944 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 21:08:06.717  INFO 4944 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 21:08:06.721  INFO 4944 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 4.082 seconds (JVM running for 5.183)
+2020-11-25 21:08:29.044  INFO 4944 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 21:08:29.045  INFO 4944 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 21:08:29.055  INFO 4944 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2020-11-25 21:11:40.543  INFO 8168 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 8168 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 21:11:40.550  INFO 8168 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 21:11:43.284  INFO 8168 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 21:11:43.304  INFO 8168 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 21:11:43.305  INFO 8168 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 21:11:43.452  INFO 8168 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 21:11:43.453  INFO 8168 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2793 ms
+2020-11-25 21:11:44.619  INFO 8168 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 21:11:44.707  INFO 8168 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 21:11:45.185  INFO 8168 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 21:11:45.190  INFO 8168 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 5.411 seconds (JVM running for 6.804)
+2020-11-25 21:11:45.264  INFO 8168 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 21:11:45.264  INFO 8168 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 21:11:45.274  INFO 8168 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2020-11-25 21:12:03.084  INFO 8180 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 8180 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 21:12:03.090  INFO 8180 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 21:12:05.406  INFO 8180 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 21:12:05.418  INFO 8180 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 21:12:05.419  INFO 8180 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 21:12:05.538  INFO 8180 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 21:12:05.539  INFO 8180 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2288 ms
+2020-11-25 21:12:06.317  INFO 8180 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 21:12:06.407  INFO 8180 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 21:12:06.787  INFO 8180 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 21:12:06.791  INFO 8180 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 4.407 seconds (JVM running for 5.988)
+2020-11-25 21:12:33.949  INFO 8180 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 21:12:33.949  INFO 8180 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 21:12:33.959  INFO 8180 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2020-11-25 21:16:09.635  INFO 7980 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 7980 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 21:16:09.646  INFO 7980 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 21:16:12.786  INFO 7980 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 21:16:12.803  INFO 7980 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 21:16:12.804  INFO 7980 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 21:16:12.931  INFO 7980 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 21:16:12.932  INFO 7980 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3049 ms
+2020-11-25 21:16:13.983  INFO 7980 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 21:16:14.071  INFO 7980 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 21:16:14.532  INFO 7980 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 21:16:14.537  INFO 7980 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 5.761 seconds (JVM running for 7.162)
+2020-11-25 21:16:14.753  INFO 7980 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 21:16:14.754  INFO 7980 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 21:16:14.765  INFO 7980 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
+2020-11-25 21:18:41.650  INFO 1768 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 1768 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 21:18:41.656  INFO 1768 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 21:18:43.714  INFO 1768 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 21:18:43.726  INFO 1768 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 21:18:43.727  INFO 1768 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 21:18:43.830  INFO 1768 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 21:18:43.831  INFO 1768 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2074 ms
+2020-11-25 21:18:44.513  INFO 1768 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 21:18:44.599  INFO 1768 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 21:18:44.985  INFO 1768 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 21:18:44.990  INFO 1768 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 4.021 seconds (JVM running for 5.084)
+2020-11-25 21:18:49.861  INFO 1768 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 21:18:49.861  INFO 1768 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 21:18:49.870  INFO 1768 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
+2020-11-25 21:20:02.133  INFO 7796 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 7796 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 21:20:02.146  INFO 7796 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 21:20:04.247  INFO 7796 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 21:20:04.259  INFO 7796 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 21:20:04.260  INFO 7796 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 21:20:04.367  INFO 7796 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 21:20:04.367  INFO 7796 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2074 ms
+2020-11-25 21:20:05.142  INFO 7796 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 21:20:05.221  INFO 7796 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 21:20:05.629  INFO 7796 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 21:20:05.634  INFO 7796 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 4.178 seconds (JVM running for 5.243)
+2020-11-25 21:20:10.054  INFO 7796 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 21:20:10.055  INFO 7796 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 21:20:10.068  INFO 7796 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 12 ms
+2020-11-25 21:20:29.037  INFO 6476 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 6476 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 21:20:29.042  INFO 6476 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 21:20:31.216  INFO 6476 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 21:20:31.231  INFO 6476 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 21:20:31.232  INFO 6476 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 21:20:31.359  INFO 6476 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 21:20:31.359  INFO 6476 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2194 ms
+2020-11-25 21:20:32.073  INFO 6476 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 21:20:32.149  INFO 6476 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 21:20:32.547  INFO 6476 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 21:20:32.551  INFO 6476 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 4.194 seconds (JVM running for 5.28)
+2020-11-25 21:20:35.537  INFO 6476 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 21:20:35.538  INFO 6476 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 21:20:35.549  INFO 6476 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
+2020-11-25 21:20:59.553  INFO 6988 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Starting OaprojectApplication on PC-201911241135 with PID 6988 (D:\OA项目\target\classes started by Administrator in D:\OA项目)
+2020-11-25 21:20:59.558  INFO 6988 --- [main] cn.bdqn.oaproject.OaprojectApplication   : No active profile set, falling back to default profiles: default
+2020-11-25 21:21:01.825  INFO 6988 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-25 21:21:01.837  INFO 6988 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-25 21:21:01.838  INFO 6988 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-25 21:21:01.943  INFO 6988 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-25 21:21:01.944  INFO 6988 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2259 ms
+2020-11-25 21:21:02.726  INFO 6988 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-25 21:21:02.804  INFO 6988 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: URL [file:D:/myPic/  #ï¿½Ä¼ï¿½ï¿½Ï´ï¿½Â·ï¿½ï¿½/index.html]
+2020-11-25 21:21:03.213  INFO 6988 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-25 21:21:03.219  INFO 6988 --- [main] cn.bdqn.oaproject.OaprojectApplication   : Started OaprojectApplication in 4.392 seconds (JVM running for 5.791)
+2020-11-25 21:21:11.804  INFO 6988 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-25 21:21:11.805  INFO 6988 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-25 21:21:11.823  INFO 6988 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 18 ms
