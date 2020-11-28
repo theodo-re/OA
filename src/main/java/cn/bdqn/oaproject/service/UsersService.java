@@ -1,13 +1,15 @@
 package cn.bdqn.oaproject.service;
 
 import cn.bdqn.oaproject.entity.Users;
-import org.apache.ibatis.annotations.Param;
 
 public interface UsersService {
     /**
      * 根据登录名查询
      * @return
      */
-    int findCByName(String uName,String password);
-    int findIdByName( String name);
+    Object[] findCByName(String uName,String password);
+    /**
+     * 根据姓名查询id
+     */
+    int findByrealName(String name);
 }

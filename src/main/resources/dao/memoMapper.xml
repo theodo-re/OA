@@ -3,5 +3,35 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bdqn.oaproject.dao.MemoDao">
-
+    <resultMap id="memoMap" type="Memo">
+        <id property="id" column="id"></id><!--
+        <result property="memoTitle" column="mTitle"></result>
+        <result property="memoContent" column="mContent"></result>-->
+        <association property="user" javaType="Users">
+            <result property="realName" column="realName"></result>
+        </association>
+    </resultMap>
+    <select id="findAll" resultMap="memoMap">
+        SELECT m.*,(SELECT realName FROM users u WHERE u.`id`=m.createdby) realName FROM memo m
+    </select>
+    <select id="findById" resultMap="memoMap" parameterType="int">
+        SELECT m.*,(SELECT realName FROM users u WHERE u.`id`=m.createdby) realName FROM memo m where id=#{id}
+    </select>
+    <update id="updatememo" parameterType="Memo">
+        update memo
+        <set>
+            mTitle=#{mTitle},
+            mContent=#{mContent},
+            modifyby=#{modifyby},
+            modifytime=#{modifytime}
+        </set>
+        where id=#{id}
+    </update>
+    <insert id="addMemo" parameterType="Memo">
+        insert into memo(mTitle,mContent,createdby,createdtime) values
+        (#{mTitle},#{mContent},#{createdby},#{createdtime})
+    </insert>
+    <delete id="delMemo" parameterType="int">
+        delete from memo where id=#{id}
+    </delete>
 </mapper>

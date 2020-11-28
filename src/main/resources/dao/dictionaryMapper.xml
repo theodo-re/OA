@@ -3,5 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bdqn.oaproject.dao.DictionaryDao">
-
+    <select id="findByName" resultType="Dictionary">
+        SELECT * FROM Dictionary WHERE typeCode='SHJG'
+    </select>
 </mapper>

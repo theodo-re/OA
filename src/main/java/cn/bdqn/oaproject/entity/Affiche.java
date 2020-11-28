@@ -1,6 +1,8 @@
 package cn.bdqn.oaproject.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Affiche {
@@ -10,11 +12,14 @@ public class Affiche {
   private long affstatus;
   private Date startdate;
   private Date enddate;
+  @JsonFormat(pattern = "yyyy-MM-dd")
   private Date pubdate;
   private String affContent;
   private long createdby;
+  @JsonFormat(pattern = "yyyy-MM-dd")
   private Date createdtime;
   private long modifyby;
+  @JsonFormat(pattern = "yyyy-MM-dd")
   private Date modifytime;
 
 
