@@ -24,4 +24,10 @@ public class UsersServiceImpl implements UsersService{
         }
         return rel;
     }
+
+    @Override
+    public int findIdByName(String name) {
+        int rel=userdao.findIdByName(name);
+        return rel;
+    }
 }

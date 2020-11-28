@@ -1,6 +1,7 @@
 package cn.bdqn.oaproject.dao;
 
 import cn.bdqn.oaproject.entity.Users;
+import org.apache.ibatis.annotations.Param;
 
 public interface UsersDao {
     /**
@@ -8,4 +9,6 @@ public interface UsersDao {
      * @return
      */
     Users findCByName(String uName);
+    //根据预订人查出编号
+    int findIdByName(@Param("name") String name);
 }

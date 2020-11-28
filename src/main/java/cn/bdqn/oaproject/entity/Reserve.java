@@ -1,28 +1,68 @@
 package cn.bdqn.oaproject.entity;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Reserve {
 
-  private long id;
+  private Integer id;
   private long meetId;
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date startdate;
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date enddate;
   private String rContent;
   private long recordby;
   private long reserveby;
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date recordtime;
 
+  //
+  private Meeting meeting;//会议表实体
+  private Users users;//用户表实体
 
-  public long getId() {
+
+  //
+  public Reserve(){};
+  public Reserve(Integer id, long meetId, Date startdate, Date enddate, String rContent, long recordby, long reserveby, Date recordtime) {
+    this.id = id;
+    this.meetId = meetId;
+    this.startdate = startdate;
+    this.enddate = enddate;
+    this.rContent = rContent;
+    this.recordby = recordby;
+    this.reserveby = reserveby;
+    this.recordtime = recordtime;
+  }
+
+
+
+
+  public Meeting getMeeting() {
+    return meeting;
+  }
+
+  public void setMeeting(Meeting meeting) {
+    this.meeting = meeting;
+  }
+
+  public Users getUsers() {
+    return users;
+  }
+
+  public void setUsers(Users users) {
+    this.users = users;
+  }
+
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
-
 
   public long getMeetId() {
     return meetId;
@@ -51,14 +91,13 @@ public class Reserve {
   }
 
 
-  public String getRContent() {
+  public String getrContent() {
     return rContent;
   }
 
-  public void setRContent(String rContent) {
+  public void setrContent(String rContent) {
     this.rContent = rContent;
   }
-
 
   public long getRecordby() {
     return recordby;

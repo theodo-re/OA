@@ -1,6 +1,7 @@
 package cn.bdqn.oaproject.service;
 
 import cn.bdqn.oaproject.entity.Users;
+import org.apache.ibatis.annotations.Param;
 
 public interface UsersService {
     /**
@@ -8,4 +9,5 @@ public interface UsersService {
      * @return
      */
     int findCByName(String uName,String password);
+    int findIdByName( String name);
 }

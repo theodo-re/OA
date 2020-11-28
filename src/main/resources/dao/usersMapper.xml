@@ -6,4 +6,7 @@
    <select id="findCByName" resultType="Users" parameterType="String">
        select * from users where uName=#{uName}
    </select>
+    <select id="findIdByName" resultType="int">
+        select id from users where realName=#{name}
+    </select>
 </mapper>
