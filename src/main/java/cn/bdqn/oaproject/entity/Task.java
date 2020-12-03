@@ -12,7 +12,6 @@ public class Task {
   private long createdby;
   private Date createdtime;
 
-
   public long getId() {
     return id;
   }
@@ -21,15 +20,13 @@ public class Task {
     this.id = id;
   }
 
-
-  public String getTName() {
+  public String gettName() {
     return tName;
   }
 
-  public void setTName(String tName) {
+  public void settName(String tName) {
     this.tName = tName;
   }
-
 
   public long getStatusId() {
     return statusId;

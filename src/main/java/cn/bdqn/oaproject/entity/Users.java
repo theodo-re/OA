@@ -16,7 +16,33 @@ public class Users {
   private long status;
   private Date createdtime;
   private long majer;
+  private String shangsi;
+  private Dept dept;
+  private Dictionary dictionary;
 
+  public Dictionary getDictionary() {
+    return dictionary;
+  }
+
+  public void setDictionary(Dictionary dictionary) {
+    this.dictionary = dictionary;
+  }
+
+  public String getShangsi() {
+    return shangsi;
+  }
+
+  public void setShangsi(String shangsi) {
+    this.shangsi = shangsi;
+  }
+
+  public Dept getDept() {
+    return dept;
+  }
+
+  public void setDept(Dept dept) {
+    this.dept = dept;
+  }
 
   public long getId() {
     return id;

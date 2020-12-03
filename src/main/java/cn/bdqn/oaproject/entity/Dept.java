@@ -17,6 +17,13 @@ public class Dept {
   private long modifyby;
   private Date modifytime;
 
+  public String getdName() {
+    return dName;
+  }
+
+  public void setdName(String dName) {
+    this.dName = dName;
+  }
 
   public long getId() {
     return id;
@@ -24,15 +31,6 @@ public class Dept {
 
   public void setId(long id) {
     this.id = id;
-  }
-
-
-  public String getDName() {
-    return dName;
-  }
-
-  public void setDName(String dName) {
-    this.dName = dName;
   }
 
 

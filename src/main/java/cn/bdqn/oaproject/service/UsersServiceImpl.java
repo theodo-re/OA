@@ -12,7 +12,8 @@ public class UsersServiceImpl implements UsersService{
     private UsersDao userdao;
 
     @Override
-    public int findCByName(String uName,String password) {
+    public Object[] findCByName(String uName,String password) {
+        Object[] obj = new Object[2];
         int rel = -1;
         Users user = userdao.findCByName(uName);
         if(user!=null){
@@ -22,6 +23,8 @@ public class UsersServiceImpl implements UsersService{
                 rel=0;
             }
         }
-        return rel;
+        obj[0]=rel;
+        obj[1]=user;
+        return obj;
     }
 }
