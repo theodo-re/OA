@@ -42,7 +42,6 @@ public class Task {
   public void setDic(Dictionary dic) {
     this.dic = dic;
   }
-
   public String gettName() {
     return tName;
   }
@@ -58,7 +57,6 @@ public class Task {
   public void setId(long id) {
     this.id = id;
   }
-
   public long getStatusId() {
     return statusId;
   }

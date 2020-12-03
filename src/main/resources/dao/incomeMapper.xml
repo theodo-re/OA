@@ -4,4 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bdqn.oaproject.dao.IncomeDao">
 
+    <insert id="add" parameterType="Income">
+        INSERT INTO `income`(userId,applydate,deptId,postId,applyment,checkId,createdby,createdtime)
+        VALUES (#{userId},#{applydate},#{deptId},#{postId},#{applyment},#{checkId},#{createdby},#{createdtime})
+    </insert>
+
 </mapper>

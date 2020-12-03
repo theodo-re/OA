@@ -3,6 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bdqn.oaproject.dao.TaskDao">
+
+    <insert id="add" parameterType="Task">
+        insert into `Task`(tName,statusId,auditId,createdby,createdtime)
+        values (#{tName},#{statusId},#{auditId},#{createdby},#{createdtime})
+    </insert>
     <resultMap id="taskmap" type="Task">
         <id property="id" column="id"></id>
         <result property="tName" column="tName"></result>
@@ -45,4 +50,5 @@
         JOIN dictionary d ON t.`statusId`=d.`valueId`
         WHERE typeCode='SHZT' limit #{pageIndex},#{pageSize}
     </select>
+
 </mapper>
