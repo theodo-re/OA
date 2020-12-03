@@ -3,5 +3,53 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bdqn.oaproject.dao.LogDao">
-
+    <resultMap id="rizhi" type="Log">
+        <id property="id" column="l.id"></id>
+        <result property="incident" column="incident"></result>
+        <result property="logcomment" column="logcomment"></result>
+        <result property="opedate" column="opedate"></result>
+        <association property="users" javaType="Users">
+            <id property="id" column="id"></id>
+           <result property="realName" column="realName"></result>
+        </association>
+        <association property="dictionary" javaType="Dictionary">
+            <id property="id" column="id"></id>
+            <result property="valueName" column="valueName"></result>
+        </association>
+    </resultMap>
+    <select id="findLog" resultMap="rizhi" parameterType="cn.bdqn.oaproject.util.LogUtil">
+        SELECT l.id,u.realName realName,d.valueName valueName,l.`incident` incident,l.`logcomment` logcomment,l.`opedate` opedate FROM `log` l
+	        JOIN users u ON u.id=l.userId
+	        JOIN dictionary d ON d.valueId=l.roleId and  typeCode='JS'
+       <where>
+            <if test="realName!=null and !''.equals(realName)">
+                and u.realName like CONCAT('%',#{realName},'%')
+            </if>
+          <if test="startDate!=null">
+                and l.`opedate`>=#{startDate}
+            </if>
+            <if test="endDate!=null">
+                and #{endDate}>=l.`opedate`
+            </if>
+        </where>
+        limit #{pageIndex},#{pageSize}
+    </select>
+    <select id="findLogCount" resultType="Integer" parameterType="cn.bdqn.oaproject.util.LogUtil">
+        select count(0) from log l  JOIN users u ON u.id=l.userId
+        <where>
+            <if test="realName!=null and !''.equals(realName)">
+                and u.realName like CONCAT('%',#{realName},'%')
+            </if>
+            <if test="startDate!=null">
+                and l.opedate>=#{startDate}
+            </if>
+            <if test="endDate!=null">
+                and #{endDate}>=l.opedate
+            </if>
+        </where>
+    </select>
+    <insert id="addLog"  parameterType="Log">
+        insert into `LOG` (userId,roleId,incident,logcomment,opedate)
+        values(#{userId},#{roleId},#{incident},#{logcomment},#{opedate})
+    </insert>
 </mapper>

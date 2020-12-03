@@ -1,40 +1,87 @@
 package cn.bdqn.oaproject.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Dept {
 
-  private long id;
-  private String dName;
+  private Integer id;
+  private String deptName;
   private long organId;
   private long userId;
   private String telephone;
   private String phone;
   private String fax;
   private long createdby;
+  @DateTimeFormat(pattern = "yyyy—MM-dd")
+  @JsonFormat(locale = "yyyy—MM-dd")
   private Date createdtime;
   private long modifyby;
+  @DateTimeFormat(pattern = "yyyy—MM-dd")
+  @JsonFormat(locale = "yyyy—MM-dd")
   private Date modifytime;
+  private Users users;
+  private Users createdbyUsers;
+  private Organization organization;
 
 
-  public long getId() {
+  public Users getUsers() {
+    return users;
+  }
+
+  public void setUsers(Users users) {
+    this.users = users;
+  }
+
+  public Users getCreatedbyUsers() {
+    return createdbyUsers;
+  }
+
+  public void setCreatedbyUsers(Users createdbyUsers) {
+    this.createdbyUsers = createdbyUsers;
+  }
+
+  public Organization getOrganization() {
+    return organization;
+  }
+
+  public void setOrganization(Organization organization) {
+    this.organization = organization;
+  }
+
+ /* public long getId() {
     return id;
   }
 
   public void setId(long id) {
     this.id = id;
+  }*/
+
+  public Integer getId() {
+    return id;
   }
 
-
-  public String getDName() {
+  public void setId(Integer id) {
+    this.id = id;
+  }
+  /* public String getDName() {
     return dName;
   }
 
   public void setDName(String dName) {
     this.dName = dName;
+  }*/
+
+  public String getDeptName() {
+    return deptName;
   }
 
+  public void setDeptName(String deptName) {
+    this.deptName = deptName;
+  }
 
   public long getOrganId() {
     return organId;

@@ -3,5 +3,32 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bdqn.oaproject.dao.DictionaryDao">
-
+    <select id="findRoleByJS" resultType="Dictionary">
+        select valueId,valueName from Dictionary
+        where typeCode='JS'
+        group by valueId
+        limit #{pageIndex},#{pageSize}
+    </select>
+    <select id="findRoleCount"  resultType="Integer">
+        select count(0) from Dictionary where typeCode='JS'
+    </select>
+    <select id="findPro" resultType="Dictionary">
+        select valueId,valueName from Dictionary  where typeCode='ZC'
+    </select>
+    <select id="findRole" resultType="Dictionary">
+         select valueId,valueName from Dictionary where typeCode='JS'
+    </select>
+    <insert id="addRole">
+        insert into Dictionary(typeCode,typeName,valueId,valueName)
+        values('JS','角色',#{valueId},#{valueName})
+    </insert>
+    <select id="findRoleById" resultType="Dictionary" parameterType="Integer">
+         select valueId,valueName from Dictionary where typeCode='JS' and valueId=#{valueId}
+    </select>
+    <update id="updateRoleById">
+        update Dictionary set valueName=#{valueName}  where typeCode='JS' and valueId=#{valueId}
+    </update>
+    <delete id="delRoleById" parameterType="Integer">
+        delete from Dictionary where typeCode='JS' and valueId=#{valueId}
+    </delete>
 </mapper>

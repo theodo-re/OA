@@ -1,6 +1,9 @@
 package cn.bdqn.oaproject.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Organization {
@@ -9,8 +12,12 @@ public class Organization {
   private String organName;
   private String shortName;
   private long createdby;
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(locale = "yyyy-MM-dd")
   private Date createdtime;
   private long modifyby;
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(locale = "yyyy-MM-dd")
   private Date modifytime;
 
 
