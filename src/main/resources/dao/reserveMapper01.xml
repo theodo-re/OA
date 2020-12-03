@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bdqn.oaproject.dao.ReserveDao">
+    <insert id="addReserve" parameterType="Reserve">
+        insert into reserve(meetId,startdate,enddate,rContent,recordby,reserveby,recordtime)
+        values(#{meetId},#{startdate},#{enddate},#{rContent},#{recordby},#{reserveby},#{recordtime})
+    </insert>
+    <!--手动映射-->
+    <resultMap id="ReservesMap" type="Reserve">
+        <id property="r.id" column="id"/>
+        <association property="meeting" javaType="Meeting">
+            <id property="m.id" column="id"></id>
+        </association>
+        <association property="users" javaType="Users">
+            <id property="u.id" column="id"></id>
+        </association>
+    </resultMap>
+    <select id="findAllreserve" resultMap="ReservesMap" parameterType="Reserve">
+         SELECT  r.id,m.id,u.id,m.`mName`, r.startdate,r.`enddate`,r.`rContent`,u.`realName`,u.`realName`,r.`recordtime` FROM  reserve r
+  INNER JOIN meeting m
+  ON m.`id`=r.`meetId`
+  INNER JOIN users u
+  ON r.`recordby`=u.`id`
+  <where>
+      <if test="startdate!=null">
+          r.startdate=#{startdate}
+      </if>
+      <if test="reserveby!=null and reserveby!=''">
+        and  r.reserveby=#{reserveby}
+      </if>
+      <if test="meetId!=null and meetId!=''">
+         and  r.meetId=#{meetId}
+      </if>
+      <if test="rContent!=null and rContent!=''">
+        and   r.rContent=#{rContent}
+      </if>
+  </where>
+    </select>
+    <select id="findAll" resultType="Reserve">
+        select * from Reserve where id =1
+    </select>
+</mapper>

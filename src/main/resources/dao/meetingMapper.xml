@@ -3,5 +3,82 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bdqn.oaproject.dao.MeetingDao">
+    <!--手动映射-->
+    <resultMap id="ReservesMap" type="Reserve">
+        <!--property 实体中的id--> <id property="id" column="r.id"/><!--column查询语句的列-->
+        <association property="meeting" javaType="Meeting">
+            <id property="id" column="m.id"></id>
+        </association>
 
+    </resultMap>
+
+    <!--根据时间查询-->
+    <select id="findMeetingByTime" resultType="Meeting">
+        SELECT DISTINCT m.*,r.`enddate` FROM meeting m
+LEFT JOIN reserve r
+ON m.`id`=r.`meetId`
+<where>
+    <if test="firstTiem!=null and firstTiem!=''">
+         r.`enddate`!=#{firstTiem} OR r.`enddate` IS NULL
+    </if>
+    <if test="firstTiem=='' or firstTiem==null">
+          m.`leisure`=1
+    </if>
+    GROUP BY m.`id`
+</where>
+    </select>
+
+    <!--根据id修改是否空闲-->
+    <update id="updateById">
+        update meeting
+        <set>
+            <if test="modifyby!=null and modifyby!=''">
+                modifyby=#{modifyby},
+            </if>
+            <if test="modifytime!=null">
+                modifytime=#{modifytime},
+            </if>
+            leisure=2
+        </set>
+        where id=#{id}
+    </update>
+    <!--根据姓名获得id-->
+    <select id="findIdBynameMeeting" resultType="int">
+        select id from meeting where mName=#{name}
+    </select>
+    <!--根据id修改会议室为空闲状态-->
+    <update id="updateLesureById"  parameterType="int">
+        update meeting
+        <set>
+            leisure=1
+        </set>
+        where id=#{id}
+    </update>
+    <!--添加会议室-->
+    <insert id="addMeeting" parameterType="Meeting">
+        insert into meeting(mName,mdescribe,leisure,createdby,createdtime,modifyby,modifytime)
+        values
+        (#{mName},#{mdescribe},#{leisure},#{createdby},#{createdtime},#{modifyby},#{modifytime})
+    </insert>
+    <!--查询全部的会议室-->
+    <select id="findAllMeeting" resultType="Meeting">
+        select * from meeting
+    </select>
+    <!--修改会议室名称和描述-->
+    <update id="updateMetById" parameterType="Meeting">
+        update meeting
+        <set>
+            <if test="mName!=null and mName!=''">
+                mName=#{mName},
+            </if>
+            <if test="mdescribe!=null and mdescribe!=''">
+                mdescribe=#{mdescribe}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    <!--删除-->
+    <delete id="delMetByid" parameterType="Integer">
+        delete from meeting where id=#{id}
+    </delete>
 </mapper>
