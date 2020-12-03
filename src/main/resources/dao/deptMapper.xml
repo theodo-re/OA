@@ -3,5 +3,35 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bdqn.oaproject.dao.DeptDao">
-
+    <select id="findDept" resultType="Dept">
+        select id,deptName from Dept
+    </select>
+    <resultMap id="DD" type="Dept">
+        <id property="id" column="d.id"></id>
+        <association property="users" javaType="Users">
+            <result property="realName" column="u1.realName"></result>
+        </association>
+        <association property="createdbyUsers" javaType="Users">
+            <result property="realName" column="u2.realName"></result>
+        </association>
+        <association property="organization" javaType="Organization">
+           <!-- <id property="id" column="o.id"></id>-->
+            <result property="organName" column="o.organName"></result>
+        </association>
+    </resultMap>
+    <select id="findDeptByCreatedId" resultMap="DD" parameterType="Long">
+        SELECT d.id,d.deptName,d.organId,d.userId,d.telephone,d.phone,d.fax,d.createdby,
+	     u1.realName,u2.realName,o.organName,o.id
+         FROM Dept d JOIN users u1 ON u1.id=d.userId
+         JOIN users u2 ON u2.id=d.createdby
+         JOIN `organization` o ON o.id=d.organId
+         where d.organId=#{id}
+    </select>
+    <update id="updateDept" parameterType="Dept">
+        update dept set deptName=#{deptName},userId=#{userId},telephone=#{telephone},
+        phone=#{phone},fax=#{fax},modifyby=#{modifyby},modifytime=#{modifytime} where id=#{id}
+    </update>
+    <delete id="delDept" parameterType="Integer">
+        delete from dept where id=#{id}
+    </delete>
 </mapper>

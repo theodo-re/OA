@@ -1,4 +1,4 @@
-<!doctype html>
+<!doctype html >
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -6,22 +6,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>OA系统</title>
     <!-- begin::global styles -->
-    <link rel="stylesheet" href="assets/vendors/bundle.css" type="text/css">
+    <link rel="stylesheet" th:href="@{/vendors/bundle.css}" type="text/css">
     <!-- begin::custom styles -->
 
 
     <!-- begin::global styles -->
-    <link rel="stylesheet" href="assets/vendors/bundle.css" type="text/css">
+    <link rel="stylesheet" th:href="@{/vendors/bundle.css}" type="text/css">
     <!-- end::global styles -->
 
 
     <!-- begin::datepicker -->
-    <link rel="stylesheet" href="assets/vendors/datepicker/daterangepicker.css">
+    <link rel="stylesheet" th:href="@{/vendors/datepicker/daterangepicker.css}">
     <!-- end::datepicker -->
 
-    <link rel="stylesheet" href="assets/css/app.css" type="text/css" charset="UTF-8">
-    <link rel="stylesheet" href="assets/css/custom.css" type="text/css">
-    <script src="assets/vendors/jquery/jquery-3.4.1.js" type="text/javascript"></script>
+    <link rel="stylesheet" th:href="@{/css/app.css}" type="text/css" charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/custom.css}" type="text/css">
+    <script th:src="@{/vendors/jquery/jquery-3.4.1.js}" type="text/javascript"></script>
+    <script th:src="@{/js/xitongguanli.js}" type="text/javascript"></script>
 
 
 </head>
@@ -56,57 +57,157 @@
 
         <div class="tab-content p-t-30" id="myTabContent">
 
-            <div class="tab-pane fade show active" id="timeline" role="tabpanel" aria-labelledby="timeline-tab">
+            <div class="tab-pane fade show active" id="timeline"  role="tabpanel" aria-labelledby="timeline-tab">
                 <div class="timeline">
 
-                    <div class="col-lg-4 offset-lg-1">
-                        <form action="" method="">
-                            <div class="form-group mb-4">
-                                部门名称：<input type="text" class="form-control form-control-lg" id="exampleInputEmail1"
-                                            autofocus placeholder="">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="card-header d-flex align-items-center justify-content-between">组织结构管理
+                                <button type="button" class="btn btn-secondary btn-floating" data-toggle="modal"
+                                        data-target="#exampleModal6">
+                                    <i class="ti-plus"></i>
+                                </button>
                             </div>
-                            <div class="form-group mb-4">
-                                所属机构：<input type="text" class="form-control form-control-lg" id="exampleInputPassword1"
-                                            value="">
+                            <div class="modal fade" id="exampleModal6" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel2">添加机构</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method='post' action='/liusujun/addOrganization'>
+                                                <div class="form-group">
+
+                                                    <label for="organName" class="col-form-label">机构名称:</label>
+                                                    <input type="text"  class="form-control"
+                                                           id="organName"   name='organName'>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="shortName" class="col-form-label">机构简称:</label>
+                                                    <input type="text"  class="form-control"
+                                                           id="shortName"   name='organ'>
+                                                    <input type="hidden" name='shortName'>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">关闭
+                                                    </button>
+                                                    <button type="submit"  class="btn btn-primary">提交</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group mb-4">
-                                部门负责人：<input type="text" class="form-control form-control-lg" id="exampleInputPassword1"
-                                             value="">
+
+
+                            <div class="accordion" id="accordionExample">
+
+                                <!--<div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                                aria-expanded="true" aria-controls="collapseOne">
+                                            Collapsible Group Item #1
+                                        </button>
+                                    </div>
+                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body">
+
+                                        </div>
+                                    </div>
+                                </div>-->
+
+                                <!--模态-->
+                               <div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel1">修改部门</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form method='post' action='/liusujun/updateDept'>
+                                                    <div class="form-group">
+                                                        <input type="hidden" name="id">
+                                                        <label for="deptName" class="col-form-label">部门名称:</label>
+                                                        <input type="text"  class="form-control"
+                                                               id="deptName"   name='deptName'>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="createdbyName" class="col-form-label">所属机构:</label>
+                                                        <input type="text" readonly class="form-control"
+                                                               id="createdbyName"   name='organ'>
+                                                        <input type="hidden" name='organId'>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="deptfuzheren" class="col-form-label">部门负责人：</label>
+                                                        <select class="form-control" id='deptfuzheren'  a='userId' name="userId">
+
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="telephone" class="col-form-label">联系电话:</label>
+                                                        <input type="text"  class="form-control"
+                                                               id="telephone"   name='telephone'>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="phone" class="col-form-label">移动电话:</label>
+                                                        <input type="text"  class="form-control"
+                                                               id="phone"   name='phone'>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="fax" class="col-form-label">传真:</label>
+                                                        <input type="text"  class="form-control"
+                                                               id="fax"   name='fax'>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">关闭
+                                                        </button>
+                                                        <button type="submit"  class="btn btn-primary">提交</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             </div>
-                            <div class="form-group mb-4">
-                                联系电话：<input type="text" class="form-control form-control-lg" id="exampleInputPassword1"
-                                            value="">
-                            </div>
-                            <div class="form-group mb-4">
-                                移动电话：<input type="text" class="form-control form-control-lg" id="exampleInputPassword1"
-                                            value="">
-                            </div>
-                            <div class="form-group mb-4">
-                                传真：<input type="text" class="form-control form-control-lg" id="exampleInputPassword1"
-                                          value="">
-                            </div>
-                            <button class="btn btn-primary btn-lg btn-block btn-uppercase mb-4">保存</button>
-                            <button class="btn btn-primary btn-lg btn-block btn-uppercase mb-4">取消</button>
-                        </form>
+
+
+
+                        </div>
                     </div>
+
+
 
                 </div>
             </div>
 
             <div class="tab-pane fade" id="photos" role="tabpanel" aria-labelledby="photos-tab">
-                <div class="tab-pane fade show active" id="timeline" role="tabpanel" aria-labelledby="timeline-tab">
+                <div class="tab-pane fade show active"  role="tabpanel" aria-labelledby="timeline-tab">
                     <div class="timeline">
 
                         <form>
                             <div class="form-group">
-                                用户名：<input value=""/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                真实姓名：<input value=""/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input type="button" value="查询">
+                                用户名：<input value="" id="uName" name="uName" />
+                                真实姓名：<input value="" id="rName" name="realName" />
+                                <input type="button" value="查询" id="userButton">
                             </div>
                         </form>
                         <div class="card-header d-flex align-items-center justify-content-between">用户管理列表
                             <button type="button" class="btn btn-secondary btn-floating" data-toggle="modal"
-                                    data-target="#exampleModal1">
+                                    data-target="#exampleModal1" id="addUser">
                                 <i class="ti-plus"></i>
                             </button>
                         </div>
@@ -117,72 +218,84 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">添加用户</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <h5 class="modal-title" >添加用户</h5>
+                                        <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form>
+                                        <form method="post" action="/liusujun/addusers">
                                             <div class="form-group">
-                                                <label for="recipient-username" class="col-form-label">用户名:</label>
-                                                <input type="text" class="form-control" id="recipient-username">
+                                                <label for="userName" class="col-form-label">用户名:</label>
+                                                <input type="text" class="form-control" id="userName" name="userName">
                                             </div>
                                             <div class="form-group">
-                                                <label for="recipient-password" class="col-form-label">密码:</label>
-                                                <input type="text" class="form-control" id="recipient-password">
+                                                <label for="passWord1" class="col-form-label">密码:</label>
+                                                <input type="password" class="form-control" id="passWord1" name="passWord1">
                                             </div>
                                             <div class="form-group">
-                                                <label for="recipient-password2" class="col-form-label">确认密码:</label>
-                                                <input type="text" class="form-control" id="recipient-password2">
+                                                <label for="passWord" class="col-form-label">确认密码:</label>
+                                                <input type="password" class="form-control" id="passWord" name="passWord">
                                             </div>
                                             <div class="form-group">
-                                                <label for="recipient-name" class="col-form-label">真实姓名:</label>
-                                                <input type="text" class="form-control" id="recipient-name">
+                                                <label for="realName" class="col-form-label">真实姓名:</label>
+                                                <input type="text" class="form-control" id="realName" name="realName">
                                             </div>
                                             <div class="form-group">
-                                                <label for="recipient-name" class="col-form-label">所在机构:</label>
-                                                <select class="form-control" id="recipient-name"></select>
+                                                <label for="organId" class="col-form-label">所在机构:</label>
+                                                <select class="form-control" a="organId" id="organId" name="organId" ></select>
+
                                             </div>
                                             <div class="form-group">
-                                                <label for="recipient-name" class="col-form-label">所在部门:</label>
-                                                <select class="form-control" id="recipient-name"></select>
+                                                <label for="deptId" class="col-form-label">所在部门:</label>
+                                                <select class="form-control" a="deptId" id="deptId" name="deptId"></select>
                                             </div>
                                             <div class="form-group">
-                                                <label for="recipient-sex" class="col-form-label">性别:</label>
-                                                <input type="text" class="form-control" id="recipient-sex">
+                                                <label for="sex" class="col-form-label">性别:</label>
+                                                <select id="sex" class="form-control" name="sex">
+                                                    <option value="1" >男</option>
+                                                    <option value="2" >女</option>
+                                                </select>
+
                                             </div>
                                             <div class="form-group">
-                                                <label for="recipient-name" class="col-form-label">职称:</label>
-                                                <select class="form-control" id="recipient-name"></select>
+                                                <label for="proId" class="col-form-label">职称:</label>
+                                                <select class="form-control" a="proId" id="proId" name="proId"></select>
                                             </div>
                                             <div class="form-group">
-                                                <label for="recipient-name" class="col-form-label">角色:</label>
-                                                <select class="form-control" id="recipient-name"></select>
+                                                <label for="roleId" class="col-form-label">角色:</label>
+                                                <select class="form-control" a="roleId" id="roleId" name="roleId"></select>
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="recipient-name" class="col-form-label">状态:</label>
-                                                <select class="form-control" id="recipient-name">
+                                                <label for="status" class="col-form-label">状态:</label>
+                                                <select class="form-control" id="status" name="status">
                                                     <option value="1">正常</option>
                                                     <option value="2">冻结</option>
                                                 </select>
 
                                             </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">提交</button>
+                                            </div>
                                         </form>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭
-                                        </button>
-                                        <button type="button" class="btn btn-primary">提交</button>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
 
+
+
+
+
+
+
                         <div class="table-responsive">
-                            <table class="table table-borderless">
-                                <tr>
+                            <table class="table table-borderless" id="Usertable">
+                                <tr id="Userth">
                                     <th>排序</th>
                                     <th>用户名</th>
                                     <th>真实姓名</th>
@@ -191,137 +304,20 @@
                                     <th>状态</th>
                                     <th>操作</th>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>张三</td>
-                                    <td>张三</td>
-                                    <td>普通用户</td>
-                                    <td>华电/研发部</td>
-                                    <td>可用</td>
-                                    <td>
-                                        <button type="button" class="btn btn-success btn-floating" data-toggle="modal"
-                                                data-target="#exampleModal3">
-                                            <i class="ti-check-box"></i>
-                                        </button>
-                                        <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog"
-                                             aria-labelledby="exampleModalLabel"
-                                             aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">添加用户</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form>
-                                                            <div class="form-group">
-                                                                <label for="recipient-username" class="col-form-label">用户名:</label>
-                                                                <input type="text" class="form-control"
-                                                                       id="recipient-username">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="recipient-password" class="col-form-label">密码:</label>
-                                                                <input type="text" class="form-control"
-                                                                       id="recipient-password">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="recipient-password2" class="col-form-label">确认密码:</label>
-                                                                <input type="text" class="form-control"
-                                                                       id="recipient-password2">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="recipient-name"
-                                                                       class="col-form-label">真实姓名:</label>
-                                                                <input type="text" class="form-control"
-                                                                       id="recipient-name">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="recipient-name"
-                                                                       class="col-form-label">所在机构:</label>
-                                                                <select class="form-control"
-                                                                        id="recipient-name"></select>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="recipient-name"
-                                                                       class="col-form-label">所在部门:</label>
-                                                                <select class="form-control"
-                                                                        id="recipient-name"></select>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="recipient-sex"
-                                                                       class="col-form-label">性别:</label>
-                                                                <input type="text" class="form-control"
-                                                                       id="recipient-sex">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="recipient-name"
-                                                                       class="col-form-label">职称:</label>
-                                                                <select class="form-control"
-                                                                        id="recipient-name"></select>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="recipient-name"
-                                                                       class="col-form-label">角色:</label>
-                                                                <select class="form-control"
-                                                                        id="recipient-name"></select>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="recipient-name"
-                                                                       class="col-form-label">状态:</label>
-                                                                <select class="form-control" id="recipient-name">
-                                                                    <option value="1">正常</option>
-                                                                    <option value="2">冻结</option>
-                                                                </select>
-
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                                data-dismiss="modal">关闭
-                                                        </button>
-                                                        <button type="button" class="btn btn-primary">提交</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button type="button" class="btn btn-danger btn-floating">
-                                            <i class="ti-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>李四</td>
-                                    <td>李四</td>
-                                    <td>人事专员</td>
-                                    <td>北大青鸟/人事部</td>
-                                    <td>冻结</td>
-                                    <td>
-                                        <button type="button" class="btn btn-success btn-floating">
-                                            <i class="ti-check-box"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-danger btn-floating">
-                                            <i class="ti-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
 
                             </table>
                         </div>
                         <nav aria-label="Page navigation example">
+                            <input id="pageIndex" name="pageIndex" type="hidden" value="1" >
+                            <input id="totalPageCount" name="totalPageCount" type="hidden" value="1" >
                             <ul class="pagination justify-content-end">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">上一页</a>
-                                <li class="page-item"><a class="page-link" href="#">1</a>
-                                <li class="page-item"><a class="page-link" href="#">2</a>
-                                <li class="page-item"><a class="page-link" href="#">3</a>
+                                <li class="page-item" id="pageLi">
+                                    <a class="page-link" href="#"   onclick="prev()">上一页</a>
+                                </li>
+
                                 <li class="page-item">
-                                    <a class="page-link" href="#">下一页</a>
+                                    <a class="page-link" href="#" id="nextPage " onclick="next()">下一页</a>
+                                </li>
                             </ul>
                         </nav>
 
@@ -332,7 +328,7 @@
             </div>
 
             <div class="tab-pane fade" id="followers" role="tabpanel" aria-labelledby="followers-tab">
-                <div class="tab-pane fade show active" id="timeline" role="tabpanel" aria-labelledby="timeline-tab">
+                <div class="tab-pane fade show active"  role="tabpanel" aria-labelledby="timeline-tab">
                     <div class="timeline">
 
                         <div class="card-header d-flex align-items-center justify-content-between">角色列表
@@ -348,155 +344,52 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">修改角色</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">添加角色</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form>
+                                        <form method="post" action="/liusujun/addRole">
                                             <div class="form-group">
-                                                <label for="recipient-username" class="col-form-label">编号:</label>
-                                                <input type="text" class="form-control" id="recipient-username">
+                                                <label for="valueId" class="col-form-label">编号:</label>
+                                                <input type="text" class="form-control" id="valueId" name="valueId">
                                             </div>
                                             <div class="form-group">
-                                                <label for="recipient-password" class="col-form-label">名称:</label>
-                                                <input type="text" class="form-control" id="recipient-password">
+                                                <label for="valueName" class="col-form-label">名称:</label>
+                                                <input type="text" class="form-control" id="valueName" name="valueName">
                                             </div>
-
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">提交</button>
+                                            </div>
                                         </form>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭
-                                        </button>
-                                        <button type="button" class="btn btn-primary">提交</button>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
 
                         <div class="table-responsive">
-                            <table class="table table-borderless">
-                                <tr>
+                            <table class="table table-borderless" id="roleTable">
+                                <tr id="roleth">
                                     <th>排序</th>
                                     <th>ID</th>
                                     <th>名称</th>
                                     <th>操作</th>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>系统管理员</td>
-                                    <td>
-                                        <button type="button" class="btn btn-success btn-floating" data-toggle="modal"
-                                                data-target="#exampleModal4">
-                                            <i class="ti-check-box"></i>
-                                        </button>
-                                        <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog"
-                                             aria-labelledby="exampleModalLabel"
-                                             aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">修改角色</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form>
-                                                            <div class="form-group">
-                                                                <label for="recipient-username" class="col-form-label">编号:</label>
-                                                                <input type="text" class="form-control"
-                                                                       id="recipient-username">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="recipient-password" class="col-form-label">名称:</label>
-                                                                <input type="text" class="form-control"
-                                                                       id="recipient-password">
-                                                            </div>
-
-                                                        </form>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                                data-dismiss="modal">关闭
-                                                        </button>
-                                                        <button type="button" class="btn btn-primary">提交</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button type="button" class="btn btn-danger btn-floating">
-                                            <i class="ti-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>2</td>
-                                    <td>公司领导</td>
-                                    <td>
-                                        <button type="button" class="btn btn-success btn-floating">
-                                            <i class="ti-check-box"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-danger btn-floating">
-                                            <i class="ti-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>3</td>
-                                    <td>部门领导</td>
-                                    <td>
-                                        <button type="button" class="btn btn-success btn-floating">
-                                            <i class="ti-check-box"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-danger btn-floating">
-                                            <i class="ti-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>4</td>
-                                    <td>人事专员</td>
-                                    <td>
-                                        <button type="button" class="btn btn-success btn-floating">
-                                            <i class="ti-check-box"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-danger btn-floating">
-                                            <i class="ti-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>5</td>
-                                    <td>普通用户</td>
-                                    <td>
-                                        <button type="button" class="btn btn-success btn-floating">
-                                            <i class="ti-check-box"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-danger btn-floating">
-                                            <i class="ti-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-
                             </table>
                         </div>
                         <nav aria-label="Page navigation example">
+                            <input type="hidden" id="rolePageIndex" name="rolePageIndex" value="1">
+                            <input type="hidden" id="roleTotalPageCount" name="roleTotalPageCount" value="1">
                             <ul class="pagination justify-content-end">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">上一页</a>
-                                <li class="page-item"><a class="page-link" href="#">1</a>
-                                <li class="page-item"><a class="page-link" href="#">2</a>
-                                <li class="page-item"><a class="page-link" href="#">3</a>
+                                <li class="page-item" id="roleLi">
+                                    <a class="page-link" href="#"  onclick="roelPrev()" >上一页</a>
+
                                 <li class="page-item">
-                                    <a class="page-link" href="#">下一页</a>
+                                    <a class="page-link" href="#" onclick="roleNext()">下一页</a>
                             </ul>
                         </nav>
 
@@ -507,16 +400,16 @@
             </div>
 
             <div class="tab-pane fade" id="earnings" role="tabpanel" aria-labelledby="earnings-tab">
-                <div class="tab-pane fade show active" id="timeline" role="tabpanel" aria-labelledby="timeline-tab">
+                <div class="tab-pane fade show active"  role="tabpanel" aria-labelledby="timeline-tab">
                     <div class="timeline">
 
                         <form>
                             <div class="form-group">
-                                用户名：<input value=""/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <label for="exampleFormControlInput1">时间段：</label>
-                                <input type="date" placeholder="开始时间">&nbsp;&nbsp;到&nbsp;&nbsp;<input type="date"
-                                                                                                      placeholder="结束时间">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input type="button" value="查询">
+                                用户名：<input value="" id="yonghuname" name="realName"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label for="startDate">时间段：</label>
+                                <input type="date" id="startDate" name="startDate" placeholder="开始时间">&nbsp;&nbsp;到&nbsp;&nbsp;
+                                <input type="date" id="endDate" name="endDate" placeholder="结束时间">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="button" value="查询" id="logButton">
                             </div>
                         </form>
                         <div class="form-group">
@@ -525,7 +418,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table table-borderless">
+                                        <table class="table table-borderless" id="logTable">
                                             <tr>
                                                 <th>编号</th>
                                                 <th>用户名</th>
@@ -533,22 +426,6 @@
                                                 <th>事件</th>
                                                 <th>备注</th>
                                                 <th>操作时间</th>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>张三</td>
-                                                <td>系统管理员</td>
-                                                <td>添加了用户</td>
-                                                <td></td>
-                                                <td>2013-11-29 15:47:20</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>李四</td>
-                                                <td>人事专员</td>
-                                                <td>发布了公告</td>
-                                                <td></td>
-                                                <td>2013-11-29 15:47:24</td>
                                             </tr>
 
                                         </table>
@@ -558,14 +435,14 @@
 
                         </div>
                         <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-end">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">上一页</a>
-                                <li class="page-item"><a class="page-link" href="#">1</a>
-                                <li class="page-item"><a class="page-link" href="#">2</a>
-                                <li class="page-item"><a class="page-link" href="#">3</a>
+                            <input type="hidden" id="logPageIndex" name="logPageIndex" value="1">
+                            <input type="hidden" id="logTotalPageCount" name="logTotalPageCount" value="1">
+                            <ul class="pagination justify-content-end" id="logul">
+                                <li class="page-item" id="logli">
+                                    <a class="page-link" onclick="logPrev()" href="#" tabindex="-1" aria-disabled="true">上一页</a>
+
                                 <li class="page-item">
-                                    <a class="page-link" href="#">下一页</a>
+                                    <a class="page-link" onclick="logNext()" href="#">下一页</a>
                             </ul>
                         </nav>
 
@@ -579,17 +456,20 @@
     </div>
 </div>
 <!-- begin::datepicker -->
-<script src="assets/vendors/datepicker/daterangepicker.js"></script>
-<script src="assets/js/examples/datepicker.js"></script>
+<script th:src="@{/vendors/datepicker/daterangepicker.js}"></script>
+<script th:src="@{/js/examples/datepicker.js}"></script>
 <!-- end::datepicker -->
 
 <!-- begin::global scripts -->
-<script src="assets/vendors/bundle.js"></script>
+<script th:src="@{/vendors/bundle.js}"></script>
 <!-- end::global scripts -->
 
 <!-- begin::custom scripts -->
-<script src="assets/js/custom.js"></script>
-<script src="assets/js/app.js"></script>
+<script th:src="@{/js/custom.js}"></script>
+<script th:src="@{/js/app.js}"></script>
+
+
+
 <!-- end::custom scripts -->
 
 

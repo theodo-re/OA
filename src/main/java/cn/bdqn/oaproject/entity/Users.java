@@ -5,8 +5,8 @@ import java.util.Date;
 public class Users {
 
   private long id;
-  private String uName;
-  private String uPassWord;
+  private String userName;
+  private String passWord;
   private String realName;
   private long organId;
   private long deptId;
@@ -16,6 +16,52 @@ public class Users {
   private long status;
   private Date createdtime;
   private long majer;
+
+  private Organization organization;
+  private Dictionary dictionary1;
+  private Dictionary dictionary2;
+  private Dictionary dictionary3;
+  private Dept dept;
+
+  public Dept getDept() {
+    return dept;
+  }
+
+  public void setDept(Dept dept) {
+    this.dept = dept;
+  }
+
+  public Organization getOrganization() {
+    return organization;
+  }
+
+  public void setOrganization(Organization organization) {
+    this.organization = organization;
+  }
+
+
+  public Dictionary getDictionary1() {
+    return dictionary1;
+  }
+
+  public void setDictionary1(Dictionary dictionary1) {
+    this.dictionary1 = dictionary1;
+  }
+
+  public Dictionary getDictionary2() {
+    return dictionary2;
+  }
+
+  public void setDictionary2(Dictionary dictionary2) {
+    this.dictionary2 = dictionary2;
+  }
+
+  public Dictionary getDictionary3() {
+    return dictionary3;
+  }
+
+  public void setDictionary3(Dictionary dictionary3) {
+    this.dictionary3 = dictionary3;
   private String shangsi;
   private Dept dept;
   private Dictionary dictionary;
@@ -52,23 +98,26 @@ public class Users {
     this.id = id;
   }
 
+
+  public String getUserName() {
+    return userName;
+
   public String getUName() {
     return uName;
+
   }
 
-  public void setUName(String uName) {
-    this.uName = uName;
+  public void setUserName(String userName) {
+    this.userName = userName;
   }
 
-
-  public String getUPassWord() {
-    return uPassWord;
+  public String getPassWord() {
+    return passWord;
   }
 
-  public void setUPassWord(String uPassWord) {
-    this.uPassWord = uPassWord;
+  public void setPassWord(String passWord) {
+    this.passWord = passWord;
   }
-
 
   public String getRealName() {
     return realName;

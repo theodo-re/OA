@@ -4,9 +4,77 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bdqn.oaproject.dao.UsersDao">
    <select id="findCByName" resultType="Users" parameterType="String">
-       select * from users where uName=#{uName}
+       select * from users where userName=#{uName}
    </select>
+
+    <resultMap id="hu" type="Users">
+        <id property="id" column="u.id"></id>
+        <association property="dictionary1" javaType="Dictionary">
+            <id property="id" column="d1.valueId"/>
+            <result property="valueName" column="rname"></result>
+        </association>
+        <association property="dictionary2" javaType="Dictionary">
+            <id property="id" column="d2.valueId"/>
+            <result property="valueName" column="sname"></result>
+        </association>
+        <association property="organization" javaType="Organization">
+            <id property="id" column="o.id"/>
+        </association>
+    </resultMap>
+    <select id="findUsers" resultMap="hu">
+        SELECT u.id,u.userName,u.realName,d1.valueName rname ,o.organName,d2.valueName sname  FROM users u
+        JOIN dictionary d1 ON u.roleId=d1.valueId AND d1.typeCode='JS'
+        JOIN dictionary d2 ON u.status=d2.valueId AND d2.typeCode='ZT'
+        JOIN organization o ON u.organId=o.id
+        <where>
+            <if test="users.userName!=null and users.userName!=''">
+                and userName like concat('%',#{users.userName},'%')
+            </if>
+            <if test="users.realName!=null and users.realName!=''">
+                and realName like concat('%',#{users.realName},'%')
+            </if>
+        </where>
+        group by u.id
+        limit #{pageIndex},#{pageSize}
+    </select>
+    <select id="findUsersCount" resultType="Integer" parameterType="Users">
+        select count(0) from users
+        <where>
+            <if test="userName!=null and userName!=''">
+                and userName like concat('%',#{userName},'%')
+            </if>
+            <if test="realName!=null and realName!=''">
+                and realName like concat('%',#{realName},'%')
+            </if>
+        </where>
+    </select>
+    <insert id="addUsers" parameterType="Users">
+        insert into users(userName,passWord,realName,organId,deptId,
+        sex,proId,roleId,status,createdtime,majer)
+        values(#{userName},#{passWord},#{realName},#{organId},#{deptId},#{sex},#{proId},#{roleId},#{status},#{createdtime},#{majer})
+    </insert>
+   
+    <select id="findUsersById" parameterType="Integer" resultType="Users">
+        SELECT  * FROM users u
+        where u.id=#{id}
+    </select>
+    <delete id="delUser" parameterType="Integer">
+        delete from users where id=#{id}
+    </delete>
+    <update id="updateUsers" parameterType="Users">
+        update users set userName=#{userName},realName=#{realName},organId=#{organId},
+        deptId=#{deptId},sex=#{sex},proId=#{proId},roleId=#{roleId},status=#{status}
+        where id=#{id}
+    </update>
+    <select id="findUsersList" resultType="Users">
+         SELECT id,realName FROM users
+    </select>
+    <select id="findDeptLead" resultType="Integer" parameterType="Long">
+        SELECT u.id FROM users u JOIN dept d ON u.deptId=d.id
+        WHERE u.roleId=3 AND d.id=#{id}
+
     <select id="findByrealName" resultType="int" parameterType="String">
         select * from users where realName=#{name}
+
     </select>
 </mapper>

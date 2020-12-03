@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -100,5 +101,12 @@ public class LogController {
         yan=(String) request.getSession().getAttribute("RANDOMREDISKEY");
         System.out.println(request.getSession().getAttribute("RANDOMREDISKEY"));
         //ImageIO.write(image, "JPEG", response.getOutputStream());
+    }
+    /**
+     * 调到系统管理
+     */
+    @RequestMapping("/xitongguanli")
+    public String xitongguanli(){
+        return "xitongguanli";
     }
 }
