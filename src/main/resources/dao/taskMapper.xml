@@ -22,7 +22,7 @@
     <select id="findAll" resultMap="taskmap">
         SELECT t.`id`,t.`statusId`,t.`tName`,d.valueName FROM task t
         JOIN dictionary d ON t.`statusId`=d.`valueId`
-        WHERE typeCode='SHZT'
+        WHERE typeCode='SHZT' limit 0,3
     </select>
     <select id="findById" resultMap="taskmap" parameterType="int">
         SELECT t.`id`,t.`tName`,d.valueName,(SELECT u.`realName` FROM users u WHERE u.`id`=t.`auditId`) Name,u.`realName`,t.`createdtime` FROM task t

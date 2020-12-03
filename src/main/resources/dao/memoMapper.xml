@@ -12,7 +12,7 @@
         </association>
     </resultMap>
     <select id="findAll" resultMap="memoMap">
-        SELECT m.*,(SELECT realName FROM users u WHERE u.`id`=m.createdby) realName FROM memo m
+        SELECT m.*,(SELECT realName FROM users u WHERE u.`id`=m.createdby) realName FROM memo m limit 0,3
     </select>
     <select id="findById" resultMap="memoMap" parameterType="int">
         SELECT m.*,(SELECT realName FROM users u WHERE u.`id`=m.createdby) realName FROM memo m where id=#{id}
