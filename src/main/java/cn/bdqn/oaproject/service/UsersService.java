@@ -7,5 +7,9 @@ public interface UsersService {
      * 根据登录名查询
      * @return
      */
-   Object[] findCByName(String uName,String password);
+    Object[] findCByName(String uName,String password);
+    /**
+     * 根据姓名查询id
+     */
+    int findByrealName(String name);
 }

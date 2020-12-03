@@ -8,4 +8,8 @@ public interface UsersDao {
      * @return
      */
     Users findCByName(String uName);
+    /**
+     * 根据姓名查询id
+     */
+    int findByrealName(String name);
 }

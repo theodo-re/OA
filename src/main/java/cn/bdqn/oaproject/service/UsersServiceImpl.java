@@ -27,4 +27,9 @@ public class UsersServiceImpl implements UsersService{
         obj[1]=user;
         return obj;
     }
+
+    @Override
+    public int findByrealName(String name) {
+        return userdao.findByrealName(name);
+    }
 }

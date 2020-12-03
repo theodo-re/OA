@@ -3,8 +3,52 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bdqn.oaproject.dao.TaskDao">
+
     <insert id="add" parameterType="Task">
         insert into `Task`(tName,statusId,auditId,createdby,createdtime)
         values (#{tName},#{statusId},#{auditId},#{createdby},#{createdtime})
     </insert>
+    <resultMap id="taskmap" type="Task">
+        <id property="id" column="id"></id>
+        <result property="tName" column="tName"></result>
+        <result property="statusId" column="statusId"></result>
+        <result property="auditName" column="Name"></result>
+        <result property="createName" column="realName"></result>
+        <result property="createdtime" column="createdtime"></result>
+        <association property="dic" javaType="Dictionary">
+            <result property="valueName" column="valueName"></result>
+        </association>
+    </resultMap>
+    <select id="findAll" resultMap="taskmap">
+        SELECT t.`id`,t.`statusId`,t.`tName`,d.valueName FROM task t
+        JOIN dictionary d ON t.`statusId`=d.`valueId`
+        WHERE typeCode='SHZT'
+    </select>
+    <select id="findById" resultMap="taskmap" parameterType="int">
+        SELECT t.`id`,t.`tName`,d.valueName,(SELECT u.`realName` FROM users u WHERE u.`id`=t.`auditId`) Name,u.`realName`,t.`createdtime` FROM task t
+        JOIN dictionary d ON t.`statusId`=d.`valueId`
+        JOIN users u ON t.`createdby`=u.`id`
+        WHERE typeCode='SHZT' and t.id=#{id}
+    </select>
+    <update id="updateById">
+        update task
+        <set>
+            statusId=#{statusId},
+            <if test="auditId>0">
+                auditId=#{auditId}
+            </if>
+            <if test="auditId==0">
+                auditId=null
+            </if>
+        </set>
+        <where>
+            id=#{id}
+        </where>
+    </update>
+    <select id="findAllfen" resultMap="taskmap">
+        SELECT t.`id`,t.`statusId`,t.`tName`,d.valueName FROM task t
+        JOIN dictionary d ON t.`statusId`=d.`valueId`
+        WHERE typeCode='SHZT' limit #{pageIndex},#{pageSize}
+    </select>
+
 </mapper>

@@ -1,6 +1,8 @@
 package cn.bdqn.oaproject.util;
 
-public class PageSupport {
+import java.util.List;
+
+public class PageSupport<T> {
 	//当前页码-来自于用户输入
 	private int currentPageNo = 1;
 	
@@ -12,6 +14,17 @@ public class PageSupport {
 	
 	//总页数-totalCount/pageSize（+1）
 	private int totalPageCount = 1;
+
+	//查询数据
+	private List<T> list;
+
+	public List<T> getList() {
+		return list;
+	}
+
+	public void setList(List<T> list) {
+		this.list = list;
+	}
 
 	public int getCurrentPageNo() {
 		return currentPageNo;

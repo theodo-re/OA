@@ -52,7 +52,6 @@ public class Users {
     this.id = id;
   }
 
-
   public String getUName() {
     return uName;
   }
