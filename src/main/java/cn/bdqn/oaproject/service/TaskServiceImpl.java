@@ -32,9 +32,15 @@ public class TaskServiceImpl implements TaskService{
     @Transactional
     public int updateById(Task task, Check check) {
         int rel=-1;
-        tdao.updateById(task);
-        cdao.add(check);
-        rel=1;
+        if (tdao.updateById(task)>0 && cdao.add(check)>0){
+            rel=1;
+        }
         return rel;
+    }
+
+    @Override
+    public List<Task> findAllfen(Integer pageIndex, Integer pageSize) {
+        pageIndex=(pageIndex-1)*pageSize;
+        return tdao.findAllfen(pageIndex,pageSize);
     }
 }

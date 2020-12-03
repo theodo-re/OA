@@ -3,6 +3,7 @@ package cn.bdqn.oaproject.controller;
 import cn.bdqn.oaproject.entity.*;
 import cn.bdqn.oaproject.service.*;
 import cn.bdqn.oaproject.util.Constants;
+import cn.bdqn.oaproject.util.PageSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpRequest;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -33,6 +35,8 @@ public class desktopController {
     private AfficheService aser;
     @Resource
     private MemoService memoService;
+    @Resource
+    private AuthorityService authorityService;
 
     /**
      * 我的桌面
@@ -40,14 +44,16 @@ public class desktopController {
      * @return
      */
     @RequestMapping("/shouye.html")
-    public String main1(Model m){
+    public String main1(Model m,HttpSession session){
         logger.info("我的桌面==============================");
         List<Task> list = tser.findAll();
         List<Affiche> affList = aser.findAll();
         List<Memo> memoList = memoService.findAll();
+        Authority authority = authorityService.findbyJSId((int) ((Users)session.getAttribute(Constants.USER_SESSION)).getProId());
         m.addAttribute("list",list);
         m.addAttribute("affList",affList);
         m.addAttribute("memoList",memoList);
+        m.addAttribute("authority",authority);
         return "shouye";
     }
     /**
@@ -196,6 +202,27 @@ public class desktopController {
             return "删除失败！";
         }
     }
-
+    /**
+     * 分页查询任务
+     */
+    @ResponseBody
+    @RequestMapping("/renwufen")
+    public PageSupport<Task> renwufen(@RequestParam(required = false) Integer pageIndex,
+                                      @RequestParam(required = false) Integer yeshu){
+        logger.info("分页查询任务==============================");
+        if(pageIndex!=null && pageIndex<=0){
+            pageIndex=1;
+        }
+        if (yeshu!=null && pageIndex>yeshu){
+            pageIndex=yeshu;
+        }
+        List<Task> tasksList = tser.findAllfen(pageIndex,Constants.pageSize);
+        PageSupport<Task> list = new PageSupport<Task>();
+        list.setList(tasksList);
+        list.setCurrentPageNo(pageIndex);
+        list.setPageSize(Constants.pageSize);
+        list.setTotalCount(tser.findAll().size());
+        return list;
+    }
 
 }

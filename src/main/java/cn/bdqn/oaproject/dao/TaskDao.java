@@ -1,6 +1,7 @@
 package cn.bdqn.oaproject.dao;
 
 import cn.bdqn.oaproject.entity.Task;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,4 +18,8 @@ public interface TaskDao {
      * 根据id修改任务
      */
     int updateById(Task task);
+    /**
+     * 分页查询所有任务
+     */
+    List<Task> findAllfen(@Param("pageIndex") Integer pageIndex,@Param("pageSize") Integer pageSize);
 }

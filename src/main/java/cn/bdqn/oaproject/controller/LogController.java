@@ -46,17 +46,17 @@ public class LogController {
             m.addAttribute("error1","密码不正确");
             return "login";
         }else{
-            if(random!=null){
-                if(yan.equals(random)){
+            if(random!=null && !"".equals(random)){
+                if(yan.equalsIgnoreCase(random)){
                     session.setAttribute(Constants.USER_SESSION,(Users)obj[1]);
                     session.setAttribute(Constants.JI,jizhu);
                     return "redirect:index1";
                 }else{
-                    m.addAttribute("error1","验证码错误！");
+                    m.addAttribute("error2","验证码错误！");
                     return "login";
                 }
             }else{
-                m.addAttribute("error1","验证码不能为空！");
+                m.addAttribute("error2","验证码不能为空！");
                 return "login";
             }
 
@@ -73,10 +73,11 @@ public class LogController {
     public String logout(HttpSession session,Model m){
         logger.info("注销==============================");
         session.removeAttribute(Constants.USER_SESSION);
-        Integer rel=-1;
-        if(session.getAttribute(Constants.JI).toString()!=null){
-            rel = Integer.parseInt(session.getAttribute(Constants.JI).toString()) ;
+
+        if(session.getAttribute(Constants.JI)==null){
+            return "login";
         }
+        Integer rel = Integer.parseInt(session.getAttribute(Constants.JI).toString()) ;
         m.addAttribute("ji",rel);
         return "login";
     }

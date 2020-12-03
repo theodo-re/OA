@@ -40,4 +40,9 @@
             id=#{id}
         </where>
     </update>
+    <select id="findAllfen" resultMap="taskmap">
+        SELECT t.`id`,t.`statusId`,t.`tName`,d.valueName FROM task t
+        JOIN dictionary d ON t.`statusId`=d.`valueId`
+        WHERE typeCode='SHZT' limit #{pageIndex},#{pageSize}
+    </select>
 </mapper>
