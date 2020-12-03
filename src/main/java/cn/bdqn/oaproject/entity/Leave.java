@@ -17,7 +17,6 @@ public class Leave {
   private long createdby;
   private Date createdtime;
 
-
   public long getId() {
     return id;
   }

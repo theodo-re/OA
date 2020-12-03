@@ -3,5 +3,34 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bdqn.oaproject.dao.LeaveDao">
+    <insert id="add" parameterType="Leave">
+        INSERT INTO `leave`(userId,deptId,startdate,enddate,leaveday,ltype,destination,checkId,createdby,createdtime)
+            VALUES (#{userId},#{deptId},#{startdate},#{enddate},#{leaveday},#{ltype},#{destination},#{checkId},#{createdby},#{createdtime})
+    </insert>
+
+    <select id="findCByName" parameterType="String" resultMap="users">
+        SELECT u.realName,u.majer,u1.`realName` shangsi,u.`id`,u.proId,d.dName bumen,c.valueName vname
+        FROM users u
+        JOIN users u1
+        JOIN dept d
+        ON u.`majer`=u1.`id`=d.`id`
+        JOIN dictionary c
+        ON u.`proId`=c.`valueId`
+        WHERE u.`realName`=#{uName}
+        AND c.typeCode='ZC'
+    </select>
+
+    <resultMap id="users" type="Users">
+        <id property="id" column="id"></id>
+        <result property="realName" column="realName"></result>
+        <result property="shangsi" column="shangsi"></result>
+        <result property="proId" column="proId"></result>
+        <association property="dept" javaType="Dept">
+            <result property="dName" column="bumen"></result>
+        </association>
+        <association property="dictionary" javaType="Dictionary">
+            <result property="valueName" column="vname"></result>
+        </association>
+    </resultMap>
 
 </mapper>

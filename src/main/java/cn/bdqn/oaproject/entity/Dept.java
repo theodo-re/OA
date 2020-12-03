@@ -10,6 +10,7 @@ public class Dept {
 
   private Integer id;
   private String deptName;
+  private String dName;
   private long organId;
   private long userId;
   private String telephone;
@@ -50,6 +51,12 @@ public class Dept {
 
   public void setOrganization(Organization organization) {
     this.organization = organization;
+  public String getdName() {
+    return dName;
+  }
+
+  public void setdName(String dName) {
+    this.dName = dName;
   }
 
  /* public long getId() {
@@ -67,13 +74,6 @@ public class Dept {
   public void setId(Integer id) {
     this.id = id;
   }
-  /* public String getDName() {
-    return dName;
-  }
-
-  public void setDName(String dName) {
-    this.dName = dName;
-  }*/
 
   public String getDeptName() {
     return deptName;

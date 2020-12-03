@@ -8,7 +8,8 @@ import java.util.Date;
 import java.util.List;
 
 public interface LogDao {
-    /**
+    int add(Log log);
+  /**
      * 查询日志表（模糊查询+分页）
      */
     List<Log> findLog(LogUtil logUtil);
@@ -21,5 +22,4 @@ public interface LogDao {
      * 添加日志
      */
     int addLog(Log log);
-
 }

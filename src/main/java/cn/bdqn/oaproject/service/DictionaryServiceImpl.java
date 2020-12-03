@@ -1,6 +1,7 @@
 package cn.bdqn.oaproject.service;
 
 import cn.bdqn.oaproject.dao.DictionaryDao;
+
 import cn.bdqn.oaproject.dao.LogDao;
 import cn.bdqn.oaproject.entity.Dictionary;
 import cn.bdqn.oaproject.entity.Log;
@@ -12,12 +13,19 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
+
+import cn.bdqn.oaproject.entity.Dictionary;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+
 import java.util.List;
 
 @Service
 public class DictionaryServiceImpl implements DictionaryService{
     @Resource
-    DictionaryDao dictionaryDao;
+
+    private DictionaryDao dictionaryDao;
     @Resource
     LogDao logdao;
     @Override
@@ -116,5 +124,8 @@ public class DictionaryServiceImpl implements DictionaryService{
 
         return rel;
 
+    @Override
+    public List<Dictionary> findByName() {
+        return dictionaryDao.findByName();
     }
 }

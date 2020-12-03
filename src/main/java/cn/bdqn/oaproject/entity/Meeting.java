@@ -1,5 +1,7 @@
 package cn.bdqn.oaproject.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Meeting {
@@ -9,10 +11,23 @@ public class Meeting {
   private String mdescribe;
   private long leisure;
   private long createdby;
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date createdtime;
   private long modifyby;
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date modifytime;
 
+  public Meeting(){};
+  public Meeting(long id, String mName, String mdescribe, long leisure, long createdby, Date createdtime, long modifyby, Date modifytime) {
+    this.id = id;
+    this.mName = mName;
+    this.mdescribe = mdescribe;
+    this.leisure = leisure;
+    this.createdby = createdby;
+    this.createdtime = createdtime;
+    this.modifyby = modifyby;
+    this.modifytime = modifytime;
+  }
 
   public long getId() {
     return id;

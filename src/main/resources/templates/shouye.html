@@ -14,6 +14,9 @@
     <link rel="stylesheet" th:href="@{/vendors/bundle.css}" type="text/css">
     <!-- end::global styles -->
 
+    <!-- begin::fullcalendar -->
+    <link rel="stylesheet" th:href="@{/vendors/fullcalendar/fullcalendar.min.css}" type="text/css">
+    <!-- end::fullcalendar -->
 
     <!-- begin::datepicker -->
     <link rel="stylesheet" th:href="@{/vendors/datepicker/daterangepicker.css}">
@@ -22,6 +25,12 @@
     <link rel="stylesheet" th:href="@{/css/app.css}" type="text/css" charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/custom.css}" type="text/css">
     <script th:src="@{/vendors/jquery/jquery-3.4.1.js}" type="text/javascript"></script>
+    <script th:src="@{/js/renwu.js}" type="text/javascript"></script>
+    <script th:src="@{/js/gonggao.js}" type="text/javascript"></script>
+    <script th:src="@{/js/bianqian.js}" type="text/javascript"></script>
+    <script>
+
+    </script>
 
 
 </head>
@@ -29,12 +38,12 @@
 <!-- end::page header -->
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6" th:if="${authority.taskId}==1">
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between">
                 待处理任务
                 <button type="button" class="btn btn-primary m-r-5" data-toggle="modal"
-                        data-target=".bd-example-modal-xl">更多
+                        data-target=".bd-example-modal-xl" value="1" name="renfen">更多
                 </button>
             </div>
             <div class="card-body">
@@ -45,52 +54,33 @@
                             <th>状态</th>
                             <th>操作</th>
                         </tr>
-                        <tr>
+                        <tr th:each="task:${list}">
+                            <td th:text="${task.tName}"></td>
+                            <td th:text="${task.dic.valueName}"></td>
 
-                            <td>Google Chrome</td>
-                            <td>13,41</td>
-                            <td>40.95%</td>
-
+                            <td>
+                                <button th:if="${task.statusId}==1" type="button" class="btn btn-primary m-r-5" data-toggle="modal"
+                                    data-target="#exampleModalshen" name="shen" th:value="${task.id}">
+                                    审核
+                                </button>&nbsp;
+                                <button type="button" class="btn btn-primary m-r-5" data-toggle="modal"
+                                    data-target="#exampleModal" name="cha" th:value="${task.id}">
+                                    查看
+                                </button>
+                            </td>
                         </tr>
-                        <tr>
 
-                            <td>Firefox</td>
-                            <td>13,41</td>
-                            <td>40.95%</td>
-
-                        </tr>
-                        <tr>
-
-                            <td>Edge</td>
-                            <td>13,41</td>
-                            <td>40.95%</td>
-
-                        </tr>
-                        <tr>
-
-                            <td>Safari</td>
-                            <td>13,41</td>
-                            <td>40.95%</td>
-
-                        </tr>
-                        <tr>
-
-                            <td>Opera</td>
-                            <td>13,41</td>
-                            <td>40.95%</td>
-
-                        </tr>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" th:if="${authority.annId}==1">
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between">
                 通知公告
                 <button type="button" class="btn btn-primary m-r-5" data-toggle="modal"
-                        data-target=".bd-example-modal-xl">更多
+                        data-target="#gonggao">更多
                 </button>
             </div>
             <div class="card-body">
@@ -100,35 +90,15 @@
                             <th>标题</th>
                             <th>日期</th>
                         </tr>
-                        <tr>
-
-                            <td>13,41</td>
-                            <td>40.95%</td>
-
-                        </tr>
-                        <tr>
-
-                            <td>13,41</td>
-                            <td>40.95%</td>
-
-                        </tr>
-                        <tr>
-
-                            <td>Edge</td>
-                            <td>13,41</td>
-
-                        </tr>
-                        <tr>
-
-                            <td>13,41</td>
-                            <td>40.95%</td>
-
-                        </tr>
-                        <tr>
-
-                            <td>13,41</td>
-                            <td>40.95%</td>
-
+                        <tr th:each="affiche:${affList}">
+                            <td th:text="${affiche.affTitle}"></td>
+                            <td th:text="${affiche.pubdate}"></td>
+                            <td>
+                                <button type="button" class="btn btn-primary m-r-5" data-toggle="modal"
+                                    data-target="#gonggaochakan" name="gao" th:value="${affiche.id}">
+                                    查看
+                                </button>
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -137,43 +107,48 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6" th:if="${authority.memoId}==1">
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between">我的便签
+                <button type="button" data-whatever="@getbootstrap" class="btn btn-primary m-r-5" data-toggle="modal"
+                        data-target="#bianqianadd">新增
+                </button>
                 <button type="button" class="btn btn-primary m-r-5" data-toggle="modal"
-                        data-target=".bd-example-modal-xl">更多
+                        data-target="#bianqian">更多
                 </button>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-borderless">
-                        <tr>
+                        <tr th:each="memo:${memoList}">
                             <td><i class="ti-book"></i></td>
-                            <td>Google</td>
-                        </tr>
-                        <tr>
-                            <td><i class="ti-book"></i></td>
-                            <td>Google Chrome</td>
-                        </tr>
-                        <tr>
-                            <td><i class="ti-book"></i></td>
-                            <td>Firefox</td>
-                        </tr>
-                        <tr>
-                            <td><i class="ti-book"></i></td>
-                            <td>Edge</td>
-                        </tr>
-                        <tr>
-                            <td><i class="ti-book"></i></td>
-                            <td>Safari</td>
-                        </tr>
-                        <tr>
-                            <td><i class="ti-book"></i></td>
-                            <td>Opera</td>
+                            <td th:text="${memo.mTitle}"></td>
+                            <td>
+                                <button type="button" class="btn btn-primary m-r-5" data-toggle="modal"
+                                        data-target="#bianqianchakan" name="bian1" th:value="${memo.id}">
+                                    查看
+                                </button>
+                                <button type="button" class="btn btn-primary m-r-5" data-toggle="modal"
+                                        data-target="#bianqianxiugai" name="bian2" th:value="${memo.id}">
+                                    修改
+                                </button>
+                                <button type="button" class="btn btn-primary m-r-5" data-toggle="modal"
+                                        data-target="#gonggaocshanchu" id="bian3" th:value="${memo.id}">
+                                    删除
+                                </button>
+                            </td>
                         </tr>
                     </table>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header d-flex align-items-center justify-content-between">常用工具</div>
+                <div class="card-body">
+                    <div id='calendar'></div>
+                </div>
         </div>
     </div>
 
@@ -184,13 +159,19 @@
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Extra large modal</h5>
+                    <h5 class="modal-title">更多任务</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <table class="table table-borderless">
+                        <tr id="ren">
+                            <th>任务名称</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭
@@ -200,23 +181,274 @@
             </div>
         </div>
     </div>
+    <!--结束-->
+    <!--查看：开始-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">查看</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
 
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header d-flex align-items-center justify-content-between">常用工具</div>
-            <div class="card-body">
-                <div class="table-responsive">
                     <table class="table table-borderless">
                         <tr>
-                            <td>Google Chrome</td>
-                            <td>13,41</td>
-                            <td>40.95%</td>
+                            <th>任务名称</th>
+                            <th>状态</th>
+                            <th>审核人</th>
+                            <th>创建人</th>
+                            <th>创建时间</th>
                         </tr>
+                        <tr id="th">
+
+                        </tr>
+
                     </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">返回</button>
                 </div>
             </div>
         </div>
     </div>
+    <!--查看：结束-->
+    <!--审核：开始-->
+    <div class="modal fade" id="exampleModalshen" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabelshen">审核</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="from" action="shenhe" method="post">
+                        <input id="shenid" name="shenid" type="hidden" value="">
+                        任务名称：<input id="zhuangName" name="zhuangName" type="text" class="form-control" value="">
+                        状态：<input id="statusId" name="statusId" type="text" class="form-control" value="">
+                        审核人：<input id="auditId" name="auditId" type="text" class="form-control" value="">
+                        审核结果：<select name="valueName"></select>
+                        审核意见：<input name="yijian" type="text" value=""/>
+                        <div class="modal-footer">
+                            <button type="button" id="btn" class="btn btn-secondary" data-dismiss="modal">提交</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">返回</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--审核：结束-->
+    <!-- 模态：通知公告 -->
+    <div class="modal fade bd-example-modal-xl" id="gonggao" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">公告列表</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-borderless">
+                        <tr>
+                            <th>标题</th>
+                            <th>日期</th>
+                        </tr>
+                        <tr th:each="affiche:${affList}">
+                            <td th:text="${affiche.affTitle}"></td>
+                            <td th:text="${affiche.pubdate}"></td>
+                            <td>
+                                <button type="button" class="btn btn-primary m-r-5" data-toggle="modal"
+                                        data-target="#gonggaochakan" name="gao" th:value="${affiche.id}">
+                                    查看
+                                </button>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--结束-->
+
+    <!--公告查看：开始-->
+    <div class="modal fade" id="gonggaochakan" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel1" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">查看</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <table class="table table-borderless">
+                        <tr>
+                            <th>标题</th>
+                            <th>内容</th>
+                            <th>发布时间</th>
+                            <th>创建日期</th>
+                        </tr>
+                        <tr id="gong">
+
+                        </tr>
+
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">返回</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--公告查看：结束-->
+
+    <!-- 模态：便签 -->
+    <div class="modal fade bd-example-modal-xl" id="bianqian" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">公告列表</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-borderless">
+                        <tr th:each="memo:${memoList}">
+                            <td><i class="ti-book"></i></td>
+                            <td th:text="${memo.mTitle}"></td>
+                            <td>
+                                <button type="button" class="btn btn-primary m-r-5" data-toggle="modal"
+                                        data-target="#gonggaochakan" name="bian1" th:value="${memo.id}">
+                                    查看
+                                </button>
+                                <button type="button" class="btn btn-primary m-r-5" data-toggle="modal"
+                                        data-target="#gonggaochakan" name="gao" th:value="${memo.id}">
+                                    修改
+                                </button>
+                                <button type="button" class="btn btn-primary m-r-5" data-toggle="modal"
+                                        data-target="#gonggaochakan" name="gao" th:value="${memo.id}">
+                                    删除
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--结束-->
+    <!--便签查看：开始-->
+    <div class="modal fade" id="bianqianchakan" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabelbian" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabelbian">查看</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <table class="table table-borderless">
+                        <tr>
+                            <th>标题</th>
+                            <th>内容</th>
+                            <th>创建人</th>
+                            <th>创建日期</th>
+                        </tr>
+                        <tr id="bian">
+
+                        </tr>
+
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">返回</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--便签查看：结束-->
+    <!--便签修改：开始-->
+    <div class="modal fade" id="bianqianxiugai" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabelxiu" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabelxiu">便签修改</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="from1" action="shenhe" method="post">
+                        <input id="xiuid" name="xiuid" type="hidden" value="">
+                        任务名称：<input id="mTitle" name="mTitle" type="text" class="form-control" value="">
+                        状态：<input id="mContent" name="mContent" type="text" class="form-control" value="">
+                        <div class="modal-footer">
+                            <button type="button" id="btnxiu" class="btn btn-secondary" data-dismiss="modal">提交</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">返回</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--便签修改：结束-->
+    <!--便签添加：开始-->
+    <div class="modal fade" id="bianqianadd" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabeladd" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabeladd">添加便签</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addfrom1" action="addshenhe" method="post">
+                        任务名称：<input id="addmTitle" name="addmTitle" type="text" class="form-control" value="">
+                        状态：<input id="addmContent" name="addmContent" type="text" class="form-control" value="">
+                        <div class="modal-footer">
+                            <button type="button" id="addbtn" class="btn btn-secondary" data-dismiss="modal">提交</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">返回</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--便签添加：结束-->
+
 </div>
 <!-- begin::datepicker -->
 <script th:src="@{/vendors/datepicker/daterangepicker.js}"></script>
@@ -227,6 +459,13 @@
 <script th:src="@{/vendors/bundle.js}"></script>
 <!-- end::global scripts -->
 
+<!-- begin::fullcalendar -->
+<script th:src="@{/vendors/fullcalendar/moment.min.js}"></script>
+<script th:src="@{/vendors/jquery/jquery-ui.min.js}"></script>
+<script th:src="@{/vendors/fullcalendar/fullcalendar.min.js}"></script>
+<script th:src="@{/js/examples/fullcalendar.js}"></script>
+<!-- end::fullcalendar -->
+
 <!-- begin::custom scripts -->
 <script th:src="@{/js/custom.js}"></script>
 <script th:src="@{/js/app.js}"></script>
@@ -234,4 +473,5 @@
 
 
 </body>
+<!---->
 </html>

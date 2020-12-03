@@ -38,7 +38,6 @@ public class UsersServiceImpl implements UsersService{
         return obj;
     }
 
-
     @Override
     public List<Users> findUsers(Users users, Integer pageIndex, Integer pageSize) {
         return userdao.findUsers(users,pageIndex,pageSize);
@@ -148,5 +147,10 @@ public class UsersServiceImpl implements UsersService{
     public Integer findDeptLead(Long deptid) {
         Integer rel=userdao.findDeptLead(deptid);
         return rel;
+
+    @Override
+    public int findByrealName(String name) {
+        return userdao.findByrealName(name);
+
     }
 }

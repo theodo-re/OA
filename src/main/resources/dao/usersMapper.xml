@@ -6,6 +6,7 @@
    <select id="findCByName" resultType="Users" parameterType="String">
        select * from users where userName=#{uName}
    </select>
+
     <resultMap id="hu" type="Users">
         <id property="id" column="u.id"></id>
         <association property="dictionary1" javaType="Dictionary">
@@ -52,41 +53,7 @@
         sex,proId,roleId,status,createdtime,majer)
         values(#{userName},#{passWord},#{realName},#{organId},#{deptId},#{sex},#{proId},#{roleId},#{status},#{createdtime},#{majer})
     </insert>
-    <!--<resultMap id="yu" type="Users">
-        <id property="id" column="u.id"></id>
-        <association property="dictionary1" javaType="Dictionary">
-            <id property="id" column="d1.valueId"/>
-            <result property="valueId" column="d1id"></result>
-            <result property="valueName" column="zcname"></result>
-        </association>
-        <association property="dictionary2" javaType="Dictionary">
-            <id property="id" column="d2.valueId"/>
-            <result property="valueId" column="d2id"></result>
-            <result property="valueName" column="jsname"></result>
-        </association>
-        <association property="dictionary3" javaType="Dictionary">
-            <id property="id" column="d3.valueId"/>
-            <result property="valueId" column="d3id"></result>
-            <result property="valueName" column="ztname"></result>
-        </association>
-        <association property="organization" javaType="Organization">
-            <id property="id" column="oid"/>
-        </association>
-        <association property="dept" javaType="Dept">
-            <id property="id" column="did"/>
-        </association>
-    </resultMap>-->
-    <!--<select id="findUsersById" parameterType="Integer" resultMap="yu">
-        SELECT  u.id,u.userName,u.passWord,u.realName,
-            o.id oid,o.organName,d.id did,d.deptName,sex,d1.valueId d1id ,d1.valueName zcname ,d2.valueId d2id ,d2.valueName jsname,d3.valueId d3id,
-            d3.valueName ztname,u.createdtime,u.majer FROM users u
-        JOIN `organization` o ON u.`organId`=o.`id`
-        JOIN `dept` d ON u.`deptId`=d.`id`
-        JOIN `dictionary` d1 ON d1.`valueId`=u.`proId` AND d1.`typeCode`='ZC'
-        JOIN `dictionary` d2 ON d2.`valueId`=u.`roleId` AND d2.`typeCode`='JS'
-        JOIN `dictionary` d3 ON d3.`valueId`=u.`status` AND d3.`typeCode`='ZT'
-        where u.id=#{id}
-    </select>-->
+   
     <select id="findUsersById" parameterType="Integer" resultType="Users">
         SELECT  * FROM users u
         where u.id=#{id}
@@ -105,5 +72,9 @@
     <select id="findDeptLead" resultType="Integer" parameterType="Long">
         SELECT u.id FROM users u JOIN dept d ON u.deptId=d.id
         WHERE u.roleId=3 AND d.id=#{id}
+
+    <select id="findByrealName" resultType="int" parameterType="String">
+        select * from users where realName=#{name}
+
     </select>
 </mapper>

@@ -6,24 +6,76 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>OA系统</title>
     <!-- begin::global styles -->
-    <link rel="stylesheet" href="assets/vendors/bundle.css" type="text/css">
+    <link rel="stylesheet" th:href="@{/vendors/bundle.css}" type="text/css">
     <!-- begin::custom styles -->
 
 
     <!-- begin::global styles -->
-    <link rel="stylesheet" href="assets/vendors/bundle.css" type="text/css">
+    <link rel="stylesheet" th:href="@{/vendors/bundle.css}" type="text/css">
     <!-- end::global styles -->
 
 
     <!-- begin::datepicker -->
-    <link rel="stylesheet" href="assets/vendors/datepicker/daterangepicker.css">
+    <link rel="stylesheet" th:href="@{/vendors/datepicker/daterangepicker.css}">
     <!-- end::datepicker -->
 
-    <link rel="stylesheet" href="assets/css/app.css" type="text/css" charset="UTF-8">
-    <link rel="stylesheet" href="assets/css/custom.css" type="text/css">
-    <script src="assets/vendors/jquery/jquery-3.4.1.js" type="text/javascript"></script>
+    <link rel="stylesheet" th:href="@{/css/app.css}" type="text/css" charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/custom.css}" type="text/css">
+    <script th:src="@{/vendors/jquery/jquery-3.4.1.js}" type="text/javascript"></script>
 
+    <script>
+        $(function () {
+            $("#qingjiaoenddate").blur(function () {
+                if($("#qingjiaostartdate").val()>$("#qingjiaoenddate").val()){
+                    alert("结束时间不得小于开始时间！");
+                    return false;
+                }else {
+                    var date = (new Date($("#qingjiaoenddate").val())-new Date($("#qingjiaostartdate").val()))/1000/3600/24;
+                    $("#qingjiaoleaveday").val(date);
+                }
+            })
 
+            $("#chuchaienddate").blur(function () {
+                if($("#qingjiaostartdate").val()>$("#qingjiaoenddate").val()){
+                    alert("结束日期不得小于出差日期！")
+                    return false;
+                }
+            })
+            $("#qingjiatijiao").click(function () {
+                $.ajax({
+                    type:'post',
+                    url:"leave.html",
+                    data:$("#qingjiabiaodan").serialize(),
+                    dataType:"text",
+                    success:function (data) {
+                        alert(data)
+                    }
+                })
+            })
+            $("#chuchaitijiao").click(function () {
+                $.ajax({
+                    type:'post',
+                    url:"evection/evection.html",
+                    data:$("#chuchaibiaodan").serialize(),
+                    dataType:"text",
+                    success:function (data) {
+                        alert(data)
+                    }
+                })
+            })
+            $("#shourutijiao").click(function () {
+                $.ajax({
+                    type:'post',
+                    url:"income/income.html",
+                    data:$("#shourubiaodan").serialize(),
+                    dataType:"text",
+                    success:function (data) {
+                        alert(data)
+                    }
+                })
+            })
+        })
+    </script>
 </head>
 <body>
 
@@ -32,7 +84,7 @@
 
         <ul class="nav nav-pills flex-column flex-sm-row" id="myTab" role="tablist">
             <li class="flex-sm-fill text-sm-center nav-item">
-                <a class="nav-link active" id="hometimeline-tab" data-toggle="tab" href="#timeline" role="tab"
+                <a class="nav-link active" id="hometimeline-tab" data-toggle="tab" href="#timelinea" role="tab"
                    aria-controls="home"
                    aria-selected="true">请假申请</a>
             </li>
@@ -51,69 +103,65 @@
 
         <div class="tab-content p-t-30" id="myTabContent">
 
-            <div class="tab-pane fade show active" id="timeline" role="tabpanel" aria-labelledby="timeline-tab">
+            <div class="tab-pane fade show active" id="timelinea" role="tabpanel" aria-labelledby="timeline-tab">
                 <div class="timeline">
-                    <form action="" method="">
+                    <form id="qingjiabiaodan" >
                         <div class="form-group" style="text-align: center;">
-                            姓名：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="" value="" readonly="readonly"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                            部门：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="" value=""
-                                                              readonly="readonly"/><br/><br/>
-                            开放时间：<input type="date" name="" value=""/>&nbsp;&nbsp;&nbsp;&nbsp;
-                            结束时间：&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" name="" value=""/><br/><br/>
-                            请假天数：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="" value=""/>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span style="vertical-align: middle;">请假类型：</span>&nbsp;&nbsp;&nbsp;&nbsp;<select name="">
-                            <option>病假</option>
-                            <option value="提交的内容">事假</option>
-                            <option value="提交的内容">婚假</option>
-                            <option value="提交的内容">丧假</option>
+                            姓名：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="qingjiaouserId" th:value="${renshi.realName}" readonly="readonly"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                            部门：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="qingjiaodeptId" th:value="${renshi.dept.dName}" readonly="readonly"/><br/><br/>
+                            开始时间：<input type="date" id="qingjiaostartdate" name="qingjiaostartdate" value=""/>&nbsp;&nbsp;&nbsp;&nbsp;
+                            结束时间：&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" id="qingjiaoenddate" name="qingjiaoenddate" value=""/><br/><br/>
+                            请假天数：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="qingjiaoleaveday" name="qingjiaoleaveday" value="" readonly="readonly"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span style="vertical-align: middle;">请假类型：</span>&nbsp;&nbsp;&nbsp;&nbsp;<select name="qingjiaoltype">
+                            <option value="1">病假</option>
+                            <option value="2">事假</option>
+                            <option value="3">婚假</option>
+                            <option value="4">丧假</option>
                         </select><br/><br/>
 
-                            请假事由： <textarea name="" rows="3" cols="50"></textarea><br/><br/>
+                            请假事由： <textarea name="qingjiaodestination" rows="3" cols="50"></textarea><br/><br/>
                             <span style="font-size: 10px; color: red;">
-										说明：<br/>
-										1、普通员工请假小于2天的，须部门经理审批<br/>
-										2、3-5天的需总监审批<br/>
-										3、大于5天的需总经理审批<br/><br/>
-									</span>
+                                说明：<br/>
+                                1、普通员工请假小于2天的，须部门经理审批<br/>
+                                2、3-5天的需总监审批<br/>
+                                3、大于5天的需总经理审批<br/><br/>
+                            </span>
                             <hr/>
-                            下一步审批人：<input type="text" name="" placeholder="请选择"/> <br/> <br/>
-                            <input type="submit" class="btn btn-primary" value="确定"/>
+                            下一步审批人：<input type="text" name="qingjiaocheckId" placeholder="请选择" th:value="${renshi.shangsi}" readonly="readonly"/> <br/> <br/>
+                            <input type="button" id="qingjiatijiao" class="btn btn-primary" value="确定"/>
                             <input type="reset" class="btn btn-primary" value="取消"/>
-
                         </div>
-                        </from>
-
-
+                    </form>
                 </div>
             </div>
 
             <div class="tab-pane fade" id="photos" role="tabpanel" aria-labelledby="photos-tab">
-                <div class="tab-pane fade show active" id="timeline" role="tabpanel" aria-labelledby="timeline-tab">
+                <div class="tab-pane fade show active" id="timelines" role="tabpanel" aria-labelledby="timeline-tab">
                     <div class="timeline">
 
-                        <form action="" method="">
+                        <form id="chuchaibiaodan">
                             <div class="form-group" style="text-align: center;">
 
-                                姓名：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="" value="" readonly="readonly"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                部门：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="" value=""
+                                姓名：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="chuchaiuserId" th:value="${renshi.realName}" readonly="readonly"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                部门：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="chuchaideptId" th:value="${renshi.dept.dName}"
                                                                   readonly="readonly"/><br/><br/>
-                                出差日期：&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" name="" value=""/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                结束日期：&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" name="" value=""/><br/><br/>
-                                出差地点：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="" value=""/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <span style="vertical-align: middle;">交通工具：</span>&nbsp;&nbsp;&nbsp;&nbsp;<select
-                                    name="">
-                                <option>病假</option>
-                                <option value="提交的内容">事假</option>
-                                <option value="提交的内容">婚假</option>
-                                <option value="提交的内容">丧假</option>
+                                出差日期：&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" name="chuchaistartdate" value=""/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                结束日期：&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" id="chuchaienddate" name="chuchaienddate" value=""/><br/><br/>
+                                出差地点：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="chuchaidestination" value=""/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span style="vertical-align: middle">出差方式：</span>&nbsp;&nbsp;&nbsp;&nbsp;<select
+                                    name="chuchaitraffic">
+                                <option value="1">汽车</option>
+                                <option value="2">火车</option>
+                                <option value="3">飞机</option>
+                                <option value="4">轮船</option>
                             </select><br/><br/>
 
-                                出差事由：&nbsp;&nbsp;&nbsp;&nbsp; <textarea name="" rows="3" cols="50"></textarea><br/><br/>
-                                工作任务：&nbsp;&nbsp;&nbsp;&nbsp; <textarea name="" rows="3" cols="50"></textarea><br/><br/>
-                                借款金额：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="" value=""/> <br/> <br/>
+                                出差事由：&nbsp;&nbsp;&nbsp;&nbsp; <textarea name="chuchaiincident" rows="3" cols="50"></textarea><br/><br/>
+                                工作任务：&nbsp;&nbsp;&nbsp;&nbsp; <textarea name="chuchaietask" rows="3" cols="50"></textarea><br/><br/>
+                                借款金额：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="chuchaimoney" value=""/> <br/> <br/>
                                 <hr/>
-                                下一步审批人：<input type="text" name="" placeholder="请选择"/>
-                                <input type="submit" class="btn btn-primary" value="确定"/>
+                                下一步审批人：<input type="text" name="chuchaicheckId" placeholder="请选择" th:value="${renshi.shangsi}" readonly="readonly"/>
+                                <input type="button" id="chuchaitijiao" class="btn btn-primary" value="确定"/>
                                 <input type="reset" class="btn btn-primary" value="取消"/>
                             </div>
 
@@ -130,32 +178,28 @@
                 <div class="tab-pane fade show active" id="timeline" role="tabpanel" aria-labelledby="timeline-tab">
                     <div class="timeline">
 
-                        <form action="" method="">
+                        <form id="shourubiaodan">
                             <div class="form-group" style="text-align: center;">
 
-                                姓名：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="" value=""
+                                姓名：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="userId" th:value="${renshi.realName}"
                                                                   readonly="readonly"/><br/><br/>
-                                申请时间：&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" name="" value=""/><br/><br/>
+                                申请时间：&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" name="applydate" value=""/><br/><br/>
 
-                                部门：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="" value=""
+                                部门：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="deptId" th:value="${renshi.dept.dName}"
                                                                   readonly="readonly"/><br/><br/>
-                                岗位：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="" value=""
+                                职位：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="postId" th:value="${renshi.dictionary.valueName}"
                                                                   readonly="readonly"/><br/><br/>
 
-                                申请事由：&nbsp;&nbsp;&nbsp;&nbsp; <textarea name="" rows="3" cols="50"></textarea><br/><br/>
+                                申请事由：&nbsp;&nbsp;&nbsp;&nbsp; <textarea name="applyment" rows="3" cols="50"></textarea><br/><br/>
                                 <hr/>
-                                下一步审批人：<input type="text" name="" placeholder="请选择"/>
-                                <input type="submit" class="btn btn-primary" value="确定"/>
+                                下一步审批人：<input type="text" name="checkId" th:value="${renshi.shangsi}" placeholder="请选择" readonly="readonly"/>
+                                <input type="button" id="shourutijiao" class="btn btn-primary" value="确定"/>
                                 <input type="reset" class="btn btn-primary" value="取消"/>
                             </div>
-
                         </form>
-
-
                     </div>
                 </div>
             </div>
-
 
         </div>
 
@@ -164,17 +208,17 @@
 </div>
 </div>
 <!-- begin::datepicker -->
-<script src="assets/vendors/datepicker/daterangepicker.js"></script>
-<script src="assets/js/examples/datepicker.js"></script>
+<script th:src="@{/vendors/datepicker/daterangepicker.js}"></script>
+<script th:src="@{/js/examples/datepicker.js}"></script>
 <!-- end::datepicker -->
 
 <!-- begin::global scripts -->
-<script src="assets/vendors/bundle.js"></script>
+<script th:src="@{/vendors/bundle.js}"></script>
 <!-- end::global scripts -->
 
 <!-- begin::custom scripts -->
-<script src="assets/js/custom.js"></script>
-<script src="assets/js/app.js"></script>
+<script th:src="@{/js/custom.js}"></script>
+<script th:src="@{/js/app.js}"></script>
 <!-- end::custom scripts -->
 
 

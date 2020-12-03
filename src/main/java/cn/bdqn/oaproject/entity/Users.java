@@ -16,6 +16,7 @@ public class Users {
   private long status;
   private Date createdtime;
   private long majer;
+
   private Organization organization;
   private Dictionary dictionary1;
   private Dictionary dictionary2;
@@ -61,6 +62,32 @@ public class Users {
 
   public void setDictionary3(Dictionary dictionary3) {
     this.dictionary3 = dictionary3;
+  private String shangsi;
+  private Dept dept;
+  private Dictionary dictionary;
+
+  public Dictionary getDictionary() {
+    return dictionary;
+  }
+
+  public void setDictionary(Dictionary dictionary) {
+    this.dictionary = dictionary;
+  }
+
+  public String getShangsi() {
+    return shangsi;
+  }
+
+  public void setShangsi(String shangsi) {
+    this.shangsi = shangsi;
+  }
+
+  public Dept getDept() {
+    return dept;
+  }
+
+  public void setDept(Dept dept) {
+    this.dept = dept;
   }
 
   public long getId() {
@@ -74,6 +101,10 @@ public class Users {
 
   public String getUserName() {
     return userName;
+
+  public String getUName() {
+    return uName;
+
   }
 
   public void setUserName(String userName) {

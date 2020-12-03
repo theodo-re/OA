@@ -44,4 +44,8 @@ public interface UsersService {
      * 根据部门id查找部门领导
      */
     Integer findDeptLead(Long deptid);
+    /**
+     * 根据姓名查询id
+     */
+    int findByrealName(String name);
 }

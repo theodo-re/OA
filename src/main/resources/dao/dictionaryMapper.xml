@@ -31,4 +31,8 @@
     <delete id="delRoleById" parameterType="Integer">
         delete from Dictionary where typeCode='JS' and valueId=#{valueId}
     </delete>
+    <select id="findByName" resultType="Dictionary">
+        SELECT * FROM Dictionary WHERE typeCode='SHJG'
+    </select>
+
 </mapper>

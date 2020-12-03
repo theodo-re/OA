@@ -1,9 +1,11 @@
 package cn.bdqn.oaproject.service;
 
 import cn.bdqn.oaproject.entity.Dictionary;
+
 import org.apache.ibatis.annotations.Param;
 
 import javax.servlet.http.HttpSession;
+
 import java.util.List;
 
 public interface DictionaryService {
@@ -39,4 +41,7 @@ public interface DictionaryService {
      * 根据id删除角色
      */
     int delRoleById(Integer valueId, HttpSession session);
+     * 根据名称查询值
+     */
+    List<Dictionary> findByName();
 }

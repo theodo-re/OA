@@ -1,6 +1,8 @@
 package cn.bdqn.oaproject.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Task {
@@ -10,8 +12,43 @@ public class Task {
   private long statusId;
   private long auditId;
   private long createdby;
+  @JsonFormat(pattern = "yyyy-MM-dd")
   private Date createdtime;
+  private Dictionary dic;
 
+  private String auditName;
+  private String createName;
+
+  public String getAuditName() {
+    return auditName;
+  }
+
+  public void setAuditName(String auditName) {
+    this.auditName = auditName;
+  }
+
+  public String getCreateName() {
+    return createName;
+  }
+
+  public void setCreateName(String createName) {
+    this.createName = createName;
+  }
+
+  public Dictionary getDic() {
+    return dic;
+  }
+
+  public void setDic(Dictionary dic) {
+    this.dic = dic;
+  }
+  public String gettName() {
+    return tName;
+  }
+
+  public void settName(String tName) {
+    this.tName = tName;
+  }
 
   public long getId() {
     return id;
@@ -20,17 +57,6 @@ public class Task {
   public void setId(long id) {
     this.id = id;
   }
-
-
-  public String getTName() {
-    return tName;
-  }
-
-  public void setTName(String tName) {
-    this.tName = tName;
-  }
-
-
   public long getStatusId() {
     return statusId;
   }

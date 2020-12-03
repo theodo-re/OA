@@ -3,5 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bdqn.oaproject.dao.EvectionDao">
+    <insert id="add" parameterType="Evection">
+        INSERT INTO `evection`(userId,deptId,startdate,enddate,destination,traffic,incident,etask,money,checkId,createdby,createdtime)
+        VALUES (#{userId},#{deptId},#{startdate},#{enddate},#{destination},#{traffic},#{incident},#{etask},#{money},#{checkId},#{createdby},#{createdtime})
+    </insert>
 
 </mapper>
