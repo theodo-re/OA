@@ -32,10 +32,4 @@ public class UsersServiceImpl implements UsersService{
     public int findByrealName(String name) {
         return userdao.findByrealName(name);
     }
-
-    @Override
-    public int findIdByName(String name) {
-        int rel=userdao.findIdByName(name);
-        return rel;
-    }
 }
