@@ -4,4 +4,329 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bdqn.oaproject.dao.WordDao">
 
+    <select id="findWordByUserId" parameterType="Integer" resultMap="findWord">
+        select * from word where created_by=#{id}
+    </select>
+
+    <select id="findUserZCByUserId" parameterType="Integer" resultType="Integer">
+        select proId from users where id=#{id}
+    </select>
+
+    <select id="findFileAPByid" parameterType="Integer" resultType="String">
+        select file_ap from word where id=#{id}
+    </select>
+
+    <delete id="deleteWordByWordId" parameterType="Integer">
+        delete from word where id=#{id}
+    </delete>
+
+    <update id="updateWordByWordId" parameterType="Integer">
+        update word set file_state=1 where id=#{id}
+    </update>
+
+    <select id="findTrashWordByUserId" resultMap="findWord">
+        select * from word where created_by=#{UserId} and file_state=0
+    </select>
+    <select id="findFileApByUserId" parameterType="Integer" resultMap="myfold">
+        select * from folder where user=#{userId}
+    </select>
+
+    <select id="findUsersByDeptId" parameterType="Integer" resultType="cn.bdqn.oaproject.entity.Users">
+        select * from Users where deptId=#{deptId}
+    </select>
+
+
+    <resultMap id="myfold" type="cn.bdqn.oaproject.entity.Folder">
+        <id property="id" column="id"></id>
+        <result property="foldName" column="fold_name"></result>
+        <result property="foldAp" column="fold_ap"></result>
+        <result property="foldRp" column="fold_rp"></result>
+        <result property="foldMsg" column="fold_msg"></result>
+        <result property="createdBy" column="created_by"></result>
+        <result property="createdTime" column="created_time"></result>
+        <result property="foldKind" column="fold_kind"></result>
+        <result property="foldState" column="fold_state"></result>
+        <result property="user" column="user"></result>
+    </resultMap>
+
+    <sql id="clum2">
+        <trim suffixOverrides=",">
+            <if test="createdBy!=null and createdBy!=''">
+                created_By,
+            </if>
+            <if test="foldName!=null and foldName!=''">
+                fold_name,
+            </if>
+            <if test="foldAp!=null and foldAp!=''">
+                fold_ap,
+            </if>
+            <if test="foldRp!=null and foldRp!=''">
+                fold_rp,
+            </if>
+
+            <if test="foldMsg!=null and foldMsg!=''">
+                fold_msg,
+            </if>
+            <if test="createdTime!=null">
+                created_time,
+            </if>
+            <if test="1==1">
+                fold_kind,
+            </if>
+            <if test="user!=null and user!=''">
+                user,
+            </if>
+            <if test="dept!=null and dept!=''">
+                dept
+            </if>
+        </trim>
+    </sql>
+    <sql id="val2">
+        <trim suffixOverrides=",">
+            <if test="createdBy!=null and createdBy!=''">
+                #{createdBy},
+            </if>
+            <if test="foldName!=null and foldName!=''">
+                #{foldName},
+            </if>
+            <if test="foldAp!=null and foldAp!=''">
+                #{foldAp},
+            </if>
+            <if test="foldRp!=null and foldRp!=''">
+                #{foldRp},
+            </if>
+            <if test="foldMsg!=null and foldMsg!=''">
+                #{foldMsg},
+            </if>
+            <if test="createdTime!=null">
+                #{createdTime},
+            </if>
+            <if test="1==1">
+                #{foldKind},
+            </if>
+            <if test="user!=null and user!=''">
+                #{user},
+            </if>
+            <if test="dept!=null and dept!=''">
+                #{dept}
+            </if>
+        </trim>
+    </sql>
+    <insert id="addFold" parameterType="cn.bdqn.oaproject.entity.Folder">
+        insert into Folder(<include refid="clum2"/>) values(<include refid="val2"/>)
+    </insert>
+
+    <resultMap id="findFolder" type="cn.bdqn.oaproject.entity.Folder">
+        <id property="id" column="id"></id>
+        <result property="foldName" column="fold_name"></result>
+        <result property="foldAp" column="fold_ap"></result>
+        <result property="foldRp" column="fold_rp"></result>
+        <result property="foldMsg" column="fold_msg"></result>
+        <result property="createdBy" column="created_by"></result>
+        <result property="createdTime" column="created_time"></result>
+        <result property="foldKind" column="fold_kind"></result>
+    </resultMap>
+
+    <select id="findFolderByDeptId" parameterType="Integer" resultMap="findFolder">
+        select * from folder where fold_kind=4 and dept=#{deptId}
+    </select>
+
+    <select id="findDeptFileByDeptId" parameterType="Integer" resultMap="findWord">
+        select * from word where file_Kind=3 and dept=#{deptId}
+    </select>
+
+    <select id="findUserByid" resultType="cn.bdqn.oaproject.entity.Users" parameterType="Integer">
+        select * from Users where id=#{userId}
+    </select>
+
+    <!--根据id查询文件绝对路径-->
+    <select id="findFileAPathByFileId" parameterType="Integer" resultMap="findWord">
+        select file_name,file_ap from word where file_kind=2 and file_state=1 and id=#{id}
+    </select>
+
+    <!--根据id修改文件状态-->
+    <update id="updateFileStateByFileId" parameterType="Integer" >
+        update Word set file_state=#{state} where id=#{id}
+    </update>
+
+    <resultMap id="findWord" type="cn.bdqn.oaproject.entity.Word">
+        <id property="id" column="id"></id>
+        <result property="fileName" column="file_name"></result>
+        <result property="fileMsg" column="file_msg"></result>
+        <result property="createdTime" column="created_Time"></result>
+        <result property="fileState" column="file_state"></result>
+        <result property="fileAp" column="file_ap"></result>
+        <result property="fileRp" column="file_rp"></result>
+        <result property="fileRp" column="file_rp"></result>
+        <association property="users" javaType="cn.bdqn.oaproject.entity.Users">
+            <id property="id" column="id"></id>
+        </association>
+        <association property="dictionary" javaType="cn.bdqn.oaproject.entity.Dictionary">
+            <id property="id" column="id"></id>
+        </association>
+    </resultMap>
+    <!--根据后缀名查询文件类型-->
+    <select id="findFileTypeByLastName" resultType="Integer" parameterType="String">
+        select valueId from dictionary where valueName=#{lastName}
+    </select>
+
+    <!--添加文档-->
+    <sql id="clum">
+        <trim suffixOverrides=",">
+            <if test="fileName!=null and fileName!=''">
+                file_name,
+            </if>
+            <if test="createdBy!=null and createdBy!=''">
+                created_by,
+            </if>
+            <if test="createdTime!=null">
+                created_Time,
+            </if>
+            <if test="fileMsg!=null and fileMsg!=''">
+                file_msg,
+            </if>
+            <if test="fileType!=null">
+                file_type,
+            </if>
+            <if test="fileKind!=null">
+                file_kind,
+            </if>
+            <if test="fileAp!=null and fileAp!=''">
+                file_ap,
+            </if>
+            <if test="fileRp!=null and fileRp!=''">
+                file_rp,
+            </if>
+            <if test="dept!=null and dept!=''">
+                dept,
+            </if>
+
+        </trim>
+    </sql>
+    <sql id="val">
+        <trim suffixOverrides=",">
+            <if test="fileName!=null and fileName!=''">
+                #{fileName},
+            </if>
+            <if test="createdBy!=null and createdBy!=''">
+                #{createdBy},
+            </if>
+            <if test="createdTime!=null">
+                #{createdTime},
+            </if>
+            <if test="fileMsg!=null and fileMsg!=''">
+                #{fileMsg},
+            </if>
+            <if test="fileType!=null">
+                #{fileType},
+            </if>
+            <if test="fileKind!=null">
+                #{fileKind},
+            </if>
+            <if test="fileAp!=null and fileAp!=''">
+                #{fileAp},
+            </if>
+            <if test="fileRp!=null and fileRp!=''">
+                #{fileRp},
+            </if>
+            <if test="dept!=null and dept!=''">
+                #{dept},
+            </if>
+        </trim>
+    </sql>
+    <insert id="addCompanyFile" parameterType="cn.bdqn.oaproject.entity.Word" >
+        insert into word(<include refid="clum"/>) values(<include refid="val"/>)
+    </insert>
+
+    <select id="findWord" resultMap="findWord" parameterType="cn.bdqn.oaproject.param.Common">
+        select w.id,u.id,d.id,w.file_name,u.realName,d.valueName,w.created_time,w.file_msg,w.file_ap,w.file_rp
+        from word w ,users u,dictionary d
+        <where>
+            <if test="1==1">
+                u.id=w.created_by and d.typeCode='type' and w.file_type=d.valueId and w.file_state=1 and w.file_kind=1
+            </if>
+            <if test="wName!=null and wName!=''">
+                and w.file_name like concat('%',#{wName},'%')
+            </if>
+            <if test="createBy!=null and createBy!=''">
+                and u.realName like concat('%',#{createBy},'%')
+            </if>
+            <if test="starDate!=null">
+                and w.created_time > #{starDate}
+            </if>
+            <if test="endDate!=null">
+                and #{endDate} > w.created_time
+            </if>
+        </where>
+        limit #{pageIndex},#{pageSize}
+   </select>
+
+    <select id="findFileCount" resultType="Integer" parameterType="cn.bdqn.oaproject.param.Common">
+        select count(0)
+        from word w ,users u,dictionary d
+        <where>
+            <if test="1==1">
+                u.id=w.created_by and d.typeCode='type' and w.file_type=d.valueId and w.file_state=1 and w.file_kind=1
+            </if>
+            <if test="wName!=null and wName!=''">
+                and w.file_name like concat('%',#{wName},'%')
+            </if>
+            <if test="createBy!=null and createBy!=''">
+                and u.realName like concat('%',#{createBy},'%')
+            </if>
+            <if test="starDate!=null">
+                and w.created_time > #{starDate}
+            </if>
+            <if test="endDate!=null">
+                and w.created_time > #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <!--查询规章制度-->
+    <select id="findSystemWord" parameterType="cn.bdqn.oaproject.param.Common" resultMap="findWord">
+        select w.id,u.id,d.id,w.file_name,u.realName,w.created_time,w.file_msg,w.file_ap,w.file_rp
+        from word w ,users u,dictionary d
+        <where>
+            <if test="1==1">
+                u.id=w.created_by  and w.file_type=d.valueId and w.file_state=1 and w.file_kind=2 and d.typeCode='type'
+            </if>
+            <if test="wName!=null and wName!=''">
+                and w.file_name like concat('%',#{wName},'%')
+            </if>
+            <if test="createBy!=null and createBy!=''">
+                and u.realName like concat('%',#{createBy},'%')
+            </if>
+            <if test="starDate!=null">
+                and w.created_time > #{starDate}
+            </if>
+            <if test="endDate!=null">
+                and #{endDate} > w.created_time
+            </if>
+        </where>
+        limit #{pageIndex},#{pageSize}
+    </select>
+
+    <select id="findSystemCount" parameterType="cn.bdqn.oaproject.param.Common" resultType="Integer">
+        select count(0)
+        from word w ,users u,dictionary d
+        <where>
+            <if test="1==1">
+                u.id=w.created_by  and w.file_type=d.valueId and w.file_state=1 and w.file_kind=2 and d.typeCode='type'
+            </if>
+            <if test="wName!=null and wName!=''">
+                and w.file_name like concat('%',#{wName},'%')
+            </if>
+            <if test="createBy!=null and createBy!=''">
+                and u.realName like concat('%',#{createBy},'%')
+            </if>
+            <if test="starDate!=null">
+                and w.created_time > #{starDate}
+            </if>
+            <if test="endDate!=null">
+                and #{endDate} > w.created_time
+            </if>
+        </where>
+    </select>
+
 </mapper>
