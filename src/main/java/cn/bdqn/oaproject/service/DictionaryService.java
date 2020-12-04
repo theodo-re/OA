@@ -41,6 +41,7 @@ public interface DictionaryService {
      * 根据id删除角色
      */
     int delRoleById(Integer valueId, HttpSession session);
+    /**
      * 根据名称查询值
      */
     List<Dictionary> findByName();

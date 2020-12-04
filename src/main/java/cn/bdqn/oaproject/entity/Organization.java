@@ -29,7 +29,6 @@ public class Organization {
     this.id = id;
   }
 
-
   public String getOrganName() {
     return organName;
   }

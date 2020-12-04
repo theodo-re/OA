@@ -14,7 +14,7 @@ public class Log {
   private String incident;
   private String logcomment;
   @DateTimeFormat(pattern = "yyyy-MM-dd")
-  @JsonFormat(locale = "yyyy-MM-dd")
+  @JsonFormat(pattern = "yyyy-MM-dd")
   private Date opedate;
   private Users users;
   private Dictionary dictionary;

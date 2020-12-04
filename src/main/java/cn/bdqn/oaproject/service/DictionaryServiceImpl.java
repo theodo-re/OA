@@ -103,27 +103,27 @@ public class DictionaryServiceImpl implements DictionaryService{
 
     @Override
     public int delRoleById(Integer valueId, HttpSession session) {
-        int rel1= dictionaryDao.delRoleById(valueId);
-        Log log=new Log();
-        Long userId=((Users)session.getAttribute("session")).getId();
+        int rel1 = dictionaryDao.delRoleById(valueId);
+        Log log = new Log();
+        Long userId = ((Users) session.getAttribute("session")).getId();
         log.setUserId(userId);
-        Long roleId=((Users)session.getAttribute("session")).getRoleId();
+        Long roleId = ((Users) session.getAttribute("session")).getRoleId();
         log.setRoleId(roleId);
         log.setIncident("删除了角色");
         log.setOpedate(new Date());
-        int rel2=logdao.addLog(log);
-        int rel=-1;
-        List<Integer> nums=new ArrayList<>();
+        int rel2 = logdao.addLog(log);
+        int rel = -1;
+        List<Integer> nums = new ArrayList<>();
         nums.add(rel1);
         nums.add(rel2);
-        for(int i:nums){
-            if(i>0){
-                rel=1;
+        for (int i : nums) {
+            if (i > 0) {
+                rel = 1;
             }
         }
 
         return rel;
-
+    }
     @Override
     public List<Dictionary> findByName() {
         return dictionaryDao.findByName();

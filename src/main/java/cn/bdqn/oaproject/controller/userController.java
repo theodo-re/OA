@@ -32,20 +32,6 @@ public class userController {
     private DeptService deptService;
 
     /**
-     * 调到首页
-     * @return
-     */
-    @RequestMapping("/index")
-    public String index(){
-        return "index";
-    }
-    @RequestMapping("/shouye")
-    public String shouye(){
-        return "shouye";
-    }
-
-
-    /**
      * 查询用户（模糊查询+分页）
      */
     @RequestMapping("/Users")
@@ -54,14 +40,8 @@ public class userController {
                             @RequestParam(required = false) String realName,
                             @RequestParam(defaultValue = "1",required = false) Integer pageIndex
                            ){
-
-
         int pageSize= Constants.pageSize;//获取当前页大小
         int currentPageNo = pageIndex;//设置当前页码
-
-
-
-
         Users user=new Users();
         user.setUserName(uName);
         user.setRealName(realName);
@@ -87,7 +67,7 @@ public class userController {
      * @param
      * @return
      */
-   @RequestMapping("findOrganization")
+   @RequestMapping("/findOrganization")
    @ResponseBody
    public List<Organization> findOrganization(){
        List<Organization> OrganizationList=organizationService.findOrganization();
@@ -96,7 +76,7 @@ public class userController {
     /**
      * 查询所在部门
      */
-    @RequestMapping("findDept")
+    @RequestMapping("/findDept")
     @ResponseBody
     public List<Dept> findDept(){
         List<Dept> deptList=deptService.findDept();
@@ -105,7 +85,7 @@ public class userController {
     /**
      * 添加用户是验证密码
      */
-    @RequestMapping("validatePassword")
+    @RequestMapping("/validatePassword")
     @ResponseBody
     public int validatePassword(@RequestParam(required = false) String password,
                                 @RequestParam(required = false) String password1){
@@ -118,21 +98,21 @@ public class userController {
     /**
      * 添加用户
      */
-    @RequestMapping("addusers")
+    @RequestMapping("/addusers")
     public String addUsers(Users user,HttpSession session){
         int rel=userService.addUsers(user,session);
         if(rel>0){
             System.out.println("添加成功");
         }else{
             System.out.println("添加失败！");
-            return "xitongguanli";
+            return "../deng/xitongguanli\"";
         }
-        return "redirect:xitongguanli";
+        return "redirect:../deng/xitongguanli\"";
     }
     /**
      * 根据id查找用户
      */
-    @RequestMapping("findUsersByid")
+    @RequestMapping("/findUsersByid")
     @ResponseBody
     public Users findUsersByid(Integer id){
         Users user=userService.findUsersById(id);
@@ -141,7 +121,7 @@ public class userController {
     /**
      * 根据id删除用户
      */
-    @RequestMapping("delUser")
+    @RequestMapping("/delUser")
     @ResponseBody
     public int delUser(Integer id,HttpSession session){
         int rel=-1;
@@ -151,16 +131,16 @@ public class userController {
     /**
      * 修改用户
      */
-    @RequestMapping("updateUsers")
+    @RequestMapping("/updateUsers")
     public String updateUser(Users users, HttpSession session){
         int rel=userService.updateUsers(users,session);
         if(rel>0){
-            return "redirect:xitongguanli";
+            return "redirect:../deng/xitongguanli";
         }
-        return "xitongguanli";
+        return "../deng/xitongguanli";
     }
     //
-    @RequestMapping("findDeptById")
+    @RequestMapping("/findDeptById")
     @ResponseBody
     public List<Dept> findDept(Integer id){
         String num=id.toString();
@@ -171,7 +151,7 @@ public class userController {
         }
         return deptList;
     }
-    @RequestMapping("findUserList")
+    @RequestMapping("/findUserList")
     @ResponseBody
     public List<Users> findUsersList(){
         List<Users> userList=userService.findUsersList();

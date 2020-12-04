@@ -4,6 +4,7 @@ import cn.bdqn.oaproject.dao.LogDao;
 import cn.bdqn.oaproject.dao.UsersDao;
 import cn.bdqn.oaproject.entity.Log;
 import cn.bdqn.oaproject.entity.Users;
+import cn.bdqn.oaproject.util.Constants;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +28,7 @@ public class UsersServiceImpl implements UsersService{
         int rel = -1;
         Users user = userdao.findCByName(uName);
         if(user!=null){
-            if(password.equals(user.getPassWord())){
+            if(password.equals(user.getuPassWord())){
                 rel=1;
             }else{
                 rel=0;
@@ -93,9 +94,9 @@ public class UsersServiceImpl implements UsersService{
     public int delUser(Integer id,HttpSession session) {
         int rel1=userdao.delUser(id);
         Log log=new Log();
-        Long userId=((Users)session.getAttribute("session")).getId();
+        Long userId=((Users)session.getAttribute(Constants.USER_SESSION)).getId();
         log.setUserId(userId);
-        Long roleId=((Users)session.getAttribute("session")).getRoleId();
+        Long roleId=((Users)session.getAttribute(Constants.USER_SESSION)).getRoleId();
         log.setRoleId(roleId);
         log.setIncident("删除了用户");
         log.setOpedate(new Date());
@@ -119,9 +120,9 @@ public class UsersServiceImpl implements UsersService{
         int rel1=userdao.updateUsers(users);
 
         Log log=new Log();
-        Long id=((Users)session.getAttribute("session")).getId();
+        Long id=((Users)session.getAttribute(Constants.USER_SESSION)).getId();
         log.setUserId(id);
-        Long roleId=((Users)session.getAttribute("session")).getRoleId();
+        Long roleId=((Users)session.getAttribute(Constants.USER_SESSION)).getRoleId();
         log.setRoleId(roleId);
         log.setIncident("修改了用户");
         log.setOpedate(new Date());
@@ -145,9 +146,9 @@ public class UsersServiceImpl implements UsersService{
 
     @Override
     public Integer findDeptLead(Long deptid) {
-        Integer rel=userdao.findDeptLead(deptid);
+        Integer rel = userdao.findDeptLead(deptid);
         return rel;
-
+    }
     @Override
     public int findByrealName(String name) {
         return userdao.findByrealName(name);

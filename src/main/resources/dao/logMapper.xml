@@ -51,7 +51,7 @@
     <insert id="addLog"  parameterType="Log">
         insert into `LOG` (userId,roleId,incident,logcomment,opedate)
         values(#{userId},#{roleId},#{incident},#{logcomment},#{opedate})
-
+    </insert>
     <insert id="add" parameterType="Log">
         insert into `Log`(userId,roleId,incident,logcomment,opedate)
         values (#{userId},#{roleId},#{incident},#{logcomment},#{opedate})

@@ -51,6 +51,7 @@ public class Dept {
 
   public void setOrganization(Organization organization) {
     this.organization = organization;
+  }
   public String getdName() {
     return dName;
   }

@@ -42,9 +42,6 @@ public interface DictionaryDao {
      */
     int delRoleById(Integer valueId);
     /**
-     *
-     */
-}
      * 根据名称查询值
      */
     List<Dictionary> findByName();

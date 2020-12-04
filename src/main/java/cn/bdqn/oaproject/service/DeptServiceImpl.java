@@ -21,9 +21,9 @@ import java.util.List;
 @Transactional(rollbackFor=Exception.class)
 public class DeptServiceImpl implements DeptService{
     @Resource
-    DeptDao deptDao;
+    private DeptDao deptDao;
     @Resource
-    LogDao logdao;
+    private LogDao logdao;
     @Override
     public List<Dept> findDept() {
         return deptDao.findDept();
