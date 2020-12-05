@@ -2,6 +2,7 @@ package cn.bdqn.oaproject.controller;
 
 import cn.bdqn.oaproject.entity.Affiche;
 import cn.bdqn.oaproject.entity.Log;
+import cn.bdqn.oaproject.entity.Users;
 import cn.bdqn.oaproject.service.AfficheService;
 import cn.bdqn.oaproject.util.Constants;
 import cn.bdqn.oaproject.util.PageSupport;
@@ -52,11 +53,12 @@ public class afficheController {
     @ResponseBody
     public String addaffiche(HttpSession session,Affiche affiche){
         logger.info("添加通告=====================");
-        affiche.setCreatedby((int)session.getAttribute(Constants.USER_SESSION));
+        Users users = (Users) session.getAttribute(Constants.USER_SESSION);
+        affiche.setCreatedby(users.getId());
         affiche.setCreatedtime(new Date());
         Log log = new Log();
-        log.setUserId((int)session.getAttribute(Constants.USER_SESSION));
-        log.setRoleId(4);
+        log.setUserId(users.getId());
+        log.setRoleId(users.getRoleId());
         log.setIncident("张三添加了通告");
         log.setOpedate(new Date());
         int rel = afficheService.insertAff(affiche,log);
@@ -88,7 +90,7 @@ public class afficheController {
     @ResponseBody
     public Affiche updateaffiche(Integer id){
         logger.info("修改通告=====================");
-        Affiche affiche = afficheService.findById(id);
+        Affiche affiche = afficheService.findbyId(id);
         return affiche;
     }
 
@@ -99,7 +101,8 @@ public class afficheController {
     @ResponseBody
     public String updateaff(HttpSession session,Affiche affiche){
         logger.info("修改通告=====================");
-        affiche.setModifyby((int)session.getAttribute(Constants.USER_SESSION));
+        Users users = (Users) session.getAttribute(Constants.USER_SESSION);
+        affiche.setModifyby(users.getId());
         affiche.setModifytime(new Date());
         int rel = afficheService.updateAff(affiche);
         if (rel>0){

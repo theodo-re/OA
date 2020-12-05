@@ -36,7 +36,7 @@ public class AfficheServiceImpl implements AfficheService{
     @Override
     public int insertAff(Affiche affiche,Log log) {
         int rel=-1;
-        if (affcheDao.insertAff(affiche)>0 && logDao.addlog(log)>0){
+        if (affcheDao.insertAff(affiche)>0 && logDao.addLog(log)>0){
             rel=1;
         }
         return rel;
@@ -53,9 +53,10 @@ public class AfficheServiceImpl implements AfficheService{
     }
 
     @Override
-    public Affiche findById(Integer id) {
-        return affcheDao.findById(id);
-      }
+    public List<Affiche> findaffAll() {
+        return affcheDao.findaffAll();
+    }
+
 
     @Override
     public Affiche findbyId(Integer id) {

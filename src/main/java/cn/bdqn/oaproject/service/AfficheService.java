@@ -23,9 +23,9 @@ public interface AfficheService {
 
     public int deleteAff(Integer id);//删除
     /**
-     * 根据id查询通告
+     * 查询所有公告
      */
-    Affiche findById(Integer id);
+    List<Affiche> findaffAll();
  
     /**
      * 根据id查询公告

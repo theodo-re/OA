@@ -22,14 +22,9 @@ public interface AffcheDao {
 
     public int deleteAff(Integer id);//删除
     /**
-     * 根据id查询通告
-     */
-    Affiche findById(Integer id);
-}
-    /**
      * 查询所有公告
      */
-    List<Affiche> findAll();
+    List<Affiche> findaffAll();
     /**
      * 根据id查询公告
      */

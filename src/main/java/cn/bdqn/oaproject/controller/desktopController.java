@@ -52,7 +52,7 @@ public class desktopController {
         }else{
             list = tser.findAll((int) users.getId());
         }
-        List<Affiche> affList = aser.findAll();
+        List<Affiche> affList = aser.findaffAll();
         List<Memo> memoList = memoService.findAll();
         Authority authority = authorityService.findbyJSId((int) users.getProId());
         m.addAttribute("list",list);
