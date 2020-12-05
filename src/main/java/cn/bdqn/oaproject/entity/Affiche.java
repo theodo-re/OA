@@ -26,6 +26,7 @@ public class Affiche {
   @JsonFormat(pattern = "yyyy-MM-dd")
   private Date createdtime;
   private long modifyby;
+  @JsonFormat(pattern = "yyyy-MM-dd")
   private Date modifytime;
 
 

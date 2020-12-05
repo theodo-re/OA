@@ -4,7 +4,13 @@ import cn.bdqn.oaproject.dao.AffcheDao;
 import cn.bdqn.oaproject.dao.LogDao;
 import cn.bdqn.oaproject.entity.Affiche;
 import cn.bdqn.oaproject.entity.Log;
+
+import cn.bdqn.oaproject.entity.Affiche;
+
 import org.springframework.stereotype.Service;
+import java.util.List;
+
+import javax.annotation.Resource;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -49,5 +55,10 @@ public class AfficheServiceImpl implements AfficheService{
     @Override
     public Affiche findById(Integer id) {
         return affcheDao.findById(id);
+      }
+
+    @Override
+    public Affiche findbyId(Integer id) {
+        return affcheDao.findbyId(id);
     }
 }

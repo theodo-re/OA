@@ -5,8 +5,10 @@ import java.util.Date;
 public class Users {
 
   private long id;
+  private String userName;
   private String uName;
   private String uPassWord;
+  private String passWord;
   private String realName;
   private long organId;
   private long deptId;
@@ -16,7 +18,14 @@ public class Users {
   private long status;
   private Date createdtime;
   private long majer;
+  private String shangsi;
 
+  private Organization organization;
+  private Dictionary dictionary;
+  private Dictionary dictionary1;
+  private Dictionary dictionary2;
+  private Dictionary dictionary3;
+  private Dept dept;
 
   public long getId() {
     return id;
@@ -26,24 +35,37 @@ public class Users {
     this.id = id;
   }
 
+  public String getUserName() {
+    return userName;
+  }
 
-  public String getUName() {
+  public void setUserName(String userName) {
+    this.userName = userName;
+  }
+
+  public String getuName() {
     return uName;
   }
 
-  public void setUName(String uName) {
+  public void setuName(String uName) {
     this.uName = uName;
   }
 
-
-  public String getUPassWord() {
+  public String getuPassWord() {
     return uPassWord;
   }
 
-  public void setUPassWord(String uPassWord) {
+  public void setuPassWord(String uPassWord) {
     this.uPassWord = uPassWord;
   }
 
+  public String getPassWord() {
+    return passWord;
+  }
+
+  public void setPassWord(String passWord) {
+    this.passWord = passWord;
+  }
 
   public String getRealName() {
     return realName;
@@ -53,7 +75,6 @@ public class Users {
     this.realName = realName;
   }
 
-
   public long getOrganId() {
     return organId;
   }
@@ -61,7 +82,6 @@ public class Users {
   public void setOrganId(long organId) {
     this.organId = organId;
   }
-
 
   public long getDeptId() {
     return deptId;
@@ -71,7 +91,6 @@ public class Users {
     this.deptId = deptId;
   }
 
-
   public long getSex() {
     return sex;
   }
@@ -79,7 +98,6 @@ public class Users {
   public void setSex(long sex) {
     this.sex = sex;
   }
-
 
   public long getProId() {
     return proId;
@@ -89,7 +107,6 @@ public class Users {
     this.proId = proId;
   }
 
-
   public long getRoleId() {
     return roleId;
   }
@@ -97,7 +114,6 @@ public class Users {
   public void setRoleId(long roleId) {
     this.roleId = roleId;
   }
-
 
   public long getStatus() {
     return status;
@@ -107,7 +123,6 @@ public class Users {
     this.status = status;
   }
 
-
   public Date getCreatedtime() {
     return createdtime;
   }
@@ -115,7 +130,6 @@ public class Users {
   public void setCreatedtime(Date createdtime) {
     this.createdtime = createdtime;
   }
-
 
   public long getMajer() {
     return majer;
@@ -125,4 +139,59 @@ public class Users {
     this.majer = majer;
   }
 
+  public String getShangsi() {
+    return shangsi;
+  }
+
+  public void setShangsi(String shangsi) {
+    this.shangsi = shangsi;
+  }
+
+  public Organization getOrganization() {
+    return organization;
+  }
+
+  public void setOrganization(Organization organization) {
+    this.organization = organization;
+  }
+
+  public Dictionary getDictionary() {
+    return dictionary;
+  }
+
+  public void setDictionary(Dictionary dictionary) {
+    this.dictionary = dictionary;
+  }
+
+  public Dictionary getDictionary1() {
+    return dictionary1;
+  }
+
+  public void setDictionary1(Dictionary dictionary1) {
+    this.dictionary1 = dictionary1;
+  }
+
+  public Dictionary getDictionary2() {
+    return dictionary2;
+  }
+
+  public void setDictionary2(Dictionary dictionary2) {
+    this.dictionary2 = dictionary2;
+  }
+
+  public Dictionary getDictionary3() {
+    return dictionary3;
+  }
+
+  public void setDictionary3(Dictionary dictionary3) {
+    this.dictionary3 = dictionary3;
+  }
+
+  public Dept getDept() {
+    return dept;
+  }
+
+  public void setDept(Dept dept) {
+    this.dept = dept;
+  }
 }

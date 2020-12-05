@@ -5,430 +5,310 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>OA系统</title>
-    <!-- begin::global styles -->
-    <link rel="stylesheet" href="assets/vendors/bundle.css" type="text/css">
-    <!-- begin::custom styles -->
-
-
-    <!-- begin::global styles -->
-    <link rel="stylesheet" href="assets/vendors/bundle.css" type="text/css">
-    <!-- end::global styles -->
-
-
-    <!-- begin::datepicker -->
-    <link rel="stylesheet" href="assets/vendors/datepicker/daterangepicker.css">
-    <!-- end::datepicker -->
-
-    <link rel="stylesheet" href="assets/css/app.css" type="text/css" charset="UTF-8">
-    <link rel="stylesheet" href="assets/css/custom.css" type="text/css">
-    <script src="assets/vendors/jquery/jquery-3.4.1.js" type="text/javascript"></script>
-
+    <link rel="stylesheet" th:href="@{vendors/select2/css/select2.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{vendors/bundle.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{vendors/bundle.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{vendors/datepicker/daterangepicker.css}">
+    <link rel="stylesheet" th:href="@{css/app.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{css/custom.css}" type="text/css">
 
 </head>
-<body>
+<body class="horizontal-side-menu">
+<!-- 开始::内容区域 -->
 
-<div class="card">
-    <div class="card-body">
-        <ul class="nav nav-pills flex-column flex-sm-row" id="myTab" role="tablist">
-            <li class="flex-sm-fill text-sm-center nav-item">
-                <a class="nav-link active" id="hometimeline-tab" data-toggle="tab" href="#timeline" role="tab"
-                   aria-controls="home"
-                   aria-selected="true">公司文档</a>
-            </li>
-            <li class="flex-sm-fill text-sm-center nav-item">
-                <a class="nav-link" id="photos-tab" data-toggle="tab" href="#photos" role="tab" aria-controls="profile"
-                   aria-selected="false">规则制度</a>
-            </li>
-            <li class="flex-sm-fill text-sm-center nav-item">
-                <a class="nav-link" id="followers-tab1" data-toggle="tab" href="#followers" role="tab"
-                   aria-controls="followers"
-                   aria-selected="false">
-                    研发部
-                </a>
-            </li>
-        </ul>
+    <div class="card">
+        <div class="card-body">
+            <ul class="nav nav-pills flex-column flex-sm-row" id="myTab" role="tablist">
+                <li class="flex-sm-fill text-sm-center nav-item" onclick="f(1)">
+                    <a class="nav-link active" id="hometimeline-tab" data-toggle="tab" href="#compdoc" role="tab"
+                       aria-controls="home" aria-selected="true">公司文档</a>
+                </li>
+                <li class="flex-sm-fill text-sm-center nav-item" onclick="g(1)">
+                    <a class="nav-link" id="photos-tab" data-toggle="tab" href="#photos" role="tab"
+                       aria-controls="profile" aria-selected="false">规则制度</a>
+                </li>
+                <li class="flex-sm-fill text-sm-center nav-item" onclick="y(1)">
+                    <a class="nav-link" id="followers-tab1" data-toggle="tab" href="#followers" role="tab"
+                       aria-controls="followers" aria-selected="false">研发部</a>
+                </li>
+            </ul>
 
-        <div class="tab-content p-t-30" id="myTabContent">
-            <div class="tab-pane fade show active" id="timeline" role="tabpanel" aria-labelledby="timeline-tab">
-                <div class="timeline">
-
-                    <form>
-                        <div class="form-group">
-                            文件名：<input type="text" placeholder="">&nbsp;&nbsp;&nbsp;&nbsp;
-                            所有者：<input type="text" placeholder="">&nbsp;&nbsp;&nbsp;&nbsp;
-                            开始日期：<input type="date"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                            结束日期：<input type="date"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <button type="button" class="btn btn-success btn-uppercase">搜索</button>
-                        </div>
-                    </form>
-                    <div class="card">
-                        <div class="card-header d-flex align-items-center justify-content-between">文档列表
-                            <div class="dropdown">
-                                <button type="button" class="btn btn-outline-secondary btn-uppercase"
-                                        data-toggle="modal" data-target="#Modal1"
-                                        data-whatever="@mdo">
-                                    <i class="ti-plus m-r-5"></i> 添加文件夹
-                                </button>
-                                <button type="button" class="btn btn-outline-secondary btn-uppercase"
-                                        data-toggle="modal" data-target="#Modal2"
-                                        data-whatever="@mdo">
-                                    <i class="ti-plus m-r-5"></i> 添加文件
-                                </button>
-
-
-                                <!-- 开始：：模态1 -->
-                                <div class="modal fade" id="Modal1" tabindex="-1" role="dialog"
-                                     aria-labelledby="exampleModalLabel"
-                                     aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">添加文件夹</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form>
-                                                    <div class="form-group">
-                                                        <label for="recipient-name" class="col-form-label">文件夹名:</label>
-                                                        <input type="text" class="form-control" id="recipient-name">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="recipient-name" class="col-form-label">路径:</label>
-                                                        <input type="text" readonly="readonly" class="form-control"
-                                                               id="recipient-name">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="recipient-name" class="col-form-label">创建人:</label>
-                                                        <input type="text" readonly="readonly" class="form-control"
-                                                               id="recipient-name">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="recipient-name" class="col-form-label">创建日期:</label>
-                                                        <input type="text" readonly="readonly" class="form-control"
-                                                               id="recipient-name">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="message-text" class="col-form-label">备注:</label>
-                                                        <textarea class="form-control" id="message-text"></textarea>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭
-                                                </button>
-                                                <button type="button" class="btn btn-primary">保存</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- 结束：：模态1 -->
-
-
-                                <!-- 开始::模态2 -->
-                                <div class="modal fade" id="Modal2" tabindex="-1" role="dialog"
-                                     aria-labelledby="exampleModalLabel"
-                                     aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">添加文件</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form>
-                                                    <div class="form-group">
-                                                        <label for="recipient-name" class="col-form-label">创建人:</label>
-                                                        <input type="text" readonly="readonly" class="form-control"
-                                                               id="recipient-name">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="recipient-name" class="col-form-label">创建时间:</label>
-                                                        <input type="text" readonly="readonly" class="form-control"
-                                                               id="recipient-name">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="recipient-name" class="col-form-label">文件名:</label>
-                                                        <input type="text" class="form-control" id="recipient-name">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="recipient-name" class="col-form-label">是否公开:</label>
-                                                        <input type="text" class="form-control" id="recipient-name">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="recipient-name" class="col-form-label">路径:</label>
-                                                        <input type="text" readonly="readonly" class="form-control"
-                                                               id="recipient-name">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="recipient-name" class="col-form-label">文件类型:</label><br>
-                                                        <input type="radio" name="rdSpeed" value="txt" checked>.txt
-                                                        &nbsp;&nbsp;
-                                                        <input type="radio" name="rdSpeed" value="word">.word &nbsp;&nbsp;
-                                                        <input type="radio" name="rdSpeed" value="class">.class &nbsp;&nbsp;
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="recipient-name" class="col-form-label">文件上传:</label>
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input"
-                                                                   id="customFile">
-                                                            <label class="custom-file-label"
-                                                                   for="customFile">选择文件</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="message-text" class="col-form-label">备注:</label>
-                                                        <textarea class="form-control" id="message-text"></textarea>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭
-                                                </button>
-                                                <button type="button" class="btn btn-primary">保存</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- 结束::模态2 -->
-
-
-                            </div>
-                        </div>
-                        <!-- 文档列表 -->
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-borderless">
-                                    <tr>
-                                        <th>名称</th>
-                                        <th>发布人</th>
-                                        <th>状态</th>
-                                        <th>发布时间</th>
-                                        <th class="text-right">操作</th>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <i class="fa fa-chrome"></i>
-                                        </td>
-                                        <td>Google Chrome</td>
-                                        <td>13,41</td>
-                                        <td>40.95%</td>
-                                        <td class="text-right">
-                                            <button type="button" class="btn btn-secondary btn-floating">
-                                                <i class="ti-plus"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-success btn-floating">
-                                                <i class="ti-check-box"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-danger btn-floating">
-                                                <i class="ti-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-
-                                </table>
-                            </div>
-                        </div>
-                        <!-- 分页 -->
-                        <nav aria-label="Page navigation example" class="mb-3">
-                            <ul class="pagination">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">上一页</a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">下一页</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-pane fade" id="photos" role="tabpanel" aria-labelledby="photos-tab">
-                <div class="tab-pane fade show active" id="timeline" role="tabpanel" aria-labelledby="timeline-tab">
+            <div class="tab-content p-t-30" id="myTabContent">
+                <!--文档列表-->
+                <div class="tab-pane fade show active" id="compdoc" role="tabpanel" aria-labelledby="timeline-tab">
                     <div class="timeline">
-
                         <form>
                             <div class="form-group">
-                                文件名：<input type="text"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                所有者：<input type="text"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                开始日期：<input type="date"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                结束日期：<input type="date"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button type="button" class="btn btn-success btn-uppercase">搜索</button>
-                            </div>
-                        </form>
-                        <div class="card">
-                            <div class="card-header d-flex align-items-center justify-content-between">文档列表
-                                <!-- <div class="dropdown">
-                            <button type="button" class="btn btn-outline-secondary btn-uppercase">
-                                <i class="ti-plus m-r-5"></i> 添加文件夹
-                            </button>
-                            <button type="button" class="btn btn-outline-secondary btn-uppercase">
-                                <i class="ti-plus m-r-5"></i> 添加文件
-                            </button>
-                        </div> -->
-                            </div>
-                            <!-- 文档列表 -->
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-borderless">
-                                        <tr>
-                                            <th>名称</th>
-                                            <th>发布人</th>
-                                            <th>状态</th>
-                                            <th>发布时间</th>
-                                            <th class="text-right">操作</th>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <i class="fa fa-chrome"></i>
-                                            </td>
-                                            <td>Google Chrome</td>
-                                            <td>13,41</td>
-                                            <td>40.95%</td>
-                                            <td class="text-right">
-                                                <button type="button" class="btn btn-secondary btn-floating">
-                                                    <i class="ti-plus"></i>
-                                                </button>
-                                                <button type="button" class="btn btn-success btn-floating">
-                                                    <i class="ti-check-box"></i>
-                                                </button>
-                                                <button type="button" class="btn btn-danger btn-floating">
-                                                    <i class="ti-trash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-
-                                    </table>
-                                </div>
-                            </div>
-                            <!-- 分页 -->
-                            <nav aria-label="Page navigation example" class="mb-3">
-                                <ul class="pagination">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">上一页</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">下一页</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-
-
-            <div class="tab-pane fade" id="followers" role="tabpanel" aria-labelledby="followers-tab">
-                <div class="tab-pane fade show active" id="timeline" role="tabpanel" aria-labelledby="timeline-tab">
-                    <div class="timeline">
-
-                        <form>
-                            <div class="form-group">
-                                文件名：<input type="text"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                所有者：<input type="text"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                开始日期：<input type="date"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                结束日期：<input type="date"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button type="button" class="btn btn-success btn-uppercase">搜索</button>
+                                文件名：<input type="text" name="wName" id="wName">&nbsp;&nbsp;&nbsp;&nbsp;
+                                创建人：<input type="text" name="createBy" id="createBy">&nbsp;&nbsp;&nbsp;&nbsp;
+                                开始日期：<input type="date" name="starDate" id="starDate">&nbsp;&nbsp;&nbsp;&nbsp;
+                                结束日期：<input type="date" name="endDate" id="endDate">&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button type="button" class="btn btn-success btn-uppercase" id="sousuo">搜索</button>
                             </div>
                         </form>
                         <div class="card">
                             <div class="card-header d-flex align-items-center justify-content-between">文档列表
                                 <div class="dropdown">
-                                    <button type="button" class="btn btn-outline-secondary btn-uppercase">
-                                        <i class="ti-plus m-r-5"></i> 添加文件夹
-                                    </button>
-                                    <button type="button" class="btn btn-outline-secondary btn-uppercase">
-                                        <i class="ti-plus m-r-5"></i> 添加文件
+                                    <button type="button" class="btn btn-outline-secondary btn-uppercase"
+                                            data-toggle="modal"
+                                            data-target=".bd-example-modal-lg1" id="addCompanyFile">
+                                        <i class="ti-plus m-r-5"></i> 添加公司文档
                                     </button>
                                 </div>
                             </div>
-                            <!-- 文档列表 -->
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-borderless">
-                                        <tr>
+                                    <table class="table table-borderless" id="CompanyFileTable">
+                                        <tr id="tr1">
                                             <th>名称</th>
+                                            <th>类型</th>
                                             <th>发布人</th>
-                                            <th>状态</th>
+                                            <th>备注</th>
                                             <th>发布时间</th>
                                             <th class="text-right">操作</th>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <i class="fa fa-chrome"></i>
-                                            </td>
-                                            <td>Google Chrome</td>
-                                            <td>13,41</td>
-                                            <td>40.95%</td>
-                                            <td class="text-right">
-                                                <button type="button" class="btn btn-secondary btn-floating">
-                                                    <i class="ti-plus"></i>
-                                                </button>
-                                                <button type="button" class="btn btn-success btn-floating">
-                                                    <i class="ti-check-box"></i>
-                                                </button>
-                                                <button type="button" class="btn btn-danger btn-floating">
-                                                    <i class="ti-trash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-
                                     </table>
                                 </div>
                             </div>
-                            <!-- 分页 -->
                             <nav aria-label="Page navigation example" class="mb-3">
-                                <ul class="pagination">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">上一页</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">下一页</a>
-                                    </li>
+                                <input type="hidden" id="dangqianye" value="0">
+                                <input type="hidden" id="zongyeshu" value="0">
+                                <ul class="pagination" id="fenye1">
+                                    <li class="page-item" id="shangyiye"><a class="page-link" href="#"
+                                                                            onclick="prev(1)">上一页</a></li>
+                                    <li class="page-item"><a class="page-link" href="#" onclick="next(1)">下一页</a></li>
                                 </ul>
                             </nav>
                         </div>
                     </div>
                 </div>
+                <!--规章制度-->
+                <div class="tab-pane fade" id="photos" role="tabpanel" aria-labelledby="photos-tab">
+                    <div class="tab-pane fade show active" id="timeline1" role="tabpanel"
+                         aria-labelledby="timeline-tab">
+                        <div class="timeline">
+                            <form>
+                                <div class="form-group">
+                                    文件名：<input type="text" id="SystemName"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    发布人：<input type="text" id="SystemBy"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    开始日期：<input type="date" id="startDate1"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    结束日期：<input type="date" id="endDate1"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button type="button" class="btn btn-success btn-uppercase" id="sousuo2">搜索</button>
+                                </div>
+                            </form>
+                            <div class="card">
+                                <div class="card-header d-flex align-items-center justify-content-between">规章制度列表
+                                    <div class="dropdown">
+                                        <button type="button" class="btn btn-outline-secondary btn-uppercase"
+                                                id="tianjiaguizhangzhidu" data-toggle="modal"
+                                                data-target=".bd-example-modal-lg1">
+                                            <i class="ti-plus m-r-5"></i> 添加规章制度
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-borderless" id="SystemTable">
+                                            <tr id="tr2">
+                                                <th>名称</th>
+                                                <th>发布人</th>
+                                                <th>备注</th>
+                                                <th>发布时间</th>
+                                                <th class="text-right">操作</th>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <nav aria-label="Page navigation example" class="mb-3">
+                                    <input type="hidden" id="dangqianye2" value="0">
+                                    <input type="hidden" id="zongyeshu2" value="0">
+                                    <ul class="pagination" id="fenye2">
+                                        <li class="page-item" id="shangyiye2">
+                                            <a class="page-link" href="#" onclick="prev(2)">上一页</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#" onclick="next(2)">下一页</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--添加文档-->
+                <div class="modal fade bd-example-modal-lg1" tabindex="-1" role="dialog"
+                     aria-labelledby="myLargeModalLabel1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modeltitle"></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="Word" method="post" enctype="multipart/form-data" id="tijiaobaocun">
+                                    <div class="form-group">
+                                        <label class="col-form-label">选择文档(<span id="yuio"></span>):</label>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="customFile" name="addfile"
+                                                   required>
+                                            <label class="custom-file-label" for="customFile">选择文档</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="createdBy" class="col-form-label">创建人:</label>
+                                        <input type="text" readonly="readonly" class="form-control" value="1">
+                                        <input type="hidden" name="createdBy" id="createdBy" value="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label">创建日期:</label>
+                                        <input type="text" readonly="readonly" class="form-control"
+                                               name="createdTime" id="dangqianshijian" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fileMsg" class="col-form-label">备注:</label>
+                                        <textarea class="form-control" name="fileMsg" id="fileMsg"></textarea>
+                                    </div>
+                                    <input type="hidden" id="fileKind" name="fileKind" value="1">
+                                </form>
 
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                                <button type="button" onclick="add()" class="btn btn-primary">上传</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!--查看规章制度-->
+                <div class="modal fade bd-example-modal-lg2" tabindex="-1" role="dialog"
+                     aria-labelledby="myLargeModalLabel2" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="systemtitle"></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" id="lookmodel">
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--部门-->
+                <div class="tab-pane fade" id="followers" role="tabpanel" aria-labelledby="followers-tab">
+                    <div class="tab-pane fade show active" id="timeline" role="tabpanel" aria-labelledby="timeline-tab">
+                        <div class="timeline">
+                            <div class="card">
+                                <div class="card-header d-flex align-items-center justify-content-between">文档列表
+                                    <div class="dropdown">
+                                        <button type="button" class="btn btn-outline-secondary btn-uppercase"
+                                                data-toggle="modal" data-target=".bd-example-modal-lg3" id="wenjianjia">
+                                            <i class="ti-plus m-r-5"></i> 添加文件夹
+                                        </button>
+                                        <button type="button" class="btn btn-outline-secondary btn-uppercase"
+                                                data-toggle="modal" id="tianjiagerenwendang"
+                                                data-target=".bd-example-modal-lg1">
+                                            <i class="ti-plus m-r-5"></i> 添加文档
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- 文档列表 -->
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <div class="accordion accordion-dark custom-accordion" id="foldtab">
+                                            <div class="accordion-row open" id="deptfold">
+                                                <a href="#" class="accordion-header">
+                                                    <span>部门文件夹</span>
+                                                    <i class="accordion-status-icon close fa fa-plus"></i>
+                                                    <i class="accordion-status-icon open fa fa-minus"></i>
+                                                </a>
+                                                <div class="accordion-body" id="deptfile">
+                                                    <!--部门文档-->
+                                                    <!--<table class="table table-borderless" >
+                                                        <tr><td><a href="#"  style="color: blue!important;">手机电话费技术大会</a></td><td  class="text-right">下载   删除</td></tr>
+                                                    </table>-->
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--添加文件夹-->
+                <div class="modal fade bd-example-modal-lg3" tabindex="-1" role="dialog"
+                     aria-labelledby="myLargeModalLabel1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">添加文件夹</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="form2">
+                                    <div class="form-group">
+                                        <label for="foldName" class="col-form-label">文件名:</label>
+                                        <input type="text" name="foldName" id="foldName" class="form-control" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label">文件所属:</label>
+                                        <div class="form-group">
+                                            <select class="js-example-basic-single" name="user"  id="userslist">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label">创建日期:</label>
+                                        <input type="text" readonly="readonly" class="form-control"
+                                               name="createdTime" id="dangqianshijian2" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fileMsg" class="col-form-label">备注:</label>
+                                        <textarea class="form-control" name="fileMsg" id="foldMsg"></textarea>
+                                    </div>
+                                    <input type="hidden" name="createdBy" id="createdBy2" value="1">
+                                    <input type="hidden" id="foldKind" name="foldKind" value="1">
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="y(1)">关闭</button>
+                                <button type="button" onclick="addfold()" class="btn btn-primary">保存</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
 
             </div>
-
         </div>
-
     </div>
-</div>
-<!-- begin::datepicker -->
-<script src="assets/vendors/datepicker/daterangepicker.js"></script>
-<script src="assets/js/examples/datepicker.js"></script>
-<!-- end::datepicker -->
-
-<!-- begin::global scripts -->
-<script src="assets/vendors/bundle.js"></script>
-<!-- end::global scripts -->
-
-<!-- begin::custom scripts -->
-<script src="assets/js/custom.js"></script>
-<script src="assets/js/app.js"></script>
-<!-- end::custom scripts -->
 
 
+
+<script th:src="@{vendors/jquery/jquery-3.4.1.js}" type="text/javascript"></script>
+<script th:src="@{assets/vendors/select2/js/select2.min.js}"></script>
+<script th:src="@{assets/js/examples/select2.js}"></script>
+<script th:src="@{js/wendang.js}"></script>
+<script th:src="@{vendors/datepicker/daterangepicker.js}"></script>
+<script th:src="@{js/examples/datepicker.js}"></script>
+<script th:src="@{vendors/bundle.js}"></script>
+<script th:src="@{js/custom.js}"></script>
+<script th:src="@{js/app.js}"></script>
 </body>
 </html>
+

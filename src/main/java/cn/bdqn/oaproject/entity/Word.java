@@ -4,19 +4,72 @@ package cn.bdqn.oaproject.entity;
 import java.util.Date;
 
 public class Word {
-
   private long id;
-  private String wName;
-  private long publicity;
-  private long wPro;
-  private String picpath;
-  private String wcomment;
-  private long folderId;
-  private long createdby;
-  private Date createdtime;
-  private long modifyby;
-  private Date modifytime;
+  private String fileName;
+  private long fileVisible;
+  private long fileType;
+  private String fileAp;
+  private String fileRp;
+  private String fileMsg;
+  private long fileAdd;
+  private Integer createdBy;
+  private Date createdTime;
+  private long modifyBy;
+  private Date modifyTime;
+  private Integer fileKind;
+  private Users users;
+  private Dictionary dictionary;
+  private long fileState;
+  private Integer dept;
 
+
+  public Integer getDept() {
+    return dept;
+  }
+
+  public void setDept(Integer dept) {
+    this.dept = dept;
+  }
+
+  public String getFileAp() {
+    return fileAp;
+  }
+
+  public void setFileAp(String fileAp) {
+    this.fileAp = fileAp;
+  }
+
+  public String getFileRp() {
+    return fileRp;
+  }
+
+  public void setFileRp(String fileRp) {
+    this.fileRp = fileRp;
+  }
+
+  public long getFileState() {
+    return fileState;
+  }
+
+  public void setFileState(long fileState) {
+    this.fileState = fileState;
+  }
+
+  public Dictionary getDictionary() {
+    return dictionary;
+  }
+
+  public void setDictionary(Dictionary dictionary) {
+    this.dictionary = dictionary;
+  }
+
+  public Users getUsers() {
+    return users;
+  }
+
+  public void setUsers(Users users) {
+    this.users = users;
+  }
 
   public long getId() {
     return id;
@@ -27,93 +80,96 @@ public class Word {
   }
 
 
-  public String getWName() {
-    return wName;
+  public String getFileName() {
+    return fileName;
   }
 
-  public void setWName(String wName) {
-    this.wName = wName;
-  }
-
-
-  public long getPublicity() {
-    return publicity;
-  }
-
-  public void setPublicity(long publicity) {
-    this.publicity = publicity;
+  public void setFileName(String fileName) {
+    this.fileName = fileName;
   }
 
 
-  public long getWPro() {
-    return wPro;
+  public long getFileVisible() {
+    return fileVisible;
   }
 
-  public void setWPro(long wPro) {
-    this.wPro = wPro;
-  }
-
-
-  public String getPicpath() {
-    return picpath;
-  }
-
-  public void setPicpath(String picpath) {
-    this.picpath = picpath;
+  public void setFileVisible(long fileVisible) {
+    this.fileVisible = fileVisible;
   }
 
 
-  public String getWcomment() {
-    return wcomment;
+  public long getFileType() {
+    return fileType;
   }
 
-  public void setWcomment(String wcomment) {
-    this.wcomment = wcomment;
-  }
-
-
-  public long getFolderId() {
-    return folderId;
-  }
-
-  public void setFolderId(long folderId) {
-    this.folderId = folderId;
+  public void setFileType(long fileType) {
+    this.fileType = fileType;
   }
 
 
-  public long getCreatedby() {
-    return createdby;
+
+
+
+  public String getFileMsg() {
+    return fileMsg;
   }
 
-  public void setCreatedby(long createdby) {
-    this.createdby = createdby;
-  }
-
-
-  public Date getCreatedtime() {
-    return createdtime;
-  }
-
-  public void setCreatedtime(Date createdtime) {
-    this.createdtime = createdtime;
+  public void setFileMsg(String fileMsg) {
+    this.fileMsg = fileMsg;
   }
 
 
-  public long getModifyby() {
-    return modifyby;
+  public long getFileAdd() {
+    return fileAdd;
   }
 
-  public void setModifyby(long modifyby) {
-    this.modifyby = modifyby;
+  public void setFileAdd(long fileAdd) {
+    this.fileAdd = fileAdd;
   }
 
 
-  public Date getModifytime() {
-    return modifytime;
+  public Integer getCreatedBy() {
+    return createdBy;
   }
 
-  public void setModifytime(Date modifytime) {
-    this.modifytime = modifytime;
+  public void setCreatedBy(Integer createdBy) {
+    this.createdBy = createdBy;
+  }
+
+
+  public Date getCreatedTime() {
+    return createdTime;
+  }
+
+  public void setCreatedTime(Date createdTime) {
+    this.createdTime = createdTime;
+  }
+
+
+  public long getModifyBy() {
+    return modifyBy;
+  }
+
+  public void setModifyBy(long modifyBy) {
+    this.modifyBy = modifyBy;
+  }
+
+
+  public Date getModifyTime() {
+    return modifyTime;
+  }
+
+  public void setModifyTime(Date modifyTime) {
+    this.modifyTime = modifyTime;
+  }
+
+
+  public Integer getFileKind() {
+    return fileKind;
+  }
+
+  public void setFileKind(Integer fileKind) {
+    this.fileKind = fileKind;
   }
 
 }

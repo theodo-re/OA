@@ -5,21 +5,71 @@ import java.util.Date;
 
 public class Folder {
 
-  private long id;
+  private Integer id;
   private String foldName;
-  private String foldPic;
-  private String fcomment;
-  private long createdby;
-  private Date createdtime;
-  private long modifyby;
-  private Date modifytime;
+  private String foldAp;
+  private Integer dept;
+  private String foldMsg;
+  private Integer createdBy;
+  private Date createdTime;
+  private Integer foldKind;
+  private Integer foldState;
+  private Integer user;
+  private String foldRp;
 
+  public String getFoldRp() {
+    return foldRp;
+  }
 
-  public long getId() {
+  public void setFoldRp(String foldRp) {
+    this.foldRp = foldRp;
+  }
+
+  public Integer getDept() {
+    return dept;
+  }
+
+  public void setDept(Integer dept) {
+    this.dept = dept;
+  }
+
+  public Integer getUser() {
+    return user;
+  }
+
+  public void setUser(Integer user) {
+    this.user = user;
+  }
+
+  public Integer getFoldState() {
+    return foldState;
+  }
+
+  public void setFoldState(Integer foldState) {
+    this.foldState = foldState;
+  }
+
+  public Integer getFoldKind() {
+    return foldKind;
+  }
+
+  public void setFoldKind(Integer foldKind) {
+    this.foldKind = foldKind;
+  }
+
+  public String getFoldAp() {
+    return foldAp;
+  }
+
+  public void setFoldAp(String foldAp) {
+    this.foldAp = foldAp;
+  }
+
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -33,57 +83,31 @@ public class Folder {
   }
 
 
-  public String getFoldPic() {
-    return foldPic;
+
+  public String getFoldMsg() {
+    return foldMsg;
   }
 
-  public void setFoldPic(String foldPic) {
-    this.foldPic = foldPic;
-  }
-
-
-  public String getFcomment() {
-    return fcomment;
-  }
-
-  public void setFcomment(String fcomment) {
-    this.fcomment = fcomment;
+  public void setFoldMsg(String foldMsg) {
+    this.foldMsg = foldMsg;
   }
 
 
-  public long getCreatedby() {
-    return createdby;
+  public Integer getCreatedBy() {
+    return createdBy;
   }
 
-  public void setCreatedby(long createdby) {
-    this.createdby = createdby;
-  }
-
-
-  public Date getCreatedtime() {
-    return createdtime;
-  }
-
-  public void setCreatedtime(Date createdtime) {
-    this.createdtime = createdtime;
+  public void setCreatedBy(Integer createdBy) {
+    this.createdBy = createdBy;
   }
 
 
-  public long getModifyby() {
-    return modifyby;
+  public Date getCreatedTime() {
+    return createdTime;
   }
 
-  public void setModifyby(long modifyby) {
-    this.modifyby = modifyby;
-  }
-
-
-  public Date getModifytime() {
-    return modifytime;
-  }
-
-  public void setModifytime(Date modifytime) {
-    this.modifytime = modifytime;
+  public void setCreatedTime(Date createdTime) {
+    this.createdTime = createdTime;
   }
 
 }

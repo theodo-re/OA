@@ -26,4 +26,9 @@ public interface AfficheService {
      * 根据id查询通告
      */
     Affiche findById(Integer id);
+ 
+    /**
+     * 根据id查询公告
+     */
+    Affiche findbyId(Integer id);
 }
