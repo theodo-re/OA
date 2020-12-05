@@ -6,34 +6,94 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>OA系统</title>
     <!-- begin::global styles -->
-    <link rel="stylesheet" href="assets/vendors/bundle.css" type="text/css">
+    <link rel="stylesheet" th:href="@{/vendors/bundle.css}" type="text/css">
     <!-- begin::custom styles -->
 
 
     <!-- begin::global styles -->
-    <link rel="stylesheet" href="assets/vendors/bundle.css" type="text/css">
+    <link rel="stylesheet" th:href="@{/vendors/bundle.css}" type="text/css">
     <!-- end::global styles -->
 
 
     <!-- begin::datepicker -->
-    <link rel="stylesheet" href="assets/vendors/datepicker/daterangepicker.css">
+    <link rel="stylesheet" th:href="@{/vendors/datepicker/daterangepicker.css}">
     <!-- end::datepicker -->
 
-    <link rel="stylesheet" href="assets/css/app.css" type="text/css" charset="UTF-8">
-    <link rel="stylesheet" href="assets/css/custom.css" type="text/css">
-    <script src="assets/vendors/jquery/jquery-3.4.1.js" type="text/javascript"></script>
+    <link rel="stylesheet" th:href="@{/css/app.css}" type="text/css" charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/custom.css}" type="text/css">
+    <script th:src="@{/vendors/jquery/jquery-3.4.1.js}" type="text/javascript"></script>
+    <script>
+        $(function () {
+            $("#btn1").click(function () {
+                $.post("addaffiche",$("#form1").serialize(),function (data) {
+                    alert(data);
+                    window.location.reload();
+                },"text");
+            });
 
+            /*删除*/
+            $("button[name='btn2']").click(function () {
+                $.post("delaffiche","id="+$(this).val(),function (data) {
+                    alert(data);
+                    window.location.reload();
+                },"text");
+            });
+
+            /*修改回显*/
+            $("button[name='btn3']").click(function () {
+                $.post("updateaffiche","id="+$(this).val(),function (data) {
+                    $("#id").val(data.id);
+                    $("#upaffTitle").val(data.affTitle);
+                    $("#affstatus").val(data.affstatus);
+                    $("#upstartdate").val(data.startdate);
+                    $("#upenddate").val(data.enddate);
+                    $("#uppubdate").val(data.pubdate);
+                    $("#affContent").val(data.affContent);
+                },"json");
+            });
+
+            /*修改*/
+            $("#btn4").click(function () {
+                $.post("updateaff",$("#form2").serialize(),function (data) {
+                    alert(data);
+                    window.location.reload();
+                },"text");
+            });
+
+            /*分页*/
+            $("button[name='renfen']").click(function () {
+                var index=$(this).val();
+                var count=$("#count").val();
+                if (index<=0){
+                    index=1;
+                    alert("当前为第一页")
+                }
+                if (index>count){
+                    index=count;
+                    alert("当前为最后一页")
+                }
+                window.location="gonggao?renfen="+index;
+            });
+        })
+    </script>
 
 </head>
 <body>
 
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">通告列表
-        <button type="button" class="btn btn-secondary btn-floating">
+        <button type="button" class="btn btn-secondary btn-floating"
+                data-toggle="modal" data-target="#addAffiche">
             <i class="ti-plus"></i>
+        </button>
     </div>
     <div class="card-body">
         <div class="table-responsive">
+            <form about="gonggao" method="post">
+                名称：<input type="text" name="title" th:value="${title}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                发布时间：<input type="date" name="date" th:value="${date}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="submit" value="查询">
+            </form>
             <table class="table table-borderless">
                 <tr>
                     <th>名称</th>
@@ -42,18 +102,18 @@
                     <th>发布时间</th>
                     <th class="text-right">操作</th>
                 </tr>
-                <tr>
-                    <td>
-                        <i class="fa fa-chrome"></i>
-                    </td>
-                    <td>Google Chrome</td>
-                    <td>13,41</td>
-                    <td>40.95%</td>
+                <tr th:each="Affiche:${afficheList}">
+                    <td th:text="${Affiche.affTitle}"></td>
+                    <td th:text="${Affiche.createdby}"></td>
+                    <td th:if="${Affiche.affstatus}==1">紧急</td>
+                    <td th:if="${Affiche.affstatus}==2">一般</td>
+                    <td th:text="${Affiche.pubdate}"></td>
                     <td class="text-right">
-                        <button type="button" class="btn btn-success btn-floating">
+                        <button type="button" class="btn btn-success btn-floating"
+                                data-toggle="modal" name="btn3" data-target="#updateAffiche" th:value="${Affiche.id}">
                             <i class="ti-check-box"></i>
                         </button>
-                        <button type="button" class="btn btn-danger btn-floating">
+                        <button type="button" name="btn2" class="btn btn-danger btn-floating" th:value="${Affiche.id}">
                             <i class="ti-trash"></i>
                         </button>
                     </td>
@@ -62,33 +122,92 @@
             </table>
         </div>
     </div>
+    <!-- 增加模态 -->
+    <div class="modal fade" id="addAffiche" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabelxiu" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabelxiu">通告增加</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="form1">
+                        标题：<input id="affTitle" name="affTitle" type="text" class="form-control" value="">
+                        状态：<select name="affstatus" >
+                                    <option value="1">紧急</option>
+                                    <option value="2">一般</option>
+                              </select></br>
+                        显示时间：<input id="startdate" name="startdate" type="date" class="form-control" value="">
+                        结束时间：<input id="enddate" name="enddate" type="date" class="form-control" value="">
+                        发布时间：<input id="pubdate" name="pubdate" type="date" class="form-control" value="">
+                        内容：<textarea name="affContent" cols="40" rows="5" class="form-control" value=""></textarea>
+                        <div class="modal-footer">
+                            <button type="button" id="btn1" class="btn btn-secondary" data-dismiss="modal">提交</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">返回</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- 修改模态 -->
+    <div class="modal fade" id="updateAffiche" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabelupdate" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabelupdate">通告修改</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="form2">
+                        <input id="id" name="id" type="hidden" value="">
+                        标题：<input id="upaffTitle" name="affTitle" type="text" class="form-control" value="">
+                        状态：<select name="affstatus" id="affstatus">
+                        <option value="1">紧急</option>
+                        <option value="2">一般</option>
+                    </select></br>
+                        显示时间：<input id="upstartdate" name="startdate" type="date" class="form-control" value="">
+                        结束时间：<input id="upenddate" name="enddate" type="date" class="form-control" value="">
+                        发布时间：<input id="uppubdate" name="pubdate" type="date" class="form-control" value="">
+                        内容：<textarea name="affContent" id="affContent" cols="40" rows="5" class="form-control" value=""></textarea>
+                        <div class="modal-footer">
+                            <button type="button" id="btn4" class="btn btn-secondary" data-dismiss="modal">提交</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">返回</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <!-- 分页 -->
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-end">
             <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                <input type="hidden" id="count" th:value="${page.totalPageCount}">
+                <button type="button" class="btn btn-primary m-r-5" data-toggle="modal"
+                name="renfen" th:value="${page.currentPageNo}-1">上一页</button>
             </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
             <li class="page-item">
-                <a class="page-link" href="#">Next</a>
+                <button type="button" class="btn btn-primary m-r-5" data-toggle="modal"
+                 name="renfen" th:value="${page.currentPageNo}+1">下一页</button>
             </li>
         </ul>
     </nav>
 </div>
 <!-- begin::datepicker -->
-<script src="assets/vendors/datepicker/daterangepicker.js"></script>
-<script src="assets/js/examples/datepicker.js"></script>
+<script th:src="@{/vendors/datepicker/daterangepicker.js}"></script>
+<script th:src="@{/js/examples/datepicker.js}"></script>
 <!-- end::datepicker -->
 
 <!-- begin::global scripts -->
-<script src="assets/vendors/bundle.js"></script>
+<script th:src="@{/vendors/bundle.js}"></script>
 <!-- end::global scripts -->
 
 <!-- begin::custom scripts -->
-<script src="assets/js/custom.js"></script>
-<script src="assets/js/app.js"></script>
+<script th:src="@{/js/custom.js}"></script>
+<script th:src="@{/js/app.js}"></script>
 <!-- end::custom scripts -->
 
 

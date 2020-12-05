@@ -1,6 +1,7 @@
 package cn.bdqn.oaproject.controller;
 
 import cn.bdqn.oaproject.service.UsersService;
+import cn.bdqn.oaproject.util.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -9,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 @Controller
+@RequestMapping("/deng")
 public class LogController {
     Logger logger = LoggerFactory.getLogger(LogController.class);
     @Resource
@@ -29,7 +32,7 @@ public class LogController {
      * 登录
      */
     @RequestMapping(value = "/login.html",method = RequestMethod.POST)
-    public String login(String uName, String password, Model m){
+    public String login(String uName, String password, Model m, HttpSession session){
         logger.info("登录页面==============================");
         int rel = user.findCByName(uName,password);
         if(rel==-1){
@@ -39,6 +42,7 @@ public class LogController {
             m.addAttribute("error1","密码不正确");
             return "login";
         }else{
+            session.setAttribute(Constants.USER_SESSION,1);
             return "redirect:index1";
         }
     }

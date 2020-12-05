@@ -1,18 +1,29 @@
 package cn.bdqn.oaproject.entity;
 
 
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Date;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 public class Affiche {
 
   private long id;
   private String affTitle;
   private long affstatus;
+  @JsonFormat(pattern = "yyyy-MM-dd")
   private Date startdate;
+  @JsonFormat(pattern = "yyyy-MM-dd")
   private Date enddate;
+  @JsonFormat(pattern = "yyyy-MM-dd")
   private Date pubdate;
   private String affContent;
   private long createdby;
+  @JsonFormat(pattern = "yyyy-MM-dd")
   private Date createdtime;
   private long modifyby;
   private Date modifytime;
