@@ -3,10 +3,74 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bdqn.oaproject.dao.AffcheDao">
-    <select id="findAll" resultType="Affiche">
-        select * from affiche where startdate &lt;= NOW() AND enddate &gt;= NOW() and pubdate is not null limit 0,3
+
+    <!-- 查询功能，resultType 设置返回值类型 -->
+    <select id="findAll" resultType="int">  <!-- 书写 SQL 语句 -->
+        SELECT count(0) FROM affiche where startdate &lt;= NOW() AND enddate &gt;= NOW()
+        <if test="title!=null and !''.equals(title)">
+            and affTitle=#{title}
+        </if>
+        <if test="date!=null and !''.equals(date)">
+            and pubdate  &gt;= #{date}
+        </if>
     </select>
+
+    <select id="findfenAll" resultType="Affiche">  <!-- 书写 SQL 语句 -->
+        SELECT * FROM affiche where startdate &lt;= NOW() AND enddate &gt;= NOW()
+        <if test="title!=null and !''.equals(title)">
+            and affTitle=#{title}
+        </if>
+        <if test="date!=null and !''.equals(date)">
+            and pubdate  &gt;= #{date}
+        </if>
+        limit ${pageIndex},${pageSize}
+    </select>
+    <select id="findById" resultType="Affiche" parameterType="int">  <!-- 书写 SQL 语句 -->
+        SELECT * FROM affiche where id=#{id}
+    </select>
+
+    <insert id="insertAff" parameterType="Affiche">
+      insert into affiche(affTitle, affstatus, startdate,enddate,pubdate,affContent,createdby,createdtime)
+      values (#{affTitle},#{affstatus},#{startdate},#{enddate},#{pubdate},#{affContent},#{createdby},#{createdtime})
+    </insert>
+
+    <update id="updateAff" parameterType="Affiche">
+    update affiche
+    <set>
+        <if test="affTitle!=null and affTitle!=''">
+            affTitle=#{affTitle},
+        </if>
+        <if test="affstatus!=null and affstatus>0">
+            affstatus = #{affstatus},
+        </if>
+        <if test="startdate!=null">
+            startdate = #{startdate},
+        </if>
+        <if test="enddate!=null">
+            enddate=#{enddate},
+        </if>
+        <if test="pubdate!=null">
+            pubdate=#{pubdate},
+        </if>
+        <if test="affContent!=null and affContent!=''">
+            affContent=#{affContent},
+        </if>
+        <if test="modifyby!=null and modifyby>0">
+            modifyby=#{modifyby},
+        </if>
+        <if test="modifytime!=null">
+            modifytime=#{modifytime}
+        </if>
+    </set>
+    where id = #{id};
+    </update>
+
+    <delete id="deleteAff" parameterType="int">
+      delete from affiche where id = #{id}
+    </delete>
+
     <select id="findbyId" resultType="Affiche" parameterType="int">
         select * from affiche where id=#{id}
     </select>
+
 </mapper>

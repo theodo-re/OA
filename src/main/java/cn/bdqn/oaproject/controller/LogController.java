@@ -60,7 +60,6 @@ public class LogController {
                 m.addAttribute("error2","验证码不能为空！");
                 return "login";
             }
-
         }
     }
     @RequestMapping("/index1")

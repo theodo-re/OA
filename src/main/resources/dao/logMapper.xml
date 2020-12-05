@@ -55,6 +55,5 @@
     <insert id="add" parameterType="Log">
         insert into `Log`(userId,roleId,incident,logcomment,opedate)
         values (#{userId},#{roleId},#{incident},#{logcomment},#{opedate})
-
     </insert>
 </mapper>
