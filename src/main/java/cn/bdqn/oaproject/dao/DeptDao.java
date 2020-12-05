@@ -1,6 +1,7 @@
 package cn.bdqn.oaproject.dao;
 
 import cn.bdqn.oaproject.entity.Dept;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,7 +22,8 @@ public interface DeptDao {
      * 删除部门
      */
     int delDept(Integer id);
-
+    //根据用户名查出所在部门
+    Dept findAllByName(@Param("realName") String realName);
 
 
 }

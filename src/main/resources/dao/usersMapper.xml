@@ -78,4 +78,11 @@
         select * from users where realName=#{name}
 
     </select>
+    <select id="findIdName" resultType="int" >
+        select id from users where realName=#{name}
+    </select>
+    <select id="findMajerByName" parameterType="String" resultType="String">
+        SELECT (SELECT us.realname FROM users us WHERE u.`majer`=us.id) FROM users u
+        WHERE u.`realName`=#{name}
+    </select>
 </mapper>

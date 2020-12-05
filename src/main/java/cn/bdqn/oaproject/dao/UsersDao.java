@@ -49,4 +49,10 @@ public interface UsersDao {
      * 根据姓名查询id
      */
     int findByrealName(String name);
+    /**
+     * 根据姓名查询id
+     */
+    int findIdName(String name);
+    //根据用户名获取部门领导
+    String findMajerByName(@Param("name") String name);
 }

@@ -154,4 +154,14 @@ public class UsersServiceImpl implements UsersService{
         return userdao.findByrealName(name);
 
     }
+
+    @Override
+    public int findIdName(String name) {
+        return userdao.findIdName(name);
+    }
+
+    @Override
+    public String findMajerByName(String name) {
+        return userdao.findMajerByName(name);
+    }
 }

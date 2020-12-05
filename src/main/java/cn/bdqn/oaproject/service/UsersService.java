@@ -48,4 +48,10 @@ public interface UsersService {
      * 根据姓名查询id
      */
     int findByrealName(String name);
+    /**
+     * 根据姓名查询id
+     */
+    int findIdName(String name);
+    //根据姓名查领导
+    String findMajerByName(String name);
 }

@@ -89,5 +89,10 @@ public class DeptServiceImpl implements DeptService{
         return rel;
     }
 
+    @Override
+    public Dept findAllByName(String realName) {
+        return deptDao.findAllByName(realName);
+    }
+
 
 }

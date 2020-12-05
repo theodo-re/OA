@@ -6,22 +6,129 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>OA系统</title>
     <!-- begin::global styles -->
-    <link rel="stylesheet" href="assets/vendors/bundle.css" type="text/css">
+    <link rel="stylesheet" th:href="@{vendors/bundle.css}" type="text/css">
     <!-- begin::custom styles -->
 
 
     <!-- begin::global styles -->
-    <link rel="stylesheet" href="assets/vendors/bundle.css" type="text/css">
+    <link rel="stylesheet" th:href="@{vendors/bundle.css}" type="text/css">
     <!-- end::global styles -->
 
 
     <!-- begin::datepicker -->
-    <link rel="stylesheet" href="assets/vendors/datepicker/daterangepicker.css">
+    <link rel="stylesheet" th:href="@{vendors/datepicker/daterangepicker.css}">
     <!-- end::datepicker -->
 
-    <link rel="stylesheet" href="assets/css/app.css" type="text/css" charset="UTF-8">
-    <link rel="stylesheet" href="assets/css/custom.css" type="text/css">
-    <script src="assets/vendors/jquery/jquery-3.4.1.js" type="text/javascript"></script>
+    <link rel="stylesheet" th:href="@{css/app.css}" type="text/css" charset="UTF-8">
+    <link rel="stylesheet" th:href="@{css/custom.css}" type="text/css">
+    <script th:src="@{/vendors/jquery/jquery-3.4.1.js}" type="text/javascript"></script>
+    <script>
+        $(function () {
+            var sel = document.getElementById("shenhe");
+
+            /*获取当前页码的值*/
+            var  count="";
+            for (var i=1;i<=$("#pagecount").val();i++){
+
+                count+="<li class='page-item'><a class='page-link' >"+i+"</a></li>"
+
+            }
+            $("#erer").after(count)
+
+            $("#shenhe").change(function () {
+                var majer = sel.options[sel.selectedIndex].value;
+                $.post("majer.html", "mejName=" + majer, function (data) {
+                    $("#checkid").val(data);
+                }, "text")
+            });
+            //获取单选框
+            //修改———————————————修改—————————————修
+
+            /*异步判断要添加的值是否已存在*/
+            $("#vplat").blur(function () {
+                var vpt = $(this).value();
+                $.post("vplate.html", "vplate=" + vpt, function (data) {
+                    $("#vpt").text(data);
+                }, "text")
+            });
+        });
+
+        function xiugai(id) {
+            $.post("xiugai.html", "id=" + id, function (data) {
+                $("#div1").html(" ");
+                var str = "<tr ><th>车牌号<input type=\'text\' value=\'" + (data.vplate) + "\' name='vplate' placeholder='请输入要修改的内容' class=\"form-control\" id='vplat'></th></tr><br/>" +
+                    "<tr><th><input type=\'hidden\' value=\'" + (data.id) + "\' name='id'></th></tr>" +
+                    "<tr ><th >车型<input type=\'text\' value=\'" + (data.vmodel) + "\' placeholder='请输入要修改的内容' name='vmodel' class=\"form-control\" id=\"vmodel\"></th></tr>" +
+                    "<tr ><th >编号<input type=\'text\' value=\'" + (data.vnumber) + "\' placeholder='请输入要修改的内容' name='vnumber' class=\"form-control\" id=\"vnumber\"></th></tr>" +
+                    "<tr ><th >备注<input type=\'text\' value=\'" + (data.vcomment) + "\' name='vcomment' placeholder='请输入要修改的内容' class=\"form-control\" id=\"recipient-name\"></th></tr>";
+                $("#div1").append(str);
+            }, "json")
+        }
+
+        function delt(id) {
+            if (confirm("确定删除吗？")) {
+                $.post("deltCar.html", "vehid=" + id, function (data) {
+                    alert(data);
+                    window.location.reload();
+                }, "text")
+            }
+        }
+
+        //分页显示
+        //var pageSize=$("tr[name='pageSize']").value();
+
+        function xiayiye() {
+            var pagecount = $("#pagecount").val()
+            var index = parseInt($("#pageindex").val())
+            if (index == pagecount) {
+                alert("这已经是最后一页了！")
+            } else {
+                $.get("fenye.html", {'index': index+1} ,function (data) {
+                    var tdStr = '';
+                    $("#th1").siblings().remove()
+                    $("#pageindex").val(data["index"])
+                    $.each(data["list"], function (index, value) {
+                        tdStr += "<tr >" +
+                            "<td>" + (value.vplate) + "</td>" +
+                            "<td >" + (value.vmodel) + "</td>" +
+                            "<td >" + (value.vnumber) + "</td>" +
+                            "<td >" + (value.vcomment) + "</td>" +
+                            "<td><input name='change' type='button' value='修改' onclick='xiugai(" + value.id + ")'  class='change' data-toggle='modal'" +
+                            "  data-target=\"#exampleModal2\" id=\"xiuagi\">&nbsp;&nbsp;&nbsp;" +
+                            "<input  type=\"button\" class=\"del\" value=\"删除\" onclick='delt(" + value.id + ")'></td></tr>";
+                    })
+                    $("#feny").append(tdStr);
+                }, "json")
+            }
+        };
+
+        function shangyiye() {
+            var index = parseInt($("#pageindex").val())
+            if (index == 1) {
+                alert("这已经是第一页了！")
+            } else {
+                $.get("fenye.html", {'index':index-1}, function (data) {
+                    $("#th1").siblings().remove()
+                    var tdStr = '';
+                    $("#pageindex").val(data["index"])
+                    $.each(data["list"], function (x, value) {
+                        tdStr += "<tr >" +
+                            "<td>" + (value.vplate) + "</td>" +
+                            "<td >" + (value.vmodel) + "</td>" +
+                            "<td >" + (value.vnumber) + "</td>" +
+                            "<td >" + (value.vcomment) + "</td>" +
+                            "<td><input name='change' type='button' value='修改' onclick='xiugai(" + value.id + ")'  class='change' data-toggle='modal'" +
+                            "  data-target=\"#exampleModal2\" id=\"xiuagi\">&nbsp;&nbsp;&nbsp;" +
+                            "<input  type=\"button\" class=\"del\" value=\"删除\" onclick='delt(" + value.id + ")'></td></tr>";
+                    })
+                    $("#feny").append(tdStr);
+                }, "json")
+            }
+
+
+        }
+
+    </script>
 
 
 </head>
@@ -39,37 +146,35 @@
                 <a class="nav-link" id="photos-tab" data-toggle="tab" href="#photos" role="tab" aria-controls="profile"
                    aria-selected="false">车辆信息管理</a>
             </li>
-
-
         </ul>
-
         <div class="tab-content p-t-30" id="myTabContent">
 
             <div class="tab-pane fade show active" id="timeline" role="tabpanel" aria-labelledby="timeline-tab">
                 <div class="timeline">
 
-                    <form action="" method="">
+                    <form action="disposeCar.html" method="post">
                         <div class="form-group">
-                            车辆编号：<input type="text" name="" value=""/><br/><br/>
-                            用车人：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="" value=""/>&nbsp;&nbsp;&nbsp;&nbsp;司机：<input
-                                type="text"
-                                name="" value=""/><br/><br/>
-                            随性人员：<input type="text" name="" value=""/>&nbsp;&nbsp;&nbsp;&nbsp;用车部门：<span
-                                name="">登录信息获取</span><br/><br/>
-                            时间：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" placeholder="开始时间">&nbsp;&nbsp;到&nbsp;&nbsp;<input
-                                type="date" placeholder="结束时间"> <br/><br/>
-                            目的地：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="" value=""/>&nbsp;&nbsp;&nbsp;&nbsp;申请里程：<input
-                                type="text"
-                                name="" value=""/><br/><br/>
-                            用车事由： <textarea name="" rows="3" cols="50"></textarea>
+                            车辆编号：<input type="text" name="vnumber" required="required" id="bh"/><br/><br/>
+                            用车人：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="vpeople" id="car"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                            司机：<input type="text" name="vdriver"/><br/><br/>
+                            随性人员：<input type="text" name="retinue"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                            用车部门：<span th:text="${dname}">登录信息获取</span><br/><br/>
+                            时间：<input type="date" placeholder="开始时间" name="startdate">&nbsp;&nbsp;到&nbsp;&nbsp;
+                            <input type="date" placeholder="结束时间" name="enddate"> <br/><br/>
+                            目的地：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="destination"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                            申请里程：<input type="text" name="mileage"/><br/><br/>
+                            用车事由： <textarea name="reason" rows="3" cols="50"></textarea>
                         </div>
                         <div class="form-group">
-                        </div>
-                        <div class="form-group">
-                            下一步审批人：<input type="text" name="" placeholder="请选择"/>
+                            下一步审批人：
+                            <select id="shenhe">
+                                <option>请选择</option>
+                                <option th:text="${majer}"></option>
+                            </select>
+                            <input type="hidden" name="checkId" id="checkid"/>
                             <br/>
                             <br/>
-                            <input type="submit" class="btn btn-primary" value="确定"/>
+                            <input type="submit" class="btn btn-primary" value="确定" id="subm"/>
                             <input type="reset" class="btn btn-primary" value="取消"/>
                         </div>
                     </form>
@@ -80,39 +185,77 @@
                 <div class="tab-pane fade show active" id="timeline" role="tabpanel" aria-labelledby="timeline-tab">
                     <div class="timeline">
                         <div class="card-body">
+
                             <div class="text-center">
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#exampleModal" data-whatever="" id="tianJa">添加
+                                </button>
 
                             </div>
+                            <!--添加调用的-->
                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                                  aria-labelledby="exampleModalLabel"
                                  aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="">会议室</h5>
+                                            <h5>车辆添加</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form>
+                                            <form action="guanLiCar.html" method="post">
                                                 <div class="form-group">
+                                                    <br/>
                                                     <label for="recipient-name" class="col-form-label">车牌号:</label>
-                                                    <input type="text" class="form-control" id="recipient-name">
+                                                    <input type="text" class="form-control" id="recipient-name"
+                                                           name="chePai">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="message-text" class="col-form-label">车型:</label>
-                                                    <textarea class="form-control" id="message-text"></textarea>
+                                                    <textarea class="form-control" id="message-text"
+                                                              name="cheXing"></textarea>
                                                 </div>
 
-                                        </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭
                                             </button>
                                             <button type="submit" class="btn btn-primary">提交</button>
-                                            </form>
                                         </div>
+                                            </form>
                                     </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--修改调用的-->
+                            <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5>车辆修改</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="changeVeh.html" method="post">
+                                                <div class="form-group" id="div1">
+                                                    <!--车辆修改-->
+
+                                                </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭
+                                            </button>
+                                            <button type="submit" class="btn btn-primary">提交</button>
+
+                                        </div>
+                                            </form>
+                                    </div>
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -120,48 +263,46 @@
                             <div class="form-group">
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table table-borderless">
-                                            <tr>
+                                        <table class="table table-borderless" id="feny">
+                                            <tr id="th1">
                                                 <th>车牌号</th>
                                                 <th>车型</th>
                                                 <th>编号</th>
                                                 <th>备注</th>
                                                 <th>操作</th>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    鲁A
-                                                </td>
-                                                <td>五菱宏光</td>
-                                                <td>001</td>
-                                                <td></td>
-                                                <td><a href="" class="btn btn-primary" data-toggle="modal"
-                                                       data-target="#exampleModal" data-whatever="修改">修改</a>&nbsp;&nbsp;&nbsp;<a
-                                                        href="">删除</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    鲁A
-                                                </td>
-                                                <td>迈巴赫</td>
-                                                <td>002</td>
-                                                <td></td>
-                                                <td><a href="" class="btn btn-primary" data-toggle="modal"
-                                                       data-target="#exampleModal" data-whatever="修改">修改</a>&nbsp;&nbsp;&nbsp;<a
-                                                        href="">删除</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    鲁A
-                                                </td>
-                                                <td>劳斯莱斯</td>
-                                                <td>003</td>
-                                                <td></td>
-                                                <td><a href="" class="btn btn-primary" data-toggle="modal"
-                                                       data-target="#exampleModal" data-whatever="修改">修改</a>&nbsp;&nbsp;&nbsp;<a
-                                                        href="">删除</a></td>
+                                            <tr th:each="veh:${vehicleList}" name="feny">
+                                                <td th:text="${veh.vplate}">车牌号</td>
+                                                <td th:text="${veh.vmodel}">车型</td>
+                                                <td th:text="${veh.vnumber}">编号</td>
+                                                <td th:text="${veh.vcomment}">备注</td>
+                                                <td><input name="change" type="button" value="修改" class="change"
+                                                           data-toggle="modal"
+                                                           data-target="#exampleModal2" id="xiuagi"
+                                                           th:onclick="'javascript:xiugai('+${veh.id}+')'">&nbsp;&nbsp;&nbsp;
+                                                    <input type="button" class="del" value="删除"
+                                                           th:onclick="'javascript:delt('+${veh.id}+')'"></td>
                                             </tr>
                                         </table>
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination justify-content-end">
+                                                <li class="page-item" id="erer">
+                                                    <a class="page-link" href="javascript:;"
+                                                       onclick="shangyiye()">上一页</a>
+                                                    <input type="hidden" id="pagecount" th:value="${pageSupport.getTotalPageCount()}">
+                                                    <input type="hidden" id="pageindex" value="1" >
+                                                </li>
+                                                <!--<li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+                                                <!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
+                                                <div id="div2"></div>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="javascript:;" onclick="xiayiye()">下一页</a>
+                                                    共<span th:text="${pageSupport.getTotalCount()}"></span>条数据
+                                                </li>
+                                            </ul>
+                                        </nav>
                                     </div>
                                 </div>
 
@@ -175,42 +316,23 @@
 
             </div>
 
-            <div class="tab-pane fade" id="followers" role="tabpanel" aria-labelledby="followers-tab">
-                <div class="tab-pane fade show active" id="timeline" role="tabpanel" aria-labelledby="timeline-tab">
-                    <div class="timeline">
-
-                        <form>
-                            <div class="form-group">
-                                <div class="card">
-                                    <div class="card-header d-flex align-items-center justify-content-between">添加会议室：
-                                        <button type="button" class="btn btn-secondary btn-floating">
-                                            <i class="ti-plus"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                    </div>
-                </div>
-
-            </div>
 
         </div>
 
     </div>
 </div>
 <!-- begin::datepicker -->
-<script src="assets/vendors/datepicker/daterangepicker.js"></script>
-<script src="assets/js/examples/datepicker.js"></script>
+<script th:src="@{vendors/datepicker/daterangepicker.js}"></script>
+<script th:src="@{js/examples/datepicker.js}"></script>
 <!-- end::datepicker -->
 
 <!-- begin::global scripts -->
-<script src="assets/vendors/bundle.js"></script>
+<script th:src="@{vendors/bundle.js}"></script>
 <!-- end::global scripts -->
 
 <!-- begin::custom scripts -->
-<script src="assets/js/custom.js"></script>
-<script src="assets/js/app.js"></script>
+<script th:src="@{js/custom.js}"></script>
+<script th:src="@{js/app.js}"></script>
 <!-- end::custom scripts -->
 
 

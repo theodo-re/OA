@@ -7,6 +7,7 @@
         <id property="id" column="d.id"></id>
         <result property="deptName" column="dName"></result>
         <association property="users" javaType="Users">
+            <id property="deptId" column="u.deptId"></id>
             <result property="realName" column="u1.realName"></result>
         </association>
         <association property="createdbyUsers" javaType="Users">
@@ -17,6 +18,12 @@
             <result property="organName" column="o.organName"></result>
         </association>
     </resultMap>
+    <select id="findAllByName" resultMap="DD" parameterType="String">
+        SELECT d.* FROM dept d
+        INNER JOIN users u
+        ON u.`deptId`=d.`id`
+        WHERE u.`realName`=#{realName}
+    </select>
     <select id="findDept" resultMap="DD">
         select id,dName from Dept
     </select>

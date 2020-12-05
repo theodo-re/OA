@@ -3,5 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bdqn.oaproject.dao.VehicleapplyDao">
-
+    <insert id="addVehapply" parameterType="Vehicleapply">
+        insert into Vehicleapply(vehicleId,vnumber,vpeople,vdriver,retinue,startdate,enddate,destination,mileage,reason,checkId,vdate)
+        values
+        (#{vehicleId},#{vnumber},#{vpeople},#{vdriver},#{retinue},#{startdate},#{enddate},#{destination},#{mileage},#{reason},#{checkId},#{vdate})
+    </insert>
 </mapper>

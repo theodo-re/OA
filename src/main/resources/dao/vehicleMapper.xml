@@ -3,5 +3,74 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bdqn.oaproject.dao.VehicleDao">
+    <select id="findAllVehicle" resultType="Vehicle">
+        SELECT v.`id`,v.`vplate`,v.`vmodel`,v.`vnumber`,v.`callId`,v.`vcomment`,
+        v.`createdby`,v.`createdtime`,v.`modifyby`,v.`modifytime` FROM Vehicle v
+        Limit #{pageIndex},#{pageSize}
+
+
+
+    </select>
+    <!--分页-->
+    <select id="findPage" resultType="int">
+        select count(1) from Vehicle
+    </select>
+    <!--添加车辆-->
+    <insert id="addVehicle" parameterType="Vehicle">
+        insert into Vehicle(vplate,vmodel,vnumber,callId,vcomment,
+            createdby,createdtime,modifyby,modifytime)values
+        (#{vplate},#{vmodel},#{vnumber},#{callId},#{vcomment},#{createdby},#{createdtime},#{modifyby},#{modifytime})
+    </insert>
+    <!--删除-->
+    <delete id="delVehicleById" parameterType="Integer">
+        delete from Vehicle where id=#{id}
+    </delete>
+    <select id="findById" resultType="Vehicle" parameterType="Integer">
+        select * from Vehicle
+        <where>
+            <if test="id!=null and id!=''">
+                id=#{id}
+            </if>
+        </where>
+    </select>
+    <!--修改-->
+    <update id="updateVehicle" parameterType="Vehicle">
+        update Vehicle
+        <set>
+            <if test="vplate!=null and vplate!=''">
+                vplate=#{vplate},
+            </if>
+            <if test="vmodel!=null and vmodel!=''">
+                vmodel=#{vmodel},
+            </if>
+            <if test="vnumber!=null and vnumber!=''">
+                vnumber=#{vnumber},
+            </if>
+            <if test="vcomment!=null and vcomment!=''">
+                vcomment=#{vcomment},
+            </if>
+            <if test="modifyby!=null ">
+                modifyby=#{modifyby},
+            </if>
+            <if test="modifytime!=null">
+                modifytime=#{modifytime}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    <select id="findByAjax" parameterType="Vehicle" resultType="Vehicle">
+        select * from Vehicle
+        <where>
+            <if test="vplate!=null and vplate!=''">
+                vplate=#{vplate},
+            </if>
+            <if test="vmodel!=null and vmodel!=''">
+                vmodel=#{vmodel},
+            </if>
+            <if test="vnumber!=null and vnumber!=''">
+                vnumber=#{vnumber}
+            </if>
+        </where>
+    </select>
 
 </mapper>

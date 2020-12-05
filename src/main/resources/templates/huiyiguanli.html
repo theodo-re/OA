@@ -11,7 +11,7 @@
 
     <!-- begin::global styles -->
     <link rel="stylesheet" th:href="@{vendors/bundle.css}" type="text/css">
-    <!-- end::global styles --
+    <!-- end::global styles -->
 
 
     <!-- begin::datepicker -->
@@ -24,7 +24,7 @@
     <script>
         $(function () {
             $("#xiuagi").click(function () {
-              $("#div2").show();
+                $("#div2").show();
             });
 
             $("#tianJa").click(function () {
@@ -32,9 +32,6 @@
             });
             //删除提示
             var radios = document.getElementsByName("metid");
-
-
-
             $(".del").click(function () {
                 //根据 name集合长度 遍历name集合
                 for(var i=0;i<radios.length;i++)
@@ -43,7 +40,7 @@
                     if(radios[i].checked)
                     {
                         //弹出选中单选按钮的值
-                       // alert(radios[i].value);
+                        // alert(radios[i].value);
                         $.post("deltHuiYi.html","metid="+radios[i].value,function (data) {
                             alert(data);
                             window.location.reload();
@@ -146,13 +143,13 @@
                         <form action="ydGuanLi.html" method="post">
                             <div class="form-group">
                                 <label for="exampleFormControlInput1">预定时间段：</label>
-                                <input type="date" placeholder="开始时间" name="ydTime">&nbsp; 提示：预定时间段必须为同一天&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="date" placeholder="开始时间" name="ydTime" required="required">&nbsp; 提示：预定时间段必须为同一天&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                             </div>
                             <div class="form-group">
 
-                                会议室预订人：<input type="text" name="ydpeople" placeholder="请输入"/>
-                                会议室名称：<input type="text" name="ydHuiyi" placeholder="请输入"/>
+                                会议室预订人：<input type="text" name="ydpeople" placeholder="请输入" required="required"/>
+                                会议室名称：<input type="text" name="ydHuiyi" placeholder="请输入" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 会议类型：
                                 &nbsp;&nbsp;&nbsp;&nbsp;
@@ -216,30 +213,30 @@
                     <div class="timeline">
 
 
-                            <div class="form-group">
-                                <div class="card">
-                                    <div class="card-header d-flex align-items-center justify-content-between">添加会议室：
-                                        <!--添加信息-->
-                                        <div class="card-body">
-                                            <div class="text-center">
-                                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                        data-target="#exampleModal" data-whatever="添加" id="tianJa">添加
-                                                </button>
-                                            </div>
-                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="">会议室</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <form action="/addHuiyi.html" method="post">
-                                                                <div class="form-group">
-                                                                    <div id="div2" style="display: none">
+                        <div class="form-group">
+                            <div class="card">
+                                <div class="card-header d-flex align-items-center justify-content-between">添加会议室：
+                                    <!--添加信息-->
+                                    <div class="card-body">
+                                        <div class="text-center">
+                                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#exampleModal" data-whatever="添加" id="tianJa">添加
+                                            </button>
+                                        </div>
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" >会议室</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="/addHuiyi.html" method="post">
+                                                            <div class="form-group">
+                                                                <div id="div2" style="display: none">
                                                                     <label for="recipient-name" class="col-form-label">（修改会议室选择：）</label>
                                                                     <br/>
                                                                     <tr th:each="met:${metList}">
@@ -247,68 +244,77 @@
                                                                         <td ><input type="radio" name="upMetid" th:value="${met.id}" ><br/></td>
 
                                                                     </tr>
-                                                                    </div>
-                                                                    <label for="recipient-name" class="col-form-label">会议室名称:</label>
-                                                                    <input type="text" class="form-control" id="recipient-name" name="meetingName">
-                                                                   <!-- <input type="hidden" name="" th:value="${}">-->
                                                                 </div>
-                                                                <div class="form-group">
-                                                                    <label for="message-text" class="col-form-label">会议室描述:</label>
-                                                                    <textarea class="form-control" id="message-text" name="meetingMdescribe"></textarea>
-                                                                </div>
+                                                                <label for="recipient-name" class="col-form-label">会议室名称:</label>
+                                                                <input type="text" class="form-control" id="recipient-name" name="meetingName">
+                                                                <!-- <input type="hidden" name="" th:value="${}">-->
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="message-text" class="col-form-label">会议室描述:</label>
+                                                                <textarea class="form-control" id="message-text" name="meetingMdescribe"></textarea>
+                                                            </div>
 
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭
-                                                            </button>
-                                                            <button type="submit" class="btn btn-primary" id="tijiao">提交</button>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭
+                                                        </button>
+                                                        <button type="submit" class="btn btn-primary" id="tijiao">提交</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--添加信息-->
+                                </div>
+                                <form action="" method="post">
+
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-borderless">
+                                                <tr>
+                                                    <th>选择</th>
+                                                    <th>会议室名称</th>
+                                                    <th>会议室描述</th>
+                                                    <th>操作</th>
+                                                </tr>
+
+                                                <tr th:each="met:${metList}">
+                                                    <td ><input type="radio" name="metid" th:value="${met.id}" id="me"></td>
+                                                    <td th:text="${met.mName}" >名称</td>
+                                                    <td th:text="${met.mdescribe}">名称 </td>
+                                                    <td><input   name="change" type="button" value="修改" class="btn btn-primary" data-toggle="modal"
+                                                                 data-target="#exampleModal" id="xiuagi"></input>&nbsp;&nbsp;&nbsp;<input   name="change" type="button" class="del" value="删除"></td>
+                                                </tr>
+                                            </table>
+                                            <nav aria-label="Page navigation example">
+                                                <ul class="pagination justify-content-end">
+                                                    <li class="page-item disabled">
+                                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">总页数</a>
+                                                    </li>
+                                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="#">下一页</a>
+                                                    </li>
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+
                         </form>
+
                     </div>
                 </div>
+
             </div>
+
         </div>
+
     </div>
-    <!--添加信息-->
-</div>
-<form action="" method="post">
-
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-borderless">
-                <tr>
-                    <th>选择</th>
-                    <th>会议室名称</th>
-                    <th>会议室描述</th>
-                    <th>操作</th>
-                </tr>
-
-                <tr th:each="met:${metList}">
-                    <td ><input type="radio" name="metid" th:value="${met.id}" id="me"></td>
-                    <td th:text="${met.mName}" >名称</td>
-                    <td th:text="${met.mdescribe}">名称 </td>
-                    <td><input   name="change" type="button" value="修改" class="btn btn-primary" data-toggle="modal"
-                                 data-target="#exampleModal" id="xiuagi"></input>&nbsp;&nbsp;&nbsp;<input   name="change" type="button" class="del" value="删除"></td>
-                </tr>
-
-
-
-
-            </table>
-        </div>
-    </div>
-    </div>
-    </div>
-
-</form>
-
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
 </div>
 <!-- end::main content -->
 
