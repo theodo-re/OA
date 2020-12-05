@@ -45,10 +45,16 @@ public class desktopController {
     @RequestMapping("/shouye.html")
     public String main1(Model m,HttpSession session){
         logger.info("我的桌面==============================");
-        List<Task> list = tser.findAll();
+        Users users= ((Users)session.getAttribute(Constants.USER_SESSION));
+        List<Task> list = null;
+        if(users.getProId()==5){
+            list = tser.findAll(null);
+        }else{
+            list = tser.findAll((int) users.getId());
+        }
         List<Affiche> affList = aser.findAll();
         List<Memo> memoList = memoService.findAll();
-        Authority authority = authorityService.findbyJSId((int) ((Users)session.getAttribute(Constants.USER_SESSION)).getProId());
+        Authority authority = authorityService.findbyJSId((int) users.getProId());
         m.addAttribute("list",list);
         m.addAttribute("affList",affList);
         m.addAttribute("memoList",memoList);
@@ -207,7 +213,8 @@ public class desktopController {
     @ResponseBody
     @RequestMapping("/renwufen")
     public PageSupport<Task> renwufen(@RequestParam(required = false) Integer pageIndex,
-                                      @RequestParam(required = false) Integer yeshu){
+                                      @RequestParam(required = false) Integer yeshu,
+                                      HttpSession session){
         logger.info("分页查询任务==============================");
         if(pageIndex!=null && pageIndex<=0){
             pageIndex=1;
@@ -215,12 +222,19 @@ public class desktopController {
         if (yeshu!=null && pageIndex>yeshu){
             pageIndex=yeshu;
         }
-        List<Task> tasksList = tser.findAllfen(pageIndex,Constants.pageSize);
         PageSupport<Task> list = new PageSupport<Task>();
-        list.setList(tasksList);
         list.setCurrentPageNo(pageIndex);
         list.setPageSize(Constants.pageSize);
-        list.setTotalCount(tser.findAll().size());
+        Users users= ((Users)session.getAttribute(Constants.USER_SESSION));
+        List<Task> tasksList = null;
+        if(users.getProId()==5){
+            tasksList = tser.findAllfen(pageIndex,Constants.pageSize, null);
+            list.setTotalCount(tser.findAll(null).size());
+        }else{
+            tasksList = tser.findAllfen(pageIndex,Constants.pageSize, (int) users.getId());
+            list.setTotalCount(tser.findAll((int) users.getId()).size());
+        }
+        list.setList(tasksList);
         return list;
     }
 

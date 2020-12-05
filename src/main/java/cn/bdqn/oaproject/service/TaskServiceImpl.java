@@ -18,8 +18,8 @@ public class TaskServiceImpl implements TaskService{
     private CheckDao cdao;
 
     @Override
-    public List<Task> findAll() {
-        return tdao.findAll();
+    public List<Task> findAll(Integer auditId) {
+        return tdao.findAll(auditId);
     }
 
     @Override
@@ -39,8 +39,8 @@ public class TaskServiceImpl implements TaskService{
     }
 
     @Override
-    public List<Task> findAllfen(Integer pageIndex, Integer pageSize) {
+    public List<Task> findAllfen(Integer pageIndex, Integer pageSize,Integer auditId) {
         pageIndex=(pageIndex-1)*pageSize;
-        return tdao.findAllfen(pageIndex,pageSize);
+        return tdao.findAllfen(pageIndex,pageSize,auditId);
     }
 }

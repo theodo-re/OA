@@ -10,7 +10,7 @@ public interface TaskDao {
     /**
      * 查询所有任务
      */
-    List<Task> findAll();
+    List<Task> findAll(@Param("auditId") Integer auditId);
     /**
      * 根据id查询任务
      */
@@ -22,7 +22,7 @@ public interface TaskDao {
     /**
      * 分页查询所有任务
      */
-    List<Task> findAllfen(@Param("pageIndex") Integer pageIndex,@Param("pageSize") Integer pageSize);
+    List<Task> findAllfen(@Param("pageIndex") Integer pageIndex,@Param("pageSize") Integer pageSize,@Param("auditId") Integer auditId);
     /**
     *添加任务
     */

@@ -19,10 +19,14 @@
             <result property="valueName" column="valueName"></result>
         </association>
     </resultMap>
-    <select id="findAll" resultMap="taskmap">
+    <select id="findAll" resultMap="taskmap" parameterType="int">
         SELECT t.`id`,t.`statusId`,t.`tName`,d.valueName FROM task t
         JOIN dictionary d ON t.`statusId`=d.`valueId`
-        WHERE typeCode='SHZT' limit 0,3
+        WHERE typeCode='SHZT'
+        <if test="auditId!=null and auditId>0">
+             and auditId=#{auditId}
+        </if>
+        limit 0,3
     </select>
     <select id="findById" resultMap="taskmap" parameterType="int">
         SELECT t.`id`,t.`tName`,d.valueName,(SELECT u.`realName` FROM users u WHERE u.`id`=t.`auditId`) Name,u.`realName`,t.`createdtime` FROM task t
@@ -48,7 +52,11 @@
     <select id="findAllfen" resultMap="taskmap">
         SELECT t.`id`,t.`statusId`,t.`tName`,d.valueName FROM task t
         JOIN dictionary d ON t.`statusId`=d.`valueId`
-        WHERE typeCode='SHZT' limit #{pageIndex},#{pageSize}
+        WHERE typeCode='SHZT'
+        <if test="auditId!=null and auditId>0">
+            and auditId=#{auditId}
+        </if>
+        limit #{pageIndex},#{pageSize}
     </select>
 
 </mapper>

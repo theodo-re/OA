@@ -11,7 +11,7 @@ public interface TaskService {
     /**
      * 查询所有任务
      */
-    List<Task> findAll();
+    List<Task> findAll(Integer auditId);
     /**
      * 根据id查询任务
      */
@@ -23,5 +23,5 @@ public interface TaskService {
     /**
      * 分页查询所有任务
      */
-    List<Task> findAllfen(Integer pageIndex,Integer pageSize);
+    List<Task> findAllfen(Integer pageIndex,Integer pageSize,Integer auditId);
 }
