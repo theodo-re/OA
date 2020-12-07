@@ -56,19 +56,17 @@ public class UsersServiceImpl implements UsersService{
 
         Integer num=-1;
         num=userdao.findDeptLead(deptId);
-        if(num==null){
-            user.setMajer(0);
-        }
-        if(num>0 && num!=null){
-            user.setMajer(num);
+        if(num!=null && num>0){
+            user.setMajer(new Long(num));
         }
 
         int rel1=userdao.addUsers(user);
 
         Log log=new Log();
-        Long id=((Users)session.getAttribute("session")).getId();
+        Users users = (Users)session.getAttribute(Constants.USER_SESSION);
+        Long id=users.getId();
         log.setUserId(id);
-        Long roleId=((Users)session.getAttribute("session")).getRoleId();
+        Long roleId=users.getRoleId();
         log.setRoleId(roleId);
         log.setIncident("添加了用户");
         log.setOpedate(new Date());
@@ -94,9 +92,10 @@ public class UsersServiceImpl implements UsersService{
     public int delUser(Integer id,HttpSession session) {
         int rel1=userdao.delUser(id);
         Log log=new Log();
-        Long userId=((Users)session.getAttribute(Constants.USER_SESSION)).getId();
+        Users users = (Users)session.getAttribute(Constants.USER_SESSION);
+        Long userId=users.getId();
         log.setUserId(userId);
-        Long roleId=((Users)session.getAttribute(Constants.USER_SESSION)).getRoleId();
+        Long roleId=users.getRoleId();
         log.setRoleId(roleId);
         log.setIncident("删除了用户");
         log.setOpedate(new Date());
@@ -120,9 +119,10 @@ public class UsersServiceImpl implements UsersService{
         int rel1=userdao.updateUsers(users);
 
         Log log=new Log();
-        Long id=((Users)session.getAttribute(Constants.USER_SESSION)).getId();
+        Users user = (Users)session.getAttribute(Constants.USER_SESSION);
+        Long id=user.getId();
         log.setUserId(id);
-        Long roleId=((Users)session.getAttribute(Constants.USER_SESSION)).getRoleId();
+        Long roleId=user.getRoleId();
         log.setRoleId(roleId);
         log.setIncident("修改了用户");
         log.setOpedate(new Date());

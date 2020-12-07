@@ -10,6 +10,7 @@
     <resultMap id="hu" type="Users">
         <id property="id" column="u.id"></id>
         <result property="userName" column="uName"></result>
+        <result property="passWord" column="uPassWord"></result>
         <association property="dictionary1" javaType="Dictionary">
             <id property="id" column="d1.valueId"/>
             <result property="valueName" column="rname"></result>
@@ -50,7 +51,7 @@
         </where>
     </select>
     <insert id="addUsers" parameterType="Users">
-        insert into users(uName,passWord,realName,organId,deptId,
+        insert into users(uName,uPassWord,realName,organId,deptId,
         sex,proId,roleId,status,createdtime,majer)
         values(#{userName},#{passWord},#{realName},#{organId},#{deptId},#{sex},#{proId},#{roleId},#{status},#{createdtime},#{majer})
     </insert>

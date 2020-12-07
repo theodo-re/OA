@@ -37,14 +37,15 @@ $(function () {
     $("#addbtn").click(function () {
         var a = $("#addfrom1").serialize();
         $.post("addmemo",a,function (data) {
-            alert(data)
+            alert(data);
+            window.location.reload();
         },"text")
-    })
+    });
     $(document).on("click","#bian3",function () {
         var a = $(this).val();
         $.post("delmemo","id="+a,function (data) {
-            alert(data)
+            alert(data);
             window.location.reload();
         },"text")
-    })
+    });
 });

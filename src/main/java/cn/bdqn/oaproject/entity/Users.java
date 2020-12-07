@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Users {
 
-  private long id;
+  private Long id;
   private String userName;
   private String uName;
   private String uPassWord;
@@ -131,11 +131,11 @@ public class Users {
     this.createdtime = createdtime;
   }
 
-  public long getMajer() {
+  public Long getMajer() {
     return majer;
   }
 
-  public void setMajer(long majer) {
+  public void setMajer(Long majer) {
     this.majer = majer;
   }
 

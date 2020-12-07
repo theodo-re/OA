@@ -69,7 +69,7 @@
       delete from affiche where id = #{id}
     </delete>
 
-    <select id="findaffAll" resultType="int">  <!-- 书写 SQL 语句 -->
+    <select id="findaffAll" resultType="Affiche">  <!-- 书写 SQL 语句 -->
         SELECT * FROM affiche where startdate &lt;= NOW() AND enddate &gt;= NOW()
     </select>
 
