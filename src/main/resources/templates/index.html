@@ -29,6 +29,9 @@
         }
     </style>
     <script>
+        $("#shouye").click(function () {
+            $("#pic").remove()
+        })
 
     </script>
 </head>
@@ -124,9 +127,10 @@
 <!-- 开始::内容区域 -->
 <main class="main-content">
         <h2>欢迎登陆</h2>
-        <!--<img th:src="@{/images/timg.jpg}">-->
+       <img th:src="@{/images/timg.jpg}" style="width: 1100px;height: 500px" id="pic">
     <div id="uiui">
-        <iframe src="" name="box" width="100%" height="1000px" frameborder="0" scrolling="no">
+        <iframe src="" name="box" width="100%" height="1000px" frameborder="0" scrolling="no" >
+
         </iframe>
     </div>
 

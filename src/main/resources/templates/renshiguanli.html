@@ -30,7 +30,7 @@
                     alert("结束时间不得小于开始时间！");
                     return false;
                 }else {
-                    var date = (new Date($("#qingjiaoenddate").val())-new Date($("#qingjiaostartdate").val()))/1000/3600/24;
+                    var date = ((new Date($("#qingjiaoenddate").val())-new Date($("#qingjiaostartdate").val()))/1000/3600/24)+1;
                     $("#qingjiaoleaveday").val(date);
                 }
             })
