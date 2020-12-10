@@ -1,5 +1,6 @@
 package cn.bdqn.oaproject.dao;
 
+import cn.bdqn.oaproject.entity.Dept;
 import cn.bdqn.oaproject.entity.Users;
 import org.apache.ibatis.annotations.Param;
 
@@ -63,4 +64,17 @@ public interface UsersDao {
      * 修改密码
      */
     int updatePwd(@Param("password") String password,@Param("id") Integer id);
+    /**
+     * 根据员工查找该员工所在机构Id
+     */
+    int findUsersOrganId(Integer id);
+    /**
+     * 根据部门id查找该部门下的员工
+     */
+    List<Users> findDeptLeadd(Long deptid);
+    /**
+     * 根据机构Id查找该部门员工
+     */
+    List<Users> findUserByOrganId(Integer organId);
+
 }

@@ -42,4 +42,12 @@
     <delete id="delDept" parameterType="Integer">
         delete from dept where id=#{id}
     </delete>
+    <select id="findDeptById" parameterType="Integer" resultMap="DD">
+    SELECT d.id,d.dName,d.organId,d.userId,d.telephone,d.phone,d.fax,d.createdby,
+  u1.realName,u2.realName,o.organName,o.id
+     FROM Dept d JOIN users u1 ON u1.id=d.userId
+     JOIN users u2 ON u2.id=d.createdby
+     JOIN `organization` o ON o.id=d.organId
+     where d.id=#{id}
+</select>
 </mapper>

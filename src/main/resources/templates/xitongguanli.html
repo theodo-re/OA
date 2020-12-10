@@ -64,10 +64,17 @@
                         <div class="card-body">
 
                             <div class="card-header d-flex align-items-center justify-content-between">组织结构管理
-                                <button type="button" class="btn btn-secondary btn-floating" data-toggle="modal"
-                                        data-target="#exampleModal6">
-                                    <i class="ti-plus"></i>
-                                </button>
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-outline-secondary btn-uppercase"
+                                            data-toggle="modal" data-target="#exampleModal6" id="jiguo">
+                                        <i class="ti-plus m-r-5"></i>添加机构
+                                    </button>
+                                    <button type="button" class="btn btn-outline-secondary btn-uppercase"
+                                            data-toggle="modal" id="bumen"
+                                            data-target="#exampleModal7">
+                                        <i class="ti-plus m-r-5"></i>添加部门
+                                    </button>
+                                </div>
                             </div>
                             <div class="modal fade" id="exampleModal6" tabindex="-1" role="dialog"
                                  aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -106,7 +113,80 @@
                             </div>
 
 
+                            <div class="modal fade" id="exampleModal7" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel3">添加部门</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method='post' action='/liusujun/addOrganization'>
+                                                <div class="form-group">
+                                                    <label for="bu" class="col-form-label">部门名称:</label>
+                                                    <input type="text" class="form-control"
+                                                           id="bu" name='organName'>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="jiguoId" class="col-form-label">选择机构:</label>
+                                                    <select class="form-control" id='jiguoId' a='organId'
+                                                            name="organId">
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="fuzeren" class="col-form-label">部门负责人：</label>
+                                                    <select class="form-control" id='fuzeren' a='userId'
+                                                            name="userId">
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="lianxidianhua" class="col-form-label">联系电话:</label>
+                                                    <input type="text" class="form-control"
+                                                           id="lianxidianhua" name='telephone'>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="yidongshouji" class="col-form-label">移动手机:</label>
+                                                    <input type="text" class="form-control"
+                                                           id="yidongshouji" name='phone'>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="chuanzhen" class="col-form-label">传真:</label>
+                                                    <input type="text" class="form-control"
+                                                           id="chuanzhen" name='fax'>
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">关闭
+                                                    </button>
+                                                    <button type="submit" class="btn btn-primary">提交</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <div class="accordion" id="accordionExample">
+
+                                <!--<div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                                aria-expanded="true" aria-controls="collapseOne">
+                                            Collapsible Group Item #1
+                                        </button>
+                                    </div>
+                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body">
+
+                                        </div>
+                                    </div>
+                                </div>-->
 
                                 <!--模态-->
                                 <div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog"
@@ -123,20 +203,21 @@
                                             <div class="modal-body">
                                                 <form method='post' action='/liusujun/updateDept'>
                                                     <div class="form-group">
-                                                        <input type="hidden" name="id">
+                                                        <input type="hidden" ab='id' name="id">
                                                         <label for="deptName" class="col-form-label">部门名称:</label>
-                                                        <input type="text" class="form-control"
+                                                        <input type="text" ab='deptname' class="form-control"
                                                                id="deptName" name='deptName'>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="createdbyName" class="col-form-label">所属机构:</label>
                                                         <input type="text" readonly class="form-control"
-                                                               id="createdbyName" name='organ'>
-                                                        <input type="hidden" name='organId'>
+                                                               id="createdbyName" ab='organ' name='organ'>
+                                                        <input type="hidden" ab='organid' name='organId'>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="deptfuzheren" class="col-form-label">部门负责人：</label>
-                                                        <select class="form-control" id='deptfuzheren' a='userId'
+                                                        <input type="hidden" ad='hiddenuserId'>
+                                                        <select class="form-control" ab='userid' id='deptfuzheren' a='userId'
                                                                 name="userId">
 
                                                         </select>
@@ -144,16 +225,16 @@
                                                     <div class="form-group">
                                                         <label for="telephone" class="col-form-label">联系电话:</label>
                                                         <input type="text" class="form-control"
-                                                               id="telephone" name='telephone'>
+                                                               id="telephone" ab='telephone' name='telephone'>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="phone" class="col-form-label">移动电话:</label>
-                                                        <input type="text" class="form-control"
+                                                        <input type="text" ab='phone' class="form-control"
                                                                id="phone" name='phone'>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="fax" class="col-form-label">传真:</label>
-                                                        <input type="text" class="form-control"
+                                                        <input type="text" ab='fax' class="form-control"
                                                                id="fax" name='fax'>
                                                     </div>
                                                     <div class="modal-footer">
@@ -240,6 +321,10 @@
                                                         name="deptId"></select>
                                             </div>
                                             <div class="form-group">
+                                                <label for="shoujihao" class="col-form-label">手机号:</label>
+                                                <input type="text" class="form-control" id="shoujihao" name="phone">
+                                            </div>
+                                            <div class="form-group">
                                                 <label for="sex" class="col-form-label">性别:</label>
                                                 <select id="sex" class="form-control" name="sex">
                                                     <option value="1">男</option>
@@ -323,6 +408,10 @@
                                                         <label for="did" class="col-form-label">所在部门:</label>
                                                         <select class="form-control" id="did" a='deptId' update='deptId'
                                                                 name="deptId"></select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="shoujihaoma" class="col-form-label">手机号:</label>
+                                                        <input type="text" class="form-control" id="shoujihaoma" name="phone">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="xingbie" class="col-form-label">性别:</label>

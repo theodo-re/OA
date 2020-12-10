@@ -5,6 +5,7 @@ import cn.bdqn.oaproject.dao.OrganizationDao;
 import cn.bdqn.oaproject.entity.Log;
 import cn.bdqn.oaproject.entity.Organization;
 import cn.bdqn.oaproject.entity.Users;
+import cn.bdqn.oaproject.util.Constants;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,15 +29,14 @@ public class OrganizationServiceImpl implements OrganizationService{
 
     @Override
     public int addOrganization(Organization organization, HttpSession session) {
-        Long createdByid=((Users)session.getAttribute("session")).getId();
+        Long createdByid=((Users)session.getAttribute(Constants.USER_SESSION)).getId();
         organization.setCreatedby(createdByid);
         organization.setCreatedtime(new Date());
         int rel1=organizationDao.addOrganization(organization);
-
         Log log=new Log();
-        Long id=((Users)session.getAttribute("session")).getId();
+        Long id=((Users)session.getAttribute(Constants.USER_SESSION)).getId();
         log.setUserId(id);
-        Long roleId=((Users)session.getAttribute("session")).getRoleId();
+        Long roleId=((Users)session.getAttribute(Constants.USER_SESSION)).getRoleId();
         log.setRoleId(roleId);
         log.setIncident("添加了机构");
         log.setOpedate(new Date());

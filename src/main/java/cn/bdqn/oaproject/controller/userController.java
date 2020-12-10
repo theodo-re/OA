@@ -151,11 +151,38 @@ public class userController {
         }
         return deptList;
     }
+
     @RequestMapping("/findUserList")
     @ResponseBody
     public List<Users> findUsersList(){
         List<Users> userList=userService.findUsersList();
         return userList;
+    }
+    @RequestMapping("/findUserOrganId")
+    @ResponseBody
+    public int findUserOrganId(Integer id){
+        int rel=userService.findUsersOrganId(id);
+        return rel;
+    }
+    @RequestMapping("finddepartmentHead")
+    @ResponseBody
+    public List<Users> finddepartmentHead(Integer deptId){
+        String num=deptId.toString();
+        Long deptid=Long.parseLong(num);
+        List<Users> userList=userService.findDeptLeadd(deptid);
+        return userList;
+    }
+    @RequestMapping("findUserByOrganId")
+    @ResponseBody
+    public List<Users> findUserByOrganId(Integer OrganId){
+        List<Users> userList=userService.findUserByOrganId(OrganId);
+        return userList;
+    }
+    @RequestMapping("/findDeptBydeptId")
+    @ResponseBody
+    public Dept findDeptbyId(Integer id){
+        Dept dept=deptService.findDeptById(id);
+        return dept;
     }
 
 }

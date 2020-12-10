@@ -52,10 +52,10 @@
     </select>
     <insert id="addUsers" parameterType="Users">
         insert into users(uName,uPassWord,realName,organId,deptId,
-        sex,proId,roleId,status,createdtime,majer)
-        values(#{userName},#{passWord},#{realName},#{organId},#{deptId},#{sex},#{proId},#{roleId},#{status},#{createdtime},#{majer})
+        sex,proId,roleId,status,createdtime,majer,phone)
+        values(#{userName},#{passWord},#{realName},#{organId},#{deptId},#{sex},#{proId},#{roleId},#{status},#{createdtime},#{majer},#{phone})
     </insert>
-   
+
     <select id="findUsersById" parameterType="Integer" resultType="Users">
         SELECT  * FROM users u
         where u.id=#{id}
@@ -65,7 +65,7 @@
     </delete>
     <update id="updateUsers" parameterType="Users">
         update users set uName=#{userName},realName=#{realName},organId=#{organId},
-        deptId=#{deptId},sex=#{sex},proId=#{proId},roleId=#{roleId},status=#{status}
+        deptId=#{deptId},sex=#{sex},proId=#{proId},roleId=#{roleId},status=#{status},phone=#{phone}
         where id=#{id}
     </update>
     <select id="findUsersList" resultType="Users">
@@ -92,4 +92,15 @@
     <update id="updatePwd">
         UPDATE users SET uPassWord=#{password} WHERE id=#{id};
     </update>
+    <select id="findUsersOrganId" resultType="Integer" parameterType="Integer">
+        select organId from Users where id=#{id}
+    </select>
+    <select id="findDeptLeadd" resultType="Users" parameterType="Long">
+        SELECT u.id FROM users u JOIN dept d ON u.deptId=d.id
+        WHERE d.id=#{id}
+    </select>
+    <select id="findUserByOrganId" parameterType="Integer" resultType="Users">
+        select * from Users where organId=#{organId}
+    </select>
+
 </mapper>

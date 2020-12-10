@@ -24,6 +24,9 @@ public interface DeptDao {
     int delDept(Integer id);
     //根据用户名查出所在部门
     Dept findAllByName(@Param("realName") String realName);
-
+    /**
+     * 根据id查询部门信息
+     */
+    Dept findDeptById(Integer id);
 
 }

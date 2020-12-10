@@ -1,7 +1,9 @@
 package cn.bdqn.oaproject.service;
 
+import cn.bdqn.oaproject.dao.DeptDao;
 import cn.bdqn.oaproject.dao.LogDao;
 import cn.bdqn.oaproject.dao.UsersDao;
+import cn.bdqn.oaproject.entity.Dept;
 import cn.bdqn.oaproject.entity.Log;
 import cn.bdqn.oaproject.entity.Users;
 import cn.bdqn.oaproject.util.Constants;
@@ -173,5 +175,19 @@ public class UsersServiceImpl implements UsersService{
     @Override
     public int updatePwd(String password, Integer id) {
         return userdao.updatePwd(password,id);
+    }
+    @Override
+    public int findUsersOrganId(Integer id) {
+        return userdao.findUsersOrganId(id);
+    }
+
+    @Override
+    public List<Users> findDeptLeadd(Long deptid) {
+        return userdao.findDeptLeadd(deptid);
+    }
+
+    @Override
+    public List<Users> findUserByOrganId(Integer organId) {
+        return userdao.findUserByOrganId(organId);
     }
 }

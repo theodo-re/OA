@@ -1,5 +1,6 @@
 package cn.bdqn.oaproject.service;
 
+import cn.bdqn.oaproject.entity.Dept;
 import cn.bdqn.oaproject.entity.Users;
 import org.apache.ibatis.annotations.Param;
 
@@ -62,4 +63,17 @@ public interface UsersService {
      * 修改密码
      */
     int updatePwd(String password,Integer id);
+    /**
+     * 根据机构id查找该机构下的员工
+     */
+    int findUsersOrganId(Integer id);
+    /**
+     * 根据部门id查找该部门下的员工
+     */
+    List<Users> findDeptLeadd(Long deptid);
+    /**
+     * 根据机构Id查找该部门员工
+     */
+    List<Users> findUserByOrganId(Integer organId);
+
 }

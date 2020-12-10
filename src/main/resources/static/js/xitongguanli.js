@@ -37,7 +37,7 @@ function userList(pageIndex){
         $("#Userth").after(stu);
     },"json")
     Organization();
-    Dept();
+    /* Dept();*/
     Role();
     Pro();
 }
@@ -94,6 +94,7 @@ function roleList(pageIndex){
         $("#roleth").after(stu);
     },"json")
 }
+//角色列表上一页
 function rolePrev() {
     var pageIndex=$("#rolePageIndex").val()
     var j=parseInt(pageIndex)
@@ -116,13 +117,12 @@ function roleNext() {
     }
 
 }
-//加载日志列表
 function logList(pageIndex){
 
     $("[a='logth']").remove();
     $("[bb='logli']").html("");
     $.post("../liusujun/logList",{'realName':$("#yonghuname").val(),
-        'pageIndex':pageIndex,'startDate':$("#startDate").val(),'endDate':$("#endDate").val()},function(data){
+        'logPageIndex':pageIndex,'startDate':$("#startDate").val(),'endDate':$("#endDate").val()},function(data){
         $("#yonghuname").val(data.logName)
         var stu='';
         var stu2='';
@@ -168,10 +168,6 @@ function logNext() {
     }
 
 }
-//提交按钮在表单外提交
-function tijiao(){
-    document.getElementById("updateUserForm").submit();//js原生方式表单提交
-}
 //加载机构列表
 function Organization(){
     $("[a='organ']").remove();
@@ -184,7 +180,7 @@ function Organization(){
     },"json")
 }
 //加载部门下拉列表
-function Dept(){
+/*function Dept(){
     $("[a='dept']").remove();
     $.post("../liusujun/findDept",function(data){
         var stu='';
@@ -193,7 +189,7 @@ function Dept(){
         })
         $("[a='deptId']").append(stu)
     },"json")
-}
+}*/
 
 //加载角色下拉列表
 function Role(){
@@ -218,7 +214,7 @@ function Pro(){
     },"json")
 }
 //加载负责人下拉列表
-function Users(){
+/*function Users(){
     $("[a='userId']").html("");
     $.post("../liusujun/findUserList",function(data){
         var stu='';
@@ -228,13 +224,14 @@ function Users(){
         $("[a='userId']").append(stu)
     },"json")
 
-}
+}*/
 //加载机构(风琴)
 function Organ(){
+    $("[a='card']").remove();
     $.post("../liusujun/findOrganization",function(data){
         var stu=""
         $.each(data,function(x,y){
-            stu+="<div class=\"card\">\n" +
+            stu+="<div a='card' class=\"card\">\n" +
                 "                                    <div class=\"card-header\" value='"+y.id+"' id=\"heading"+(x+1)+"\">\n" +
                 "                                        <button class=\"btn btn-link\" cc='organid' type=\"button\" data-toggle=\"collapse\" data-target=\"#collapse"+(x+1)+"\"\n" +
                 "                                                aria-expanded=\"true\" value='"+y.id+"' aria-controls=\"collapseOne\">\n" +
@@ -250,16 +247,235 @@ function Organ(){
         })
         $("#accordionExample").append(stu)
     },"json")
-    Users();
+    /* Users();*/
 
 
 }
+//添加用户
+function addUsers(){
+    $("#exampleModal1").modal("hide");
+    var from=document.querySelector("#addUsers");
+    var fromdata=new FormData(from);
+    $.ajax({
+        url: '../liusujun/addusers',
+        dataType: 'json',
+        async: true,
+        data: fromdata,
+        processData: false,// 不加会报错
+        contentType: false,//避免对发送到服务器上数据类型重复操作
+        type: 'POST',
+        success: function (data) {
+            if(data>0){
+                alert("添加成功！")
+                userList();
+                logList();
+            }else{
+                alert("添加失败！")
+            }
+
+        },
+        error: function () {
+            alert("请求出错！")
+        }
+    })
+
+}
+//修改用户
+function updateUsers(){
+    $("#exampleModal3").modal("hide");
+    var from=document.querySelector("#updateUserForm");
+    var fromdata=new FormData(from);
+    $.ajax({
+        url: '../liusujun/updateUsers',
+        dataType: 'json',
+        async: true,
+        data: fromdata,
+        processData: false,// 不加会报错
+        contentType: false,//避免对发送到服务器上数据类型重复操作
+        type: 'POST',
+        success: function (data) {
+            if(data>0){
+                alert("修改成功！")
+                userList();
+                logList();
+            }else{
+                alert("添加失败！")
+            }
+
+        },
+        error: function () {
+            alert("请求出错！")
+        }
+    })
+
+    /*document.getElementById("updateUserForm").submit();*///js原生方式表单提交
+
+}
+//添加角色
+function addRole(){
+    $("#exampleModal2").modal("hide");
+    $.ajax({
+        url: '../liusujun/addRole',
+        dataType: 'json',
+        data: {valueId:$("#valueId").val(),valueName:$("#valueName").val()},
+        type: 'POST',
+        success: function (data) {
+            if(data>0){
+                alert("添加成功！")
+                roleList();
+                logList();
+            }else{
+                alert("添加失败！")
+            }
+
+        },
+        error: function () {
+            alert("请求出错！")
+        }
+    })
+
+}
+//修改角色
+function updateRole(){
+    $("#exampleModal4").modal("hide");
+    $.ajax({
+        url: '../liusujun/updateRole',
+        dataType: 'json',
+        data: {'valueId':$("#bainhao").val(),'valueName':$("#roleName").val()},
+        type: 'POST',
+        success: function (data) {
+            if(data>0){
+                alert("修改成功！")
+                roleList();
+                logList();
+            }else{
+                alert("修改失败！")
+            }
+
+        },
+        error: function () {
+            alert("请求出错！")
+        }
+    })
+
+}
+//添加机构
+function addOrgan(){
+    $("#exampleModal6").modal("hide");
+    $.ajax({
+        url: '../liusujun/addOrganization',
+        dataType: 'json',
+        data: {organName:$("#organName").val(),shortName:$("#shortName").val()},
+        type: 'POST',
+        success: function (data) {
+            if(data>0){
+                alert("添加成功！")
+                Organ();
+                logList();
+            }else{
+                alert("添加失败！")
+            }
+
+        },
+        error: function () {
+            alert("请求出错！")
+        }
+    })
+
+}
+//修改部门
+function updateDept(){
+    $("#exampleModal5").modal("hide");
+    var from=document.querySelector("#updateDeptFrom");
+    var fromdata=new FormData(from);
+    $.ajax({
+        url: '../liusujun/updateDept',
+        dataType: 'json',
+        async: true,
+        data: fromdata,
+        processData: false,// 不加会报错
+        contentType: false,//避免对发送到服务器上数据类型重复操作
+        type: 'POST',
+        success: function (data) {
+            if(data>0){
+                alert("修改成功！")
+                userList();
+                logList();
+            }else{
+                alert("添加失败！")
+            }
+
+        },
+        error: function () {
+            alert("请求出错！")
+        }
+    })
+
+}
+//添加部门
+function addDept(){
+    $("#exampleModal7").modal("hide");
+    var from=document.querySelector("#addDeptFrom");
+    var fromdata=new FormData(from);
+    $.ajax({
+        url: '../liusujun/adddept',
+        dataType: 'json',
+        async: true,
+        data: fromdata,
+        processData: false,// 不加会报错
+        contentType: false,//避免对发送到服务器上数据类型重复操作
+        type: 'POST',
+        success: function (data) {
+            if(data>0){
+                alert("修改成功！")
+                Organ();
+                logList();
+            }else{
+                alert("添加失败！")
+            }
+
+        },
+        error: function () {
+            alert("请求出错！")
+        }
+    })
+
+
+}
+
+
 $(function(){
     Organ();
     userList();
     roleList();
     logList();
 
+    //加载机构下的所有职工
+    $("#jiguoId").click(function(){
+        $("[a='userId']").html("");
+        $.post("../liusujun/findUserByOrganId",{'OrganId':$("#jiguoId").val()},function(d){
+            var stu='';
+            $.each(d,function(x,y){
+                stu+="<option  value='"+y.id+"' >"+y.realName+"</option>"
+            })
+            $("[a='userId']").append(stu)
+        },"json")
+    })
+    //点击修改部门模态框
+    $(document).on('click','[bb=\'exampleModal5\']',function(){
+        $.post("../liusujun/findDeptBydeptId",{'id':$(this).val()},function(data){
+            $("[ab='id']").val(data.id)
+            $("[ab='deptname']").val(data.deptName);
+            $("[ab='organ']").val(data.organization.organName);
+            $("[ab='organid']").val(data.organId)
+            $("[ad='hiddenuserId']").val(data.userId)
+            $("[ab='userid']").val(data.userId)
+            $("[ab='telephone']").val(data.telephone)
+            $("[ab='phone']").val(data.phone)
+            $("[ab='fax']").val(data.fax)
+        },"json")
+    })
+    //点击机构加载下属部门
     $("[a='organId']").click(function(){
         $("[a='dept']").remove();
         $.post("../liusujun/findDeptById",{'id':$(this).val()},function (data) {
@@ -272,6 +488,16 @@ $(function(){
     })
     //加载机构下的部门
     $(document).on('click','[cc=\'organid\']',function(){
+
+        $("[a='userId']").html("");
+        $.post("../liusujun/findUserByOrganId",{'OrganId':$(this).val()},function(d){
+            var stu='';
+            $.each(d,function(x,y){
+                stu+="<option  value='"+y.id+"' >"+y.realName+"</option>"
+            })
+            $("[a='userId']").append(stu)
+        },"json")
+
         var stu="";
         $("[a='deptTable']").remove();
         $.post("../liusujun/findDeptById",{'id':$(this).val()},function(data){
@@ -282,14 +508,13 @@ $(function(){
                 "                                    <th>联系电话</th>\n" +
                 "                                    <th>操作</th>\n" +
                 "                                </tr>\n"
-
             $.each(data,function(x,y){
                 stu+=" <tr a='roleTr'>\n" +
                     "                                    <td>"+(x+1)+"</td>\n" +
                     "                                    <td>"+y.deptName+"</td>\n" +
                     "                                    <td>"+y.telephone+"</td>\n" +
                     "                                    <td>\n" +
-                    "                                        <button type=\"button\" class=\"btn btn-success btn-floating\" data-toggle=\"modal\"\n" +
+                    "                                        <button type=\"button\" bb='exampleModal5'  value='"+y.id+"' class=\"btn btn-success btn-floating\" data-toggle=\"modal\"\n" +
                     "                                                data-target=\"#exampleModal5\" >\n" +
                     "                                            <i class=\"ti-check-box\"></i>\n" +
                     "                                        </button>\n" +
@@ -299,14 +524,14 @@ $(function(){
                     "                                        </button>\n" +
                     "                                    </td>\n" +
                     "                                </tr>"
-                $("[name='id']").val(y.id)
-                $("[name='deptName']").val(y.deptName);
-                $("[ name='organ']").val(y.organization.organName);
-                $("[name='organId']").val(y.organId)
-                $("[name='userId']").val(y.userId)
-                $("[name='telephone']").val(y.telephone)
-                $("[name='phone']").val(y.phone)
-                $("[name='fax']").val(y.fax)
+                /* $("[name='id']").val(y.id)
+                 $("[name='deptName']").val(y.deptName);
+                 $("[name='organ']").val(y.organization.organName);
+                 $("[name='organId']").val(y.organId)
+                 $("[name='userId']").val(y.userId)
+                 $("[name='telephone']").val(y.telephone)
+                 $("[name='phone']").val(y.phone)
+                 $("[name='fax']").val(y.fax)*/
             })
             stu+="</table>"
             $("[cc='deName']").append(stu)
@@ -321,26 +546,18 @@ $(function(){
     $("#logButton").click(function(){
         logList();
     })
-    //添加用户时验证两次密码输入一致
-    $("#passWord").blur(function(){
-        $.post("../liusujun/validatePassword ",{'password':$("#passWord").val(),'password1':$("#passWord1").val()},function(data){
-            if(data!=1){
-                alert("两次输入的密码不同，请重新输入！")
-            }
-        },"json")
-    })
     //修改用户
     $(document).on('click','[cc=\'updateuser\']',function(){
         $("[a='dept']").remove();
-        $.post("../liusujun/findDeptById",{'id':$(this).val()},function (data) {
-            var stu='';
-            $.each(data,function(x,y){
-                stu+="<option a='dept' value="+y.id+" >"+y.deptName+"</option>"
-            })
-            $("[a='deptId']").append(stu)
-        },"json")
-
-
+        $.post("../liusujun/findUserOrganId",{'id':$(this).val()},function(data){
+            $.post("../liusujun/findDeptById",{'id':data},function (da) {
+                var stu='';
+                $.each(da,function(x,y){
+                    stu+="<option a='dept'  value="+y.id+" >"+y.deptName+"</option>"
+                })
+                $("[a='deptId']").append(stu)
+            },"json")
+        })
         $.post("../liusujun/findUsersByid",{'id':$(this).val()},function(data){
             $("[update='id']").val(data.id);
             $("[update='userName']").val(data.uName);
@@ -380,7 +597,7 @@ $(function(){
             $.post("../liusujun/delRoleById",{'valueId':$(this).val()},function(data){
                 if(data>0){
                     alert("删除成功！")
-                    userList();
+                    roleList();
                 }else{
                     alert("删除失败！")
                 }
@@ -401,6 +618,36 @@ $(function(){
             })
         }
     })
+    //前端验证
+    //添加用户验证
+    //添加用户时验证两次密码输入一致
+    $("#passWord").blur(function(){
+        $.post("../liusujun/validatePassword ",{'password':$("#passWord").val(),'password1':$("#passWord1").val()},function(data){
+            if(data!=1){
+                alert("两次输入的密码不同，请重新输入！")
+            }
+        },"json")
+    })
+    //用户名不能为空
+
+    $("#passWord1").click(function(){
+        if($("#userName").val()==""){
+            alert("用户名不能为空！")
+        }
+
+    })
+    $("#passWord").blur(function(){
+        if($("#passWord1").val()==""){
+            alert("密码不能为空！")
+        }else{
+            if($("#passWord").val().length<6){
+                alert("密码不能小于6位")
+            }
+        }
+    })
+
+
+
 
 
 

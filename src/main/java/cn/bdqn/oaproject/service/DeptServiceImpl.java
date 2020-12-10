@@ -5,6 +5,7 @@ import cn.bdqn.oaproject.dao.LogDao;
 import cn.bdqn.oaproject.entity.Dept;
 import cn.bdqn.oaproject.entity.Log;
 import cn.bdqn.oaproject.entity.Users;
+import cn.bdqn.oaproject.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -36,14 +37,15 @@ public class DeptServiceImpl implements DeptService{
 
     @Override
     public int updateDept(Dept dept, HttpSession session) {
-        Long modifyById=((Users)session.getAttribute("session")).getId();
+        Users users = (Users)session.getAttribute(Constants.USER_SESSION);
+        Long modifyById=users.getId();
         dept.setModifyby(modifyById);
         dept.setModifytime(new Date());
         int rel1=deptDao.updateDept(dept);
         Log log=new Log();
-        Long id=((Users)session.getAttribute("session")).getId();
+        Long id=users.getId();
         log.setUserId(id);
-        Long roleId=((Users)session.getAttribute("session")).getRoleId();
+        Long roleId=users.getRoleId();
         log.setRoleId(roleId);
         log.setIncident("修改了部门");
         log.setOpedate(new Date());
@@ -65,13 +67,12 @@ public class DeptServiceImpl implements DeptService{
 
     @Override
     public int delDept(Integer id,HttpSession session) {
-
-
         int rel1=deptDao.delDept(id);
         Log log=new Log();
-        Long userId=((Users)session.getAttribute("session")).getId();
+        Users users = (Users)session.getAttribute(Constants.USER_SESSION);
+        Long userId=users.getId();
         log.setUserId(userId);
-        Long roleId=((Users)session.getAttribute("session")).getRoleId();
+        Long roleId=users.getRoleId();
         log.setRoleId(roleId);
         log.setIncident("删除了部门");
         log.setOpedate(new Date());
@@ -92,6 +93,11 @@ public class DeptServiceImpl implements DeptService{
     @Override
     public Dept findAllByName(String realName) {
         return deptDao.findAllByName(realName);
+    }
+
+    @Override
+    public Dept findDeptById(Integer id) {
+        return deptDao.findDeptById(id);
     }
 
 

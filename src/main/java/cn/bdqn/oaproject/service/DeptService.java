@@ -24,4 +24,8 @@ public interface DeptService {
     int delDept(Integer id,HttpSession session);
 
     Dept findAllByName(String realName);
+    /**
+     * 根据id查询部门信息
+     */
+    Dept findDeptById(Integer id);
 }
