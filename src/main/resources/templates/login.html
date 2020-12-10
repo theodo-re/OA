@@ -41,6 +41,16 @@
                     alert(data);
                 });
             });
+            $("#btn1").click(function () {
+                var strat = $("input[name='customCheck']").prop('checked');
+                var num = $("input[name='customCheck']").val();
+                if (strat){
+                    num=1;
+                }
+                $.post("remember","num="+num,function (data) {
+
+                },"text");
+            });
         });
     </script>
 
@@ -87,16 +97,12 @@
                         <form action="login.html" method="post">
                             <div class="form-group mb-4">
                                 <input type="text" name="uName" class="form-control form-control-lg" id="exampleInputEmail1" autofocus
-                                       placeholder="用户名或者邮箱" value="ZS">
+                                       placeholder="用户名或者邮箱" th:value="${name}">
                                 <span style="color: red" th:text="${error}"></span>
                             </div>
                             <div class="form-group mb-4">
-                                <!--<input th:if="${ji}!=1" type="password" name="password" class="form-control form-control-lg" id="exampleInputPassword1"
-                                       placeholder="密码">
-                                <input th:if="${ji}==1" type="password" name="password" class="form-control form-control-lg" id="exampleInputPassword1"
-                                       placeholder="密码" value="123456">-->
                                 <input type="password" name="password" class="form-control form-control-lg" id="exampleInputPassword1"
-                                       placeholder="密码" value="123456">
+                                       placeholder="密码" th:value="${password}">
                                 <span style="color: red" th:text="${error1}"></span>
                             </div>
                             <div class="form-group mb-4">
@@ -105,12 +111,17 @@
                                 <img src="createImg" style="cursor: pointer;"
                                      onclick="changeValidateCode(this)" title="点击图片刷新验证码" />
                             </div>
-                            <button class="btn btn-primary btn-lg btn-block btn-uppercase mb-4">登录</button>
+                            <button class="btn btn-primary btn-lg btn-block btn-uppercase mb-4" id="btn1">登录</button>
                             <div class="d-flex justify-content-between align-items-center mb-4">
-                                <div class="custom-control custom-checkbox">
-                                    <input  type="checkbox" class="custom-control-input" id="customCheck" name="jizhu" value="1">
+                                <div th:if="${num}==1" class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" name="customCheck" id="customCheck" value="0" checked>
                                     <label class="custom-control-label" for="customCheck">记住密码</label>
                                 </div>
+                                <div th:if="${num}!=1" class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" name="customCheck" id="customCheck1" value="0">
+                                    <label class="custom-control-label" for="customCheck1">记住密码</label>
+                                </div>
+
                                 <a href="forget" class="auth-link text-black">忘记密码?</a>
                             </div>
                         </form>

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -37,15 +38,40 @@ public class LogController {
      * 转登录页面
      */
     @RequestMapping(value = "/login.html",method = RequestMethod.GET)
-    public String login(){
+    public String login(HttpServletRequest request,Model model){
         logger.info("转登录页面==============================");
+        Cookie[] cookies = request.getCookies();
+        String name="";
+        String password="";
+        String num="";
+        if(cookies!=null && cookies.length>0){
+            for(int i=0;i<cookies.length;i++){
+                if(cookies[i].getName().equals("num")){
+                    num=cookies[i].getValue();
+                }
+            }
+            for(int i=0;i<cookies.length;i++){
+            if(cookies[i].getName().equals("uName")){
+                name=cookies[i].getValue();
+            }
+            if(num!=null && !"".equals(num)){
+                if(cookies[i].getName().equals("password")){
+                    password=cookies[i].getValue();
+                }
+            }
+            }
+        }
+        model.addAttribute("name",name);
+        model.addAttribute("password",password);
+        model.addAttribute("num",num);
         return "login";
     }
     /**
      * 登录
      */
     @RequestMapping(value = "/login.html",method = RequestMethod.POST)
-    public String login(String uName, String password, Model m,HttpSession session,String jizhu,String random){
+    public String login(String uName, String password, Model m,HttpSession session,
+                        String random,HttpServletResponse response){
         logger.info("登录页面==============================");
         Object[] obj = user.findCByName(uName,password);
         if((int)obj[0]==-1){
@@ -58,7 +84,12 @@ public class LogController {
             if(random!=null && !"".equals(random)){
                 if(yan.equalsIgnoreCase(random)){
                     session.setAttribute(Constants.USER_SESSION,(Users)obj[1]);
-                    session.setAttribute(Constants.JI,jizhu);
+                    Cookie cookie = new Cookie("uName",uName);
+                    Cookie cookie1 = new Cookie("password",password);
+                    cookie.setMaxAge(60);
+                    cookie1.setMaxAge(60);
+                    response.addCookie(cookie);
+                    response.addCookie(cookie1);
                     return "redirect:index1";
                 }else{
                     m.addAttribute("error2","验证码错误！");
@@ -69,6 +100,24 @@ public class LogController {
                 return "login";
             }
         }
+    }
+
+    /**
+     * 记住密码
+     */
+    @RequestMapping("/remember")
+    @ResponseBody
+    public String remember(String num,HttpServletResponse response){
+        if(Integer.parseInt(num)==1){
+            Cookie cookie = new Cookie("num",num);
+            cookie.setMaxAge(60);
+            response.addCookie(cookie);
+        }else {
+            Cookie cookie= new Cookie("num", null);
+            cookie.setMaxAge(0);
+            response.addCookie(cookie);
+        }
+        return "";
     }
 
     /**
@@ -101,13 +150,13 @@ public class LogController {
         logger.info("异步手机验证==============================");
         Users users = user.findPhone(phone);
         if(users!=null){
-            /*code = RandomStringUtils.randomNumeric(6);
+            code = RandomStringUtils.randomNumeric(6);
             SendSmsResponse sendSms =Sms.sendSms(phone,code);//填写你需要测试的手机号码
             System.out.println("短信接口返回的数据----------------");
             System.out.println("Code=" + sendSms.getCode());
             System.out.println("Message=" + sendSms.getMessage());
             System.out.println("RequestId=" + sendSms.getRequestId());
-            System.out.println("BizId=" + sendSms.getBizId());*/
+            System.out.println("BizId=" + sendSms.getBizId());
             return "验证码已发送！";
         }else {
             return "手机号码不正确！";
@@ -125,13 +174,7 @@ public class LogController {
     public String logout(HttpSession session,Model m){
         logger.info("注销==============================");
         session.removeAttribute(Constants.USER_SESSION);
-
-        if(session.getAttribute(Constants.JI)==null){
-            return "login";
-        }
-        Integer rel = Integer.parseInt(session.getAttribute(Constants.JI).toString()) ;
-        m.addAttribute("ji",rel);
-        return "login";
+        return "redirect:login.html";
     }
     /**
      * 图片验证码测试类
