@@ -8,4 +8,16 @@
         values
         (#{vehicleId},#{vnumber},#{vpeople},#{vdriver},#{retinue},#{startdate},#{enddate},#{destination},#{mileage},#{reason},#{checkId},#{vdate})
     </insert>
+   <!-- /*开始时间                    #结束时间                    #开始时间*/-->
+    <select id="findBehByidTime" parameterType="Vehicleapply" resultType="Vehicleapply">
+
+        SELECT * FROM vehicleapply   WHERE
+        vehicleId=#{id}
+        AND(
+        (startdate>=#{startdate} AND  #{enddate}>=enddate)
+        OR
+        (#{startdate}>=startdate AND enddate>=#{startdate})
+        OR
+        (#{enddate}>=startdate AND  enddate>=#{enddate}))
+    </select>
 </mapper>

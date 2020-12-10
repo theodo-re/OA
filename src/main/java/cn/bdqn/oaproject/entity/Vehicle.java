@@ -1,6 +1,8 @@
 package cn.bdqn.oaproject.entity;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Vehicle {
@@ -12,8 +14,10 @@ public class Vehicle {
   private long callId;
   private String vcomment;
   private long createdby;
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date createdtime;
   private long modifyby;
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date modifytime;
 
 

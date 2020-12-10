@@ -64,5 +64,22 @@ public class MeetingServiceImpl implements MeetingService{
         return rel;
     }
 
+    @Override
+    public Meeting findMetById(Integer id) {
+        Meeting meeting=meetingDao.findMetById(id);
+        return meeting;
+    }
+
+    @Override
+    public int findAllPage() {
+
+        return meetingDao.findAllPage();
+    }
+
+    @Override
+    public List<Meeting> findAllMet(Integer index, Integer pageSize) {
+        return meetingDao.findAllMet(index,pageSize);
+    }
+
 
 }

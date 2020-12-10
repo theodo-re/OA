@@ -20,4 +20,12 @@ public interface VehicleDao {
     int updateVehicle(Vehicle vehicle);
     //异步判断是否存在
     Vehicle findByAjax(Vehicle vehicle);
+    ////通过车辆名称获得id
+    int findIdByVmodel(@Param("vmodel")String vmodel);
+    //通过车名查找车辆编码
+    Vehicle findVnumberByVmodel(@Param("vmodel") String Vmodel);
+    //查找全部车辆名称
+    List<Vehicle> findAllVmodel();
+    //查找全部车辆编码
+    List<Vehicle> findAllVnumber();
 }

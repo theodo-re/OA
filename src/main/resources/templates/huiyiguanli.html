@@ -23,36 +23,84 @@
     <script th:src="@{vendors/jquery/jquery-3.4.1.js}" type="text/javascript"></script>
     <script>
         $(function () {
-            $("#xiuagi").click(function () {
-                $("#div2").show();
-            });
-
-            $("#tianJa").click(function () {
-                $("#div2").hide();
-            });
-            //删除提示
-            var radios = document.getElementsByName("metid");
-            $(".del").click(function () {
-                //根据 name集合长度 遍历name集合
-                for(var i=0;i<radios.length;i++)
-                {
-                    //判断那个单选按钮为选中状态
-                    if(radios[i].checked)
-                    {
-                        //弹出选中单选按钮的值
-                        // alert(radios[i].value);
-                        $.post("deltHuiYi.html","metid="+radios[i].value,function (data) {
-                            alert(data);
-                            window.location.reload();
-
-                        },"text")
-                    }
-                }
-
-            })
+            var page="";
+            for(var i=1;i<=$("#pagecount").val();i++){
+                page+="<li class='page-item'><a class='page-link' >"+i+"</a></li>";
+            }
+            $("#erer").after(page)
 
 
+            //删除
         })
+        function xiugai(id) {
+            $.post("xiugaiHy.html", "id=" +id, function (data) {
+                $("#div1").html(" ");
+                var str = "<tr ><th>会议室名称<input type=\'text\' value=\'" + (data.mName) + "\' name='mName' placeholder='请输入要修改的内容' class=\"form-control\"  required='required'></th></tr>" +
+                    "<tr><th><input type=\'hidden\' value=\'" + (data.id) + "\' name='id'></th></tr>" +
+                    "<tr ><th >会议室描述<input type=\'text\' value=\'" + (data.mdescribe) + "\' placeholder='请输入要修改的内容' name='mdescribe' class=\"form-control\" id=\"vmodel\" required='required'></th></tr>"+
+                    "<tr ><th >是否空闲,1、空闲，2、不空闲<span  placeholder='请输入要修改的内容' name='leisure'  id=\"vnumber\" class=\"form-control\">" + (data.leisure) + "</span></th></tr>" +
+                    "<tr ><th >创建时间<span   name='createdtime' placeholder='请输入要修改的内容' class=\"form-control\" id=\"recipient-name\">"+ (data.createdtime.toString())+"</span></th></tr>";
+                $("#div1").append(str);
+            }, "json")
+        }
+        function delt(id) {
+            if(confirm("确定删除吗？")) {
+                $.post("deltHuiYi.html", "metid=" + id, function (data) {
+                    alert(data);
+                    window.location.reload();
+                }, "text")
+            }
+
+        }
+        //上一页
+        function shangyiye() {
+            var pagecount=$("#pagecount").val();
+            var index=parseInt($("#pageindex").val())
+            if(index==1){
+                alert("已经是第一页了！")
+            }else{
+                $.post("fenyeMet.html", {'index':index-1},function (date) {
+                    var tdStr ='';
+                    $("#th1").siblings().remove()
+                    $("#pageindex").val(date["index"])
+                    $.each(date["meetingList"], function (met,value) {
+                        tdStr += "<tr >" +
+                            "<td>" + (value.mName) + "</td>" +
+                            "<td >" + (value.mdescribe) + "</td>" +
+                            "<td><input  type='button' value='修改' onclick='xiugai("+(value.id)+")'  class='change' data-toggle='modal'" +
+                            "  data-target=\"#exampleModal2\" >&nbsp;&nbsp;&nbsp;" +
+                            "<input  type=\"button\" class=\"del\" value=\"删除\" onclick='delt(" + value.id + ")'></td></tr>";
+                    })
+                    $("#tab1").append(tdStr);
+                },"json")
+            }
+
+        }
+        //下一页
+        function xiayiye() {
+            var pagecount=$("#pagecount").val();
+            var index=parseInt($("#pageindex").val())
+            if(index==pagecount){
+                alert("已经是最后一页了！")
+            }else{
+                $.post("fenyeMet.html",{'index':index+1},function (date) {
+                    var tdStr ='';
+                    $("#th1").siblings().remove()
+                    $("#pageindex").val(date["index"]);
+                    $.each(date["meetingList"], function (met,value) {
+                        tdStr += "<tr >" +
+                            "<td>" + (value.mName) + "</td>" +
+                            "<td >" + (value.mdescribe) + "</td>" +
+                            "<td><input  type='button' value='修改' onclick='xiugai("+(value.id)+")'  class='change' data-toggle='modal'" +
+                            "  data-target=\"#exampleModal2\" >&nbsp;&nbsp;&nbsp;" +
+                            "<input  type=\"button\" class=\"del\" value=\"删除\" onclick='delt(" + value.id + ")'></td></tr>";
+                    })
+                    $("#tab1").append(tdStr);
+                },"json")
+            }
+
+        }
+
     </script>
 
 
@@ -85,7 +133,7 @@
                     <form action="huiyiguanli.html" method="post">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">预定时间段：</label>
-                            <input type="date" placeholder="开始时间" id="firstTime" name="firstTime" th:value="${firstTime}"> 提示：预定时间段必须为同一天&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="date" placeholder="开始时间" id="firstTime" name="firstTime" th:value="${firstTime}" required="required"> 提示：预定时间段必须为同一天&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <input type="submit" name="" id="select" value="查询">
                         </div>
                     </form>
@@ -116,11 +164,11 @@
                     </div>
 
                     <div class="form-group">
-                        会议室预订人：<input type="text" name="reserveby" placeholder="请输入"/>
+                        会议室预订人：<input type="text" name="reserveby" placeholder="请输入" required="required"/>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         会议类型：
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <select name="rContent" id="hylx">
+                        <select name="rContent" id="hylx" required="required">
                             <option selected="">请选择类型</option>
                             <option>会议</option>
                             <option>培训</option>
@@ -239,11 +287,7 @@
                                                                 <div id="div2" style="display: none">
                                                                     <label for="recipient-name" class="col-form-label">（修改会议室选择：）</label>
                                                                     <br/>
-                                                                    <tr th:each="met:${metList}">
-                                                                        <td th:text="${met.mName}" >名称</td>
-                                                                        <td ><input type="radio" name="upMetid" th:value="${met.id}" ><br/></td>
 
-                                                                    </tr>
                                                                 </div>
                                                                 <label for="recipient-name" class="col-form-label">会议室名称:</label>
                                                                 <input type="text" class="form-control" id="recipient-name" name="meetingName">
@@ -264,6 +308,36 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <!--修改=================;-->
+                                        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
+                                             aria-labelledby="exampleModalLabel"
+                                             aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5>车辆修改</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="changeMet.html" method="post">
+                                                            <div class="form-group" id="div1">
+                                                                <!--会议室修改-->
+
+                                                            </div>
+
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭
+                                                                </button>
+                                                                <button type="submit" class="btn btn-primary">提交</button>
+
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <!--添加信息-->
                                 </div>
@@ -271,32 +345,33 @@
 
                                     <div class="card-body">
                                         <div class="table-responsive">
-                                            <table class="table table-borderless">
-                                                <tr>
-                                                    <th>选择</th>
+                                            <table class="table table-borderless" id="tab1">
+                                                <tr id="th1" >
                                                     <th>会议室名称</th>
                                                     <th>会议室描述</th>
                                                     <th>操作</th>
                                                 </tr>
-
-                                                <tr th:each="met:${metList}">
-                                                    <td ><input type="radio" name="metid" th:value="${met.id}" id="me"></td>
-                                                    <td th:text="${met.mName}" >名称</td>
-                                                    <td th:text="${met.mdescribe}">名称 </td>
-                                                    <td><input   name="change" type="button" value="修改" class="btn btn-primary" data-toggle="modal"
-                                                                 data-target="#exampleModal" id="xiuagi"></input>&nbsp;&nbsp;&nbsp;<input   name="change" type="button" class="del" value="删除"></td>
+                                                <tr th:each="met:${meetList}">
+                                                    <td th:text="${met.mName}"></td>
+                                                    <td th:text="${met.mdescribe}"></td>
+                                                    <td ><input type="button" value="修改" th:onclick="'javascript:xiugai('+${met.id}+')'" class="change" data-toggle="modal"
+                                                    data-target="#exampleModal2">
+                                                        <input type="button" class="del" value="删除" th:onclick="'javascript:delt('+${met.id}+')'">
+                                                    </td>
                                                 </tr>
                                             </table>
                                             <nav aria-label="Page navigation example">
                                                 <ul class="pagination justify-content-end">
-                                                    <li class="page-item disabled">
-                                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">总页数</a>
+                                                    <li class="page-item" id="erer">
+                                                        <a class="page-link" href="javascript:;"
+                                                           onclick="shangyiye()">上一页</a>
+                                                        <input type="hidden" id="pagecount" th:value="${pageSupport.getTotalPageCount()}">
+                                                        <input type="hidden" id="pageindex" value="1" >
                                                     </li>
-                                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                    <div id="div3"></div>
                                                     <li class="page-item">
-                                                        <a class="page-link" href="#">下一页</a>
+                                                        <a class="page-link" href="javascript:;" onclick="xiayiye()">下一页</a>
+                                                        共<span th:text="${pageSupport.getTotalPageCount()}"></span>页，<span th:text="${pageSupport.getTotalCount()}"></span>条数据
                                                     </li>
                                                 </ul>
                                             </nav>

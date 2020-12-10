@@ -23,6 +23,12 @@ public interface MeetingDao {
         int updateMetById(Meeting meeting);
         //删除
         int delMetByid(@Param("id")Integer id);
+        //根据id查询
+        Meeting findMetById(@Param("id")Integer id);
+        //分页
+        int findAllPage();
+        //
+        List<Meeting> findAllMet(@Param("index") Integer index,@Param("size") Integer pageSize);
 
 
 }

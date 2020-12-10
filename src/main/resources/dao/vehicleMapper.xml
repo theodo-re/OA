@@ -7,9 +7,6 @@
         SELECT v.`id`,v.`vplate`,v.`vmodel`,v.`vnumber`,v.`callId`,v.`vcomment`,
         v.`createdby`,v.`createdtime`,v.`modifyby`,v.`modifytime` FROM Vehicle v
         Limit #{pageIndex},#{pageSize}
-
-
-
     </select>
     <!--分页-->
     <select id="findPage" resultType="int">
@@ -71,6 +68,30 @@
                 vnumber=#{vnumber}
             </if>
         </where>
+    </select>
+    <select id="findVnumberByVmodel" resultType="Vehicle" parameterType="String">
+        select * from Vehicle
+        <where>
+            <if test="vmodel!=null and vmodel!=''">
+                vmodel=#{vmodel}
+            </if>
+        </where>
+    </select>
+    <select id="findAllVmodel" resultType="Vehicle">
+        select vmodel from Vehicle
+    </select>
+    <!--根据车名查id-->
+    <select id="findIdByVmodel" resultType="int" parameterType="String">
+        select id from Vehicle
+        <where>
+            <if test="vmodel!=null and vmodel!=''">
+                vmodel=#{vmodel}
+            </if>
+        </where>
+    </select>
+    <!--查询全部车辆编码-->
+    <select id="findAllVnumber" resultType="Vehicle">
+        select vnumber from Vehicle
     </select>
 
 </mapper>

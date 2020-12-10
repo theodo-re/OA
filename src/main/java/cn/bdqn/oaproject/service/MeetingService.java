@@ -22,4 +22,10 @@ public interface MeetingService {
     int updateMetById(Meeting meeting);
     //删除
     int delMetByid(Integer id);
+    //
+    Meeting findMetById(Integer id);
+    //
+    int findAllPage();
+    //
+    List<Meeting> findAllMet(Integer index,Integer pageSize);
 }

@@ -25,25 +25,27 @@
     <script>
         $(function () {
             var sel = document.getElementById("shenhe");
-
+            $("#subm").attr('disabled',true);//提交按钮禁用
             /*获取当前页码的值*/
             var  count="";
             for (var i=1;i<=$("#pagecount").val();i++){
-
                 count+="<li class='page-item'><a class='page-link' >"+i+"</a></li>"
-
             }
             $("#erer").after(count)
-
             $("#shenhe").change(function () {
                 var majer = sel.options[sel.selectedIndex].value;
-                $.post("majer.html", "mejName=" + majer, function (data) {
-                    $("#checkid").val(data);
-                }, "text")
+                if(majer=="请选择"){
+                    $("#subm").attr('disabled',true);//提交按钮禁用
+                    alert("请选择审核人！")
+                }else {
+                    $.post("majer.html", "mejName=" + majer, function (data) {
+                        $("#checkid").val(data);
+                    }, "text")
+                    $("#subm").attr('disabled',false);//提交按钮禁用
+                }
             });
             //获取单选框
             //修改———————————————修改—————————————修
-
             /*异步判断要添加的值是否已存在*/
             $("#vplat").blur(function () {
                 var vpt = $(this).value();
@@ -51,6 +53,7 @@
                     $("#vpt").text(data);
                 }, "text")
             });
+
         });
 
         function xiugai(id) {
@@ -64,7 +67,6 @@
                 $("#div1").append(str);
             }, "json")
         }
-
         function delt(id) {
             if (confirm("确定删除吗？")) {
                 $.post("deltCar.html", "vehid=" + id, function (data) {
@@ -73,13 +75,13 @@
                 }, "text")
             }
         }
-
         //分页显示
         //var pageSize=$("tr[name='pageSize']").value();
-
         function xiayiye() {
+
             var pagecount = $("#pagecount").val()
             var index = parseInt($("#pageindex").val())
+
             if (index == pagecount) {
                 alert("这已经是最后一页了！")
             } else {
@@ -124,6 +126,35 @@
                     $("#feny").append(tdStr);
                 }, "json")
             }
+        }
+        function TimeChanges() {
+            //判断用车时间是否重复
+
+                //获取车辆信息
+                var  carName=$("#cheliang").val();
+                //获取开始时间
+                var startTime=$("#startTime").val();
+                //获取结束时间
+                var endTime=$("#endTime").val();
+                if(startTime>endTime){
+                    $("#span1").css("color", "red");
+                    $("#span1").text("选择的开始日期不能大于结束日期");
+                    $("#subm").attr('disabled',true);//提交按钮禁用
+                }else {
+                    //异步
+                    $.post("carTime.html", "carName=" + carName + "&startdate=" + startTime + "&enddate=" + endTime, function (date) {
+                        if (date.length > 0) {
+                            $("#subm").attr('disabled',true);
+                            $("#span1").css("color", "red");
+                            $("#span1").text("该车辆在" + startTime + "日至" + endTime + "日期间内已被占用，用更换时间");
+                        } else {
+                            $("#subm").attr('disabled',false);//提交按钮可用
+                            $("#span1").css("color", "green");
+                            $("#span1").text("日期以锁定");
+                        }
+
+                    }, "json")
+                }
 
 
         }
@@ -154,20 +185,23 @@
 
                     <form action="disposeCar.html" method="post">
                         <div class="form-group">
-                            车辆编号：<input type="text" name="vnumber" required="required" id="bh"/><br/><br/>
-                            用车人：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="vpeople" id="car"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                            司机：<input type="text" name="vdriver"/><br/><br/>
-                            随性人员：<input type="text" name="retinue"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                            车辆：<select  name="cheLiang" required="required" id="cheliang">
+                            <option>请选择</option>
+                            <option th:each="ve:${vmodelList}" th:text="${ve.vmodel}"></option>
+                        </select><br/><br/>
+                            用车人：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="vpeople" id="car" required="required"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                            司机：<input type="text" name="vdriver" required="required"/><br/><br/>
+                            随性人员：<input type="text" name="retinue" required="required"/>&nbsp;&nbsp;&nbsp;&nbsp;
                             用车部门：<span th:text="${dname}">登录信息获取</span><br/><br/>
-                            时间：<input type="date" placeholder="开始时间" name="startdate">&nbsp;&nbsp;到&nbsp;&nbsp;
-                            <input type="date" placeholder="结束时间" name="enddate"> <br/><br/>
-                            目的地：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="destination"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                            申请里程：<input type="text" name="mileage"/><br/><br/>
-                            用车事由： <textarea name="reason" rows="3" cols="50"></textarea>
+                            时间：<input type="date" placeholder="开始时间" name="startdate" id="startTime" required="required" onchange="TimeChanges()">&nbsp;&nbsp;到&nbsp;&nbsp;
+                            <input type="date" placeholder="结束时间" name="enddate" id="endTime" required="required" onchange="TimeChanges()"> <span id="span1" ></span><br/><br/>
+                            目的地：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="destination" required="required"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                            申请里程：<input type="text" name="mileage" required="required"/><br/><br/>
+                            用车事由： <textarea name="reason" rows="3" cols="50" required="required" id="shiyou"></textarea>
                         </div>
                         <div class="form-group">
                             下一步审批人：
-                            <select id="shenhe">
+                            <select id="shenhe" >
                                 <option>请选择</option>
                                 <option th:text="${majer}"></option>
                             </select>
@@ -292,10 +326,6 @@
                                                     <input type="hidden" id="pagecount" th:value="${pageSupport.getTotalPageCount()}">
                                                     <input type="hidden" id="pageindex" value="1" >
                                                 </li>
-                                                <!--<li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>-->
-                                                <!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
                                                 <div id="div2"></div>
                                                 <li class="page-item">
                                                     <a class="page-link" href="javascript:;" onclick="xiayiye()">下一页</a>

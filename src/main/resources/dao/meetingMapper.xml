@@ -19,7 +19,7 @@ LEFT JOIN reserve r
 ON m.`id`=r.`meetId`
 <where>
     <if test="firstTiem!=null and firstTiem!=''">
-         r.`enddate`!=#{firstTiem} OR r.`enddate` IS NULL
+         r.`enddate`!=#{firstTiem} AND m.`modifytime`!=#{firstTiem} OR r.`enddate` IS NULL
     </if>
     <if test="firstTiem=='' or firstTiem==null">
           m.`leisure`=1
@@ -61,7 +61,7 @@ ON m.`id`=r.`meetId`
         (#{mName},#{mdescribe},#{leisure},#{createdby},#{createdtime},#{modifyby},#{modifytime})
     </insert>
     <!--查询全部的会议室-->
-    <select id="findAllMeeting" resultType="Meeting">
+    <select id="findAllMeeting" resultType="Meeting" >
         select * from meeting
     </select>
     <!--修改会议室名称和描述-->
@@ -72,7 +72,13 @@ ON m.`id`=r.`meetId`
                 mName=#{mName},
             </if>
             <if test="mdescribe!=null and mdescribe!=''">
-                mdescribe=#{mdescribe}
+                mdescribe=#{mdescribe},
+            </if>
+            <if test="modifyby!=null and modifyby!=0">
+                modifyby=#{modifyby},
+            </if>
+            <if test="modifytime!=null">
+                modifytime=#{modifytime}
             </if>
         </set>
         where id=#{id}
@@ -81,4 +87,20 @@ ON m.`id`=r.`meetId`
     <delete id="delMetByid" parameterType="Integer">
         delete from meeting where id=#{id}
     </delete>
+    <!--//-->
+    <select id="findMetById" parameterType="Integer" resultType="Meeting">
+        select * from Meeting
+        <where>
+            <if test="id!=null and id!=0">
+                id=#{id}
+            </if>
+        </where>
+    </select>
+    <!--分页-->
+    <select id="findAllPage" resultType="int">
+        select COUNT(0) from meeting
+    </select>
+    <select id="findAllMet" resultType="Meeting">
+        select * from meeting limit #{index},#{size}
+    </select>
 </mapper>

@@ -21,10 +21,7 @@ import org.thymeleaf.spring5.context.SpringContextUtils;
 import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpSession;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class CarController {
@@ -44,47 +41,41 @@ public class CarController {
      */
     @RequestMapping(value = "yongcheguanli.html",method = RequestMethod.GET)
     public String showIndex(HttpSession session, Model model,@RequestParam(required = false) Integer pageIndex){
-        System.out.println(pageIndex+"这是页面");
         Users user = (Users) session.getAttribute(Constants.USER_SESSION);
+        //System.out.println(user.getRealName()+"姓名+++++++++");
         //根据用户名查出所在部门
         Dept dept=deptService.findAllByName(user.getRealName());
-        model.addAttribute("dname",dept.getdName());
+        model.addAttribute("dname",dept.getDeptName());
         //根据用户名获取部门领导
         String majer=usersService.findMajerByName(user.getRealName());
         model.addAttribute("majer",majer);
         //显示全部的车辆信息
         //分页
-        int pageSize=3;
+        int pageSize=2;
         List<Vehicle> vehicleList=vehicleService.findAllVehicle(0,pageSize);
+        model.addAttribute("vehicleList",vehicleList);
         //设置每页条数
         int pageCount=vehicleService.findPage();//
         PageSupport pageSupport=new PageSupport();
         //pageSupport.setCurrentPageNo(pageIndex);
         pageSupport.setPageSize(pageSize);
         pageSupport.setTotalCount(pageCount);
-        int totalPageCount=pageCount%pageSize+1;
-       /* model.addAttribute("totalPageCount",totalPageCount);*/
-        model.addAttribute("vehicleList",vehicleList);
-       /* model.addAttribute("pageCount",pageCount);
-        model.addAttribute("pageSize",pageSize);*/
-       /*model.addAttribute("pageIndex",pageIndex);*/
-       model.addAttribute("pageSupport",pageSupport);
+        model.addAttribute("pageSupport",pageSupport);
 
+
+        List<Vehicle> mo=vehicleService.findAllVmodel();
+       model.addAttribute("vmodelList",mo);
         return "yongcheguanli";
     }
     //
     @RequestMapping(value = "fenye.html",method=RequestMethod.GET)
     @ResponseBody
     public Map<String,Object> page(Integer index){
-        int pageSize=3;
+        int pageSize=2;
       Map<String ,Object> map=new HashMap<>();
         map.put("index",index);
-
         index=(index-1)*pageSize;
-
         List<Vehicle> vehicleList=vehicleService.findAllVehicle(index,pageSize);
-
-
         map.put("list",vehicleList);
         return  map;
     };
@@ -104,8 +95,12 @@ public class CarController {
      * @return
      */
     @RequestMapping(value = "disposeCar.html",method = RequestMethod.POST)
-    public String get(Vehicleapply vehicleapply,Model model){
-        vehicleapply.setVehicleId(1);
+    public String get(Vehicleapply vehicleapply,Model model,@RequestParam(required = false) String cheLiang){
+        //通过车辆名称获取车辆编码
+        Vehicle vehicle=vehicleService.findVnumberByVmodel(cheLiang);
+        vehicleapply.setVnumber(vehicle.getVnumber());
+        //通过车辆名称获得id
+        vehicleapply.setVehicleId(vehicleService.findIdByVmodel(cheLiang));
         vehicleapply.setVdate(new Date());
         int rel=vehicleapplyService.addVehapply(vehicleapply);
         if(rel>0){
@@ -113,8 +108,16 @@ public class CarController {
         }else {
             System.out.println("添加成功：(");
         }
-        /*List<Vehicle> vehicleList=vehicleService.findAllVehicle();
-        model.addAttribute("vehicleList",vehicleList);*/
+        //分页信息
+        int pageCount=vehicleService.findPage();//
+        int pageSize=2;
+        PageSupport pageSupport=new PageSupport();
+        //pageSupport.setCurrentPageNo(pageIndex);
+        pageSupport.setPageSize(pageSize);
+        pageSupport.setTotalCount(pageCount);
+        model.addAttribute("pageSupport",pageSupport);
+        List<Vehicle> vehicleList=vehicleService.findAllVehicle(0,pageSize);
+        model.addAttribute("vehicleList",vehicleList);
         return "yongcheguanli";
     }
     /**
@@ -124,9 +127,23 @@ public class CarController {
     public String cheGuanLi(@RequestParam(required = false) String chePai,
                             @RequestParam(required = false)String cheXing,
                             @RequestParam(required = false)Integer vehId,Model model){
-        System.out.println(vehId+"车辆的id");
+
         //添加车辆信息
        int vnumber=(int)((Math.random()*9+1)*10000);//随机生成车辆编号
+        //车辆编码不能重复
+        //查询全部车辆编码
+        List<Vehicle> vehList=vehicleService.findAllVnumber();
+        boolean blen=false;
+        while (blen=false) {
+            blen=true;
+            for (int i = 0; i <= vehList.size(); i++) {
+                if (Integer.parseInt(vehList.get(i).getVnumber()) == vnumber) {
+                    vnumber = (int) ((Math.random() * 9 + 1) * 10000);
+                    blen=false;
+                    break;
+                }
+            }
+        }
         if((chePai!=null&&!chePai.equals(""))||(cheXing!=null&&!cheXing.equals(""))){
             Vehicle vehicle=new Vehicle();
             vehicle.setVplate(chePai);
@@ -150,6 +167,16 @@ public class CarController {
         //显示车辆
         /*List<Vehicle> vehicleList=vehicleService.findAllVehicle();
         model.addAttribute("vehicleList",vehicleList);*/
+        //分页信息
+        int pageCount=vehicleService.findPage();//
+        int pageSize=2;
+        PageSupport pageSupport=new PageSupport();
+        //pageSupport.setCurrentPageNo(pageIndex);
+        pageSupport.setPageSize(pageSize);
+        pageSupport.setTotalCount(pageCount);
+        model.addAttribute("pageSupport",pageSupport);
+        List<Vehicle> vehicleList=vehicleService.findAllVehicle(0,pageSize);
+        model.addAttribute("vehicleList",vehicleList);
         return "yongcheguanli";
     }
     //删除
@@ -176,22 +203,28 @@ public class CarController {
     }
     //车辆信息修改处理
     @RequestMapping("changeVeh.html")
-    public String changVeh(Vehicle vehicle,HttpSession session){
-
+    public String changVeh(Vehicle vehicle,HttpSession session,Model model){
         //获取登录人的信息
         Users users=(Users)session.getAttribute(Constants.USER_SESSION);
-        System.out.println(users.getId()+"id");
         vehicle.setModifytime(new Date());
         vehicle.setModifyby(users.getId());
         vehicleService.updateVehicle(vehicle);
-
+        //分页信息
+        int pageCount=vehicleService.findPage();//
+        int pageSize=2;
+        PageSupport pageSupport=new PageSupport();
+        //pageSupport.setCurrentPageNo(pageIndex);
+        pageSupport.setPageSize(pageSize);
+        pageSupport.setTotalCount(pageCount);
+        model.addAttribute("pageSupport",pageSupport);
+        List<Vehicle> vehicleList=vehicleService.findAllVehicle(0,pageSize);
+        model.addAttribute("vehicleList",vehicleList);
         return "yongcheguanli";
     }
     //异步判断是否修改的数据已存在
     @RequestMapping("vplate.html")
     @ResponseBody
     public String showvpt(String vplate){
-        System.out.println(vplate+"获取的");
        Vehicle vehicle=new Vehicle();
        vehicle.setVplate(vplate);
         if(vehicleService.findByAjax(vehicle)!=null){
@@ -199,6 +232,22 @@ public class CarController {
         }else{
             return "error";
         }
+    }
+    //异步判断用车时间重复
+    @RequestMapping(value = "carTime.html",method = RequestMethod.POST)
+    @ResponseBody
+    public List<Vehicleapply> carTime(String carName,Vehicleapply vehicleapply){
+        //根据车名获得对应id
+        int id=vehicleService.findIdByVmodel(carName);
+        vehicleapply.setId(id);
+        //根据id查找时间
+        List<Vehicleapply> vehicleapplyList=vehicleapplyService.findBehByidTime(vehicleapply);
+        System.out.println(carName+":获取的车名");
+        System.out.println(vehicleapply.getStartdate()+":获取的开始时间");
+        System.out.println(vehicleapply.getEnddate()+"：获取的结束时间");
+       return vehicleapplyList;
+
+
     }
 
 }

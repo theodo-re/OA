@@ -1,5 +1,6 @@
 package cn.bdqn.oaproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -12,6 +13,7 @@ public class Meeting {
   private long leisure;
   private long createdby;
   @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern = "yyyy-MM-dd")
   private Date createdtime;
   private long modifyby;
   @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -38,11 +40,11 @@ public class Meeting {
   }
 
 
-  public String getMName() {
+  public String getmName() {
     return mName;
   }
 
-  public void setMName(String mName) {
+  public void setmName(String mName) {
     this.mName = mName;
   }
 

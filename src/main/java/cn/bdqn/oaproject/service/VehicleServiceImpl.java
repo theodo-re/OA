@@ -52,4 +52,24 @@ public class VehicleServiceImpl implements VehicleService{
     public Vehicle findByAjax(Vehicle vehicle) {
         return vehicleDao.findByAjax(vehicle);
     }
+
+    @Override
+    public Vehicle findVnumberByVmodel(String Vmodel) {
+        return vehicleDao.findVnumberByVmodel(Vmodel);
+    }
+
+    @Override
+    public List<Vehicle> findAllVmodel() {
+        return vehicleDao.findAllVmodel();
+    }
+
+    @Override
+    public List<Vehicle> findAllVnumber() {
+        return vehicleDao.findAllVnumber();
+    }
+
+    @Override
+    public int findIdByVmodel(String vmodel) {
+        return vehicleDao.findIdByVmodel(vmodel);
+    }
 }

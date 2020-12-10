@@ -1,6 +1,9 @@
 package cn.bdqn.oaproject.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Vehicleapply {
@@ -11,12 +14,18 @@ public class Vehicleapply {
   private String vpeople;
   private String vdriver;
   private String retinue;
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern = "yyyy-MM-dd")
   private Date startdate;
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern = "yyyy-MM-dd")
   private Date enddate;
   private String destination;
   private long mileage;
   private String reason;
   private long checkId;
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern = "yyyy-MM-dd")
   private Date vdate;
 
 
