@@ -3,19 +3,26 @@ package cn.bdqn.oaproject.controller;
 import cn.bdqn.oaproject.entity.Users;
 import cn.bdqn.oaproject.service.UsersService;
 import cn.bdqn.oaproject.util.Constants;
+import cn.bdqn.oaproject.util.Sms;
 import cn.bdqn.oaproject.util.validationCodeUtil;
+import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
+import com.aliyuncs.exceptions.ClientException;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/deng")
@@ -24,6 +31,7 @@ public class LogController {
     @Resource
     private UsersService user;
     String yan="";
+    String code="";
 
     /**
      * 转登录页面
@@ -62,6 +70,50 @@ public class LogController {
             }
         }
     }
+
+    /**
+     *手机验证码登录
+     */
+    @RequestMapping("/yan.html")
+    public String yan(String phone,String security,Model m,HttpSession session) {
+        logger.info("手机验证码登录==============================");
+        Users users = user.findPhone(phone);
+        if(security!=null && security!=""){
+            if(code.equals(security)){
+                session.setAttribute(Constants.USER_SESSION,users);
+                return "redirect:index1";
+            }else {
+                m.addAttribute("error3","验证码不正确！");
+                return "login";
+            }
+        }else {
+            m.addAttribute("error3","验证码不能为空！");
+            return "login";
+        }
+    }
+
+    /**
+     * 异步手机验证
+     */
+    @RequestMapping("/phoneyan")
+    @ResponseBody
+    public String phoneyan(String phone) throws ClientException {
+        logger.info("异步手机验证==============================");
+        Users users = user.findPhone(phone);
+        if(users!=null){
+            /*code = RandomStringUtils.randomNumeric(6);
+            SendSmsResponse sendSms =Sms.sendSms(phone,code);//填写你需要测试的手机号码
+            System.out.println("短信接口返回的数据----------------");
+            System.out.println("Code=" + sendSms.getCode());
+            System.out.println("Message=" + sendSms.getMessage());
+            System.out.println("RequestId=" + sendSms.getRequestId());
+            System.out.println("BizId=" + sendSms.getBizId());*/
+            return "验证码已发送！";
+        }else {
+            return "手机号码不正确！";
+        }
+    }
+
     @RequestMapping("/index1")
     public String main(HttpSession session , Model m){
         logger.info("登录首页==============================");
@@ -107,5 +159,46 @@ public class LogController {
     @RequestMapping("/xitongguanli")
     public String xitongguanli(){
         return "xitongguanli";
+    }
+
+    /**
+     * 忘记密码
+     */
+    @RequestMapping("/forget")
+    public String forget(){
+        logger.info("忘记密码===================");
+        return "forgetPwd";
+    }
+
+    /**
+     * 验证手机号
+     */
+    @RequestMapping("/forgetpwd")
+    @ResponseBody
+    public Map<String,String> forgetpwd(String phone){
+        logger.info("验证手机号===================");
+        Users users = user.findPhone(phone);
+        Map<String,String> map = new HashMap<>();
+        if(users!=null){
+            map.put("num","1");
+            map.put("id",users.getId()+"");
+        }else {
+            map.put("num","0");
+        }
+        return map;
+    }
+
+    /**
+     * 修改密码
+     */
+    @RequestMapping("/updatepwd")
+    @ResponseBody
+    public String updatepwd(String password,Integer id){
+        logger.info("修改密码===================");
+        int rel = user.updatePwd(password,id);
+        if (rel>0){
+            return "修改成功，请返回登录！";
+        }
+        return "修改失败！";
     }
 }

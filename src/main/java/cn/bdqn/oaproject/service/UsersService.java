@@ -54,4 +54,12 @@ public interface UsersService {
     int findIdName(String name);
     //根据姓名查领导
     String findMajerByName(String name);
+    /**
+     * 根据手机号查找用户
+     */
+    Users findPhone(String phone);
+    /**
+     * 修改密码
+     */
+    int updatePwd(String password,Integer id);
 }

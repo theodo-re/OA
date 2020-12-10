@@ -86,4 +86,10 @@
         SELECT (SELECT us.realname FROM users us WHERE u.`majer`=us.id) FROM users u
         WHERE u.`realName`=#{name}
     </select>
+    <select id="findPhone" parameterType="String" resultType="Users">
+        select * from users where phone=#{phone}
+    </select>
+    <update id="updatePwd">
+        UPDATE users SET uPassWord=#{password} WHERE id=#{id};
+    </update>
 </mapper>

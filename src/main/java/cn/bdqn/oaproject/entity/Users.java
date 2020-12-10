@@ -19,6 +19,7 @@ public class Users {
   private Date createdtime;
   private long majer;
   private String shangsi;
+  private String phone;
 
   private Organization organization;
   private Dictionary dictionary;
@@ -26,6 +27,14 @@ public class Users {
   private Dictionary dictionary2;
   private Dictionary dictionary3;
   private Dept dept;
+
+  public String getPhone() {
+    return phone;
+  }
+
+  public void setPhone(String phone) {
+    this.phone = phone;
+  }
 
   public long getId() {
     return id;

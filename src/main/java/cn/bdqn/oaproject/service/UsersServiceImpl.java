@@ -164,4 +164,14 @@ public class UsersServiceImpl implements UsersService{
     public String findMajerByName(String name) {
         return userdao.findMajerByName(name);
     }
+
+    @Override
+    public Users findPhone(String phone) {
+        return userdao.findPhone(phone);
+    }
+
+    @Override
+    public int updatePwd(String password, Integer id) {
+        return userdao.updatePwd(password,id);
+    }
 }

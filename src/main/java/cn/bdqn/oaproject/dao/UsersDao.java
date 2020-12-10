@@ -55,4 +55,12 @@ public interface UsersDao {
     int findIdName(String name);
     //根据用户名获取部门领导
     String findMajerByName(@Param("name") String name);
+    /**
+     * 根据手机号查找用户
+     */
+    Users findPhone(String phone);
+    /**
+     * 修改密码
+     */
+    int updatePwd(@Param("password") String password,@Param("id") Integer id);
 }
