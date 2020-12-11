@@ -84,10 +84,11 @@ public class LogController {
             if(random!=null && !"".equals(random)){
                 if(yan.equalsIgnoreCase(random)){
                     session.setAttribute(Constants.USER_SESSION,(Users)obj[1]);
+                    session.setMaxInactiveInterval(60*60*24);
                     Cookie cookie = new Cookie("uName",uName);
                     Cookie cookie1 = new Cookie("password",password);
-                    cookie.setMaxAge(60);
-                    cookie1.setMaxAge(60);
+                    cookie.setMaxAge(60*60*72);
+                    cookie1.setMaxAge(60*60*72);
                     response.addCookie(cookie);
                     response.addCookie(cookie1);
                     return "redirect:index1";
@@ -110,7 +111,7 @@ public class LogController {
     public String remember(String num,HttpServletResponse response){
         if(Integer.parseInt(num)==1){
             Cookie cookie = new Cookie("num",num);
-            cookie.setMaxAge(60);
+            cookie.setMaxAge(60*60*72);
             response.addCookie(cookie);
         }else {
             Cookie cookie= new Cookie("num", null);

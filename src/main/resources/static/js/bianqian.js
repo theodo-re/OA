@@ -41,7 +41,7 @@ $(function () {
             window.location.reload();
         },"text")
     });
-    $(document).on("click","#bian3",function () {
+    $(document).on("click","button[name='bian3']",function () {
         var a = $(this).val();
         $.post("delmemo","id="+a,function (data) {
             alert(data);
