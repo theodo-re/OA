@@ -11,18 +11,14 @@ public class Affiche {
   private String affTitle;
   private long affstatus;
   @JsonFormat(pattern = "yyyy-MM-dd")
-  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date startdate;
   @JsonFormat(pattern = "yyyy-MM-dd")
-  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date enddate;
   @JsonFormat(pattern = "yyyy-MM-dd")
-  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date pubdate;
   private String affContent;
   private long createdby;
   @JsonFormat(pattern = "yyyy-MM-dd")
-  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date createdtime;
   private long modifyby;
   @JsonFormat(pattern = "yyyy-MM-dd")

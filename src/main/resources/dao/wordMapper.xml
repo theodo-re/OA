@@ -25,7 +25,7 @@
     </update>
 
     <select id="findTrashWordByUserId" resultMap="findWord">
-        select * from word where created_by=#{UserId} and file_state=0
+        select * from word where modify_by=#{UserId} and file_state=0
     </select>
     <select id="findFileApByUserId" parameterType="Integer" resultMap="myfold">
         select * from folder where user=#{userId}
@@ -145,8 +145,8 @@
     </select>
 
     <!--根据id修改文件状态-->
-    <update id="updateFileStateByFileId" parameterType="Integer" >
-        update Word set file_state=#{state} where id=#{id}
+    <update id="updateFileStateByFileId" parameterType="cn.bdqn.oaproject.param.UpdateInfo" >
+        update Word set file_state=#{state},modify_by=#{userId},modify_time=#{date} where id=#{id}
     </update>
 
     <resultMap id="findWord" type="cn.bdqn.oaproject.entity.Word">
@@ -158,6 +158,8 @@
         <result property="fileAp" column="file_ap"></result>
         <result property="fileRp" column="file_rp"></result>
         <result property="fileRp" column="file_rp"></result>
+        <result property="modifyBy" column="modify_by"></result>
+        <result property="modifyTime" column="modify_time"></result>
         <association property="users" javaType="cn.bdqn.oaproject.entity.Users">
             <id property="id" column="id"></id>
         </association>

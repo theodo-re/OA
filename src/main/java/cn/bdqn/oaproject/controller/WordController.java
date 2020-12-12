@@ -8,6 +8,7 @@ import cn.bdqn.oaproject.param.Common;
 import cn.bdqn.oaproject.service.WordService;
 import cn.bdqn.oaproject.util.Constants;
 import cn.bdqn.oaproject.util.Fixed;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -34,25 +36,56 @@ public class WordController {
     @Resource
     private WordService wordService;
 
+    @PutMapping("/abs")
+    @ResponseBody
+    public Map<String ,Object> addCompanyWord(HttpSession session){
+        Users user=(Users)session.getAttribute(Constants.USER_SESSION);
+        Map<String,Object> map=new HashMap<>();
+        Date date=new Date();
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        System.out.println("当前时间："+simpleDateFormat);
+        if (user!=null){
+            map.put("time",simpleDateFormat.format(date));
+            map.put("userId",user.getId());
+            map.put("userName",user.getRealName());
+        }
+        return map;
+    }
 
     @GetMapping("/User")
     @ResponseBody
     public List<Users> findUsers(HttpSession session){
         Users user=(Users)session.getAttribute(Constants.USER_SESSION);
-        List<Users> usersList=wordService.findUserByDeptId((int) user.getDeptId());
+        int id=0;
+        if (user!=null){
+            id=(int) user.getDeptId();
+        }
+        List<Users> usersList=wordService.findUserByDeptId(id);
         return usersList;
     }
 
     @DeleteMapping("/Word")
     @ResponseBody
-    public int deleteWord(Integer id) {
-        int result = wordService.updateFileStateByFileId(id);
+    public int deleteWord(Integer id,HttpSession session) {
+        Users user=(Users)session.getAttribute(Constants.USER_SESSION);
+        int userId=0;
+        int result=0;
+        if (user!=null){
+            userId=(int)user.getId();
+            result = wordService.updateFileStateByFileId(id,userId,0);
+        }
         return result;
     }
 
     @PostMapping("/Word")
     @ResponseBody
-    public String addCommonWord(Word word, MultipartFile addfile, Model model,HttpSession session) {
+    public String addCommonWord(Word word, MultipartFile addfile, HttpSession session) {
+        Users user=(Users) session.getAttribute(Constants.USER_SESSION);
+        int id=0;
+        if (user!=null){
+            id=(int)user.getId();
+        }
         String fileName = addfile.getOriginalFilename();//获取包含扩展名的文件名
         word.setFileName(fileName.substring(0, fileName.length() - 4));//获取不包含扩展名的文件名
         String lastName = fileName.substring(fileName.lastIndexOf(".") + 1);//获取扩展名
@@ -81,15 +114,13 @@ public class WordController {
             if (!lastName.equalsIgnoreCase("doc") && !lastName.equalsIgnoreCase("txt")) {//判断文件格式是否符合
                 return "部门文档只能是doc或者txt文件!";
             }
-            Users user=(Users) session.getAttribute(Constants.USER_SESSION);
             word.setDept((int)user.getDeptId());
         }else if(word.getFileKind()==4){
-            Users user=(Users) session.getAttribute("user");
-            Folder folder =wordService.findfoldApByUserId((int)user.getId());
+            Folder folder =wordService.findfoldApByUserId(id);
             apath=folder.getFoldAp()+fileName;//绝对路劲
             rpath=folder.getFoldRp()+fileName;//相对路径
             if (!lastName.equalsIgnoreCase("doc") && !lastName.equalsIgnoreCase("txt")) {//判断文件格式是否符合
-                return "个人文档只能是doc或者txt文件!";
+               return "个人文档只能是doc或者txt文件!";
             }
             word.setDept((int) user.getDeptId());
         }
@@ -112,21 +143,25 @@ public class WordController {
         if (i > 0) {
             return "添加成功";
         } else {
-            return "添加失败！";
+            return  "添加失败！";
         }
+
     }
 
     @PutMapping("/Word")
     @ResponseBody
     public Map<String, Object> sousuo(Common common,HttpSession session) {
-
-
-        Users user1=(Users)session.getAttribute(Constants.USER_SESSION);
-
-        Integer ZC=wordService.findUserZCById((int)user1.getId());
+        Map<String, Object> map = new HashMap<>();
+        map.put("fileName",common.getwName());
+        map.put("createdBy",common.getCreateBy());
+        Users user=(Users)session.getAttribute(Constants.USER_SESSION);
+        Integer ZC=0;
+        if (user!=null){
+            ZC=wordService.findUserZCById((int)user.getId());
+        }
         int pageCount = 1;
         int pageIndex = common.getPageIndex();
-        Map<String, Object> map = new HashMap<>();
+
         List<Word> words = wordService.findWordList(common);
         Integer count = wordService.findCommonWordCount(common);
         if (count != null) {
@@ -146,6 +181,7 @@ public class WordController {
 
     @GetMapping("/wendang")
     public String show() {
+
         return "wendangliebiao";
     }
 }

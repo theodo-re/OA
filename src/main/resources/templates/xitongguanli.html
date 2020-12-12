@@ -87,7 +87,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form method='post' action='/liusujun/addOrganization'>
+                                            <form>
                                                 <div class="form-group">
 
                                                     <label for="organName" class="col-form-label">机构名称:</label>
@@ -104,7 +104,7 @@
                                                     <button type="button" class="btn btn-secondary"
                                                             data-dismiss="modal">关闭
                                                     </button>
-                                                    <button type="submit" class="btn btn-primary">提交</button>
+                                                    <button type="button" onclick="addOrgan()" class="btn btn-primary">提交</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -124,11 +124,11 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form method='post' action='/liusujun/addOrganization'>
+                                            <form id="addDeptFrom">
                                                 <div class="form-group">
                                                     <label for="bu" class="col-form-label">部门名称:</label>
                                                     <input type="text" class="form-control"
-                                                           id="bu" name='organName'>
+                                                           id="bu" name='dName'>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="jiguoId" class="col-form-label">选择机构:</label>
@@ -162,7 +162,7 @@
                                                     <button type="button" class="btn btn-secondary"
                                                             data-dismiss="modal">关闭
                                                     </button>
-                                                    <button type="submit" class="btn btn-primary">提交</button>
+                                                    <button type="button" onclick="addDept()" class="btn btn-primary">提交</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -173,20 +173,6 @@
 
                             <div class="accordion" id="accordionExample">
 
-                                <!--<div class="card">
-                                    <div class="card-header" id="headingOne">
-                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                                                aria-expanded="true" aria-controls="collapseOne">
-                                            Collapsible Group Item #1
-                                        </button>
-                                    </div>
-                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                                         data-parent="#accordionExample">
-                                        <div class="card-body">
-
-                                        </div>
-                                    </div>
-                                </div>-->
 
                                 <!--模态-->
                                 <div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog"
@@ -201,7 +187,7 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form method='post' action='/liusujun/updateDept'>
+                                                <form id="updateDeptFrom">
                                                     <div class="form-group">
                                                         <input type="hidden" ab='id' name="id">
                                                         <label for="deptName" class="col-form-label">部门名称:</label>
@@ -241,7 +227,7 @@
                                                         <button type="button" class="btn btn-secondary"
                                                                 data-dismiss="modal">关闭
                                                         </button>
-                                                        <button type="submit" class="btn btn-primary">提交</button>
+                                                        <button type="button" onclick="updateDept()" class="btn btn-primary">提交</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -290,7 +276,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="post" action="/liusujun/addusers">
+                                        <form id="addUsers">
                                             <div class="form-group">
                                                 <label for="userName" class="col-form-label">用户名:</label>
                                                 <input type="text" class="form-control" id="userName" name="userName">
@@ -353,7 +339,7 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭
                                                 </button>
-                                                <button type="submit" class="btn btn-primary">提交</button>
+                                                <button type="button" onclick="addUsers()" class="btn btn-primary">提交</button>
                                             </div>
                                         </form>
                                     </div>
@@ -387,7 +373,7 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form id="updateUserForm" method='post' action='../liusujun/updateUsers'>
+                                                <form id="updateUserForm">
                                                     <input type='hidden' name='id' update='id'>
                                                     <div class="form-group">
                                                         <label for="dengluming" class="col-form-label">用户名:</label>
@@ -445,7 +431,7 @@
                                                 <button type="button" class="btn btn-secondary" data-dismiss=\"modal\">
                                                     关闭
                                                 </button>
-                                                <button type="button" onclick='tijiao()' class="btn btn-primary">提交
+                                                <button type="button" onclick='updateUsers()' class="btn btn-primary">提交
                                                 </button>
                                             </div>
                                         </div>
@@ -497,7 +483,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="post" action="/liusujun/addRole">
+                                        <form>
                                             <div class="form-group">
                                                 <label for="valueId" class="col-form-label">编号:</label>
                                                 <input type="text" class="form-control" id="valueId" name="valueId">
@@ -509,7 +495,7 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭
                                                 </button>
-                                                <button type="submit" class="btn btn-primary">提交</button>
+                                                <button type="button" onclick="addRole()" class="btn btn-primary">提交</button>
                                             </div>
                                         </form>
                                     </div>
@@ -540,7 +526,7 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form method='post' action='updateRole'>
+                                                <form>
                                                     <div class="form-group">
                                                         <label for="bainhao" class="col-form-label">编号:</label>
                                                         <input type="text" readonly class="form-control"
@@ -555,7 +541,7 @@
                                                         <button type="button" class="btn btn-secondary"
                                                                 data-dismiss="modal">关闭
                                                         </button>
-                                                        <button type="submit" id='updateRoleButton'
+                                                        <button type="button" onclick="updateRole()" id='updateRoleButton'
                                                                 class="btn btn-primary">提交
                                                         </button>
                                                     </div>
@@ -572,7 +558,7 @@
                             <input type="hidden" id="roleTotalPageCount" name="roleTotalPageCount" value="1">
                             <ul class="pagination justify-content-end">
                                 <li class="page-item" id="roleLi">
-                                    <a class="page-link" href="#" onclick="roelPrev()">上一页</a>
+                                    <a class="page-link" href="#" onclick="rolePrev()">上一页</a>
 
                                 <li class="page-item">
                                     <a class="page-link" href="#" onclick="roleNext()">下一页</a>

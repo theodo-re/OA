@@ -118,7 +118,6 @@ function roleNext() {
 
 }
 function logList(pageIndex){
-
     $("[a='logth']").remove();
     $("[bb='logli']").html("");
     $.post("../liusujun/logList",{'realName':$("#yonghuname").val(),
@@ -147,6 +146,7 @@ function logList(pageIndex){
     },"json")
 }
 function logPrev() {
+
     var pageIndex=$("#logPageIndex").val()
     var j=parseInt(pageIndex)
     if(j==1){
@@ -164,6 +164,7 @@ function logNext() {
     if(j==i){
         alert("已经是最后一页了！")
     }else{
+        alert(j+1+"liusujun")
         logList(j+1);
     }
 
@@ -269,6 +270,7 @@ function addUsers(){
                 alert("添加成功！")
                 userList();
                 logList();
+                Organ();
             }else{
                 alert("添加失败！")
             }
@@ -298,6 +300,7 @@ function updateUsers(){
                 alert("修改成功！")
                 userList();
                 logList();
+                Organ();
             }else{
                 alert("添加失败！")
             }
@@ -324,6 +327,7 @@ function addRole(){
                 alert("添加成功！")
                 roleList();
                 logList();
+                userList();
             }else{
                 alert("添加失败！")
             }
@@ -344,10 +348,12 @@ function updateRole(){
         data: {'valueId':$("#bainhao").val(),'valueName':$("#roleName").val()},
         type: 'POST',
         success: function (data) {
+            alert(data);
             if(data>0){
                 alert("修改成功！")
                 roleList();
                 logList();
+                userList();
             }else{
                 alert("修改失败！")
             }
@@ -372,6 +378,7 @@ function addOrgan(){
                 alert("添加成功！")
                 Organ();
                 logList();
+                userList();
             }else{
                 alert("添加失败！")
             }
@@ -401,6 +408,7 @@ function updateDept(){
                 alert("修改成功！")
                 userList();
                 logList();
+                userList();
             }else{
                 alert("添加失败！")
             }
@@ -427,9 +435,10 @@ function addDept(){
         type: 'POST',
         success: function (data) {
             if(data>0){
-                alert("修改成功！")
+                alert("添加成功！")
                 Organ();
                 logList();
+                userList();
             }else{
                 alert("添加失败！")
             }

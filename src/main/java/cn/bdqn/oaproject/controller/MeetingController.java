@@ -38,7 +38,7 @@ public class MeetingController {
 
     //会议管理
     @RequestMapping(value = "/huiyiguanli",method = RequestMethod.GET)
-    public String meeting(Model model){
+    public String meeting(Model model,HttpSession session){
         List<Meeting> metList=meetingService.findAllMeeting();
         model.addAttribute("metList",metList);
         //进入页面显示出全部的会议室
@@ -50,6 +50,8 @@ public class MeetingController {
         model.addAttribute("pageSupport",pageSupport);
         List<Meeting> meetingList=meetingService.findAllMet(0,2);
         model.addAttribute("meetList",meetingList);
+        Users user = (Users) session.getAttribute(Constants.USER_SESSION);
+        model.addAttribute("user",user.getRoleId());
 
 
         return "huiyiguanli";

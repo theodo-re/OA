@@ -1,4 +1,14 @@
 $(function () {
+    $.ajax({
+        url:'dept',
+        type:'post',
+        dataType:'text',
+        success:function (data) {
+            var json = eval("("+data+")");
+            $("#followers-tab1").text(json.deptName)
+        }
+    })
+
     f(1);
 
     /*点击搜索按钮*/
@@ -11,68 +21,56 @@ $(function () {
     })
     /*添加公司文档*/
     $("#addCompanyFile").click(function () {
-        //将当前时间转换成yyyymmdd格式
-        var mydate = new Date();
-        var str = "" + mydate.getFullYear() + "-";
-        var mm = mydate.getMonth() + 1
-        if (mydate.getMonth() > 9) {
-            str += mm + "-";
-        } else {
-            str += "0" + mm + "-";
-        }
-        if (mydate.getDate() > 9) {
-            str += mydate.getDate();
-        } else {
-            str += "0" + mydate.getDate();
-        }
         $("#yuio").text("doc/txt")
-        $("#dangqianshijian").val(str);
         $("#fileKind").val(1)
         $("#modeltitle").text("添加公司文档")
+        $.ajax({
+            url:'abs',
+            type:'put',
+            dataType:'json',
+            success:function (data) {
+                $("#dangqianshijian").val(data["time"])
+                $("#by").val(data["userName"])
+                $("#createdBy").val(data["userId"])
+            }
+        })
 
     })
     /*添加个人文档*/
     $("#tianjiagerenwendang").click(function () {
-        //将当前时间转换成yyyymmdd格式
-        var mydate = new Date();
-        var str = "" + mydate.getFullYear() + "-";
-        var mm = mydate.getMonth() + 1
-        if (mydate.getMonth() > 9) {
-            str += mm + "-";
-        } else {
-            str += "0" + mm + "-";
-        }
-        if (mydate.getDate() > 9) {
-            str += mydate.getDate();
-        } else {
-            str += "0" + mydate.getDate();
-        }
 
-        $("#dangqianshijian").val(str);
+        $.ajax({
+            url:'abs',
+            type:'put',
+            dataType:'json',
+            success:function (data) {
+                $("#dangqianshijian").val(data["time"])
+                $("#by").val(data["userName"])
+                $("#createdBy").val(data["userId"])
+            }
+        })
+
         $("#modeltitle").text("添加个人文档")
         $("#yuio").text("doc/txt")
         $("#fileKind").val(4)
     })
     /*添加规章制度*/
     $("#tianjiaguizhangzhidu").click(function () {
-        //将当前时间转换成yyyymmdd格式
-        var mydate = new Date();
-        var str = "" + mydate.getFullYear() + "-";
-        var mm = mydate.getMonth() + 1
-        if (mydate.getMonth() > 9) {
-            str += mm + "-";
-        } else {
-            str += "0" + mm + "-";
-        }
-        if (mydate.getDate() > 9) {
-            str += mydate.getDate();
-        } else {
-            str += "0" + mydate.getDate();
-        }
+
         $("#yuio").text("txt")
-        $("#dangqianshijian").val(str);
+
         $("#fileKind").val(2)
         $("#modeltitle").text("添加规章制度")
+        $.ajax({
+            url:'abs',
+            type:'put',
+            dataType:'json',
+            success:function (data) {
+                $("#dangqianshijian").val(data["time"])
+                $("#by").val(data["userName"])
+                $("#createdBy").val(data["userId"])
+            }
+        })
     })
     /*添加文件夹*/
     $("#wenjianjia").click(function () {
@@ -194,16 +192,16 @@ function del2(id) {
 /*上一页*/
 function prev(num) {
     if (num == 1) {
-        var page = $("#dangqianye").val();
+        var page = parseInt($("#dangqianye").val())
         if (page == 1) {
-            f($("#zongyeshu").val())
+            alert("已是第一页！")
         } else {
             f(page - 1)
         }
     } else if (num == 2) {
-        var page = $("#dangqianye2").val();
+        var page = parseInt($("#dangqianye2").val());
         if (page == 1) {
-            g($("#zongyeshu2").val())
+            alert("已是第一页！")
         } else {
             g(page - 1)
         }
@@ -215,18 +213,18 @@ function prev(num) {
 /*下一页*/
 function next(num) {
     if (num == 1) {
-        var page = $("#dangqianye").val();
+        var page = parseInt($("#dangqianye").val());
         if (page == $("#zongyeshu").val()) {
-            f(1)
+            alert("已是最后一页！")
         } else {
             f(page + 1)
         }
     } else if (num == 2) {
-        var page = $("#dangqianye2").val();
+        var page = parseInt($("#dangqianye2").val());
         if (page == $("#zongyeshu2").val()) {
-            f(1)
+            alert("已是最后一页！")
         } else {
-            f(page + 1)
+            g(page + 1)
         }
     }
 }
@@ -261,7 +259,9 @@ function g(page) {
             }
             if (data["ZC"] < 4) {
                 $("#tianjiaguizhangzhidu").remove()
+                $(".btn btn-danger btn-floating").remove()
             }
+
             $("#zongyeshu2").val(data["pageCount"])
             $("#dangqianye2").val(data["pageIndex"]);
             $("#shangyiye2").after(str2);
@@ -300,11 +300,15 @@ function f(page) {
             }
             if (data["ZC"] < 4) {
                 $("#addCompanyFile").remove()
+                $(".btn btn-danger btn-floating").remove()
             }
+            $("#wName").val(data["fileName"])
+            $("#createBy").val(data["createdBy"])
             $("#zongyeshu").val(data["pageCount"])
             $("#dangqianye").val(data["pageIndex"]);
             $("#shangyiye").after(str2);
             $("#CompanyFileTable").append(str);
+
         }
     })
 }
@@ -328,15 +332,12 @@ function y(page) {
                 str += "<div class='accordion-row'><a href='#' class='accordion-header'><span>" + y.foldName + "</span>" +
                     "<i class='accordion-status-icon close fa fa-plus'></i><i class='accordion-status-icon open fa fa-minus'></i>" +
                     "</a><div class='accordion-body'>"
-                if (data["user"] == y.user) {
 
+                if (data["user"].id == y.user) {
                     $.each(data["wordlist2"], function (j, k) {
-
                         str += "<p>" + k.fileName + "</p>"
                     })
                 }
-
-
                 str += "</div></div>"
             })
             if (data["ZC"] < 2) {

@@ -65,6 +65,7 @@ public class CarController {
 
         List<Vehicle> mo=vehicleService.findAllVmodel();
         model.addAttribute("vmodelList",mo);
+        model.addAttribute("user",user.getRoleId());
         return "yongcheguanli";
     }
     //

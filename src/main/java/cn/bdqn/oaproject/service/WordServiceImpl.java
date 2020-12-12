@@ -5,6 +5,7 @@ import cn.bdqn.oaproject.entity.Folder;
 import cn.bdqn.oaproject.entity.Users;
 import cn.bdqn.oaproject.entity.Word;
 import cn.bdqn.oaproject.param.Common;
+import cn.bdqn.oaproject.param.UpdateInfo;
 import cn.bdqn.oaproject.util.Fixed;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,13 +59,21 @@ public class WordServiceImpl implements WordService {
 
     /*根据id 修改文件状态为回收站*/
     @Override
-    public Integer updateFileStateByFileId(Integer id) {
-        Integer result = wordDao.updateFileStateByFileId(id, 0);
+    public Integer updateFileStateByFileId(Integer id,Integer userId,Integer state) {
+        Date date=new Date();
+        UpdateInfo info=new UpdateInfo();
+        info.setId(id);
+        info.setUserId(userId);
+        info.setState(state);
+        info.setDate(date);
+        Integer result = wordDao.updateFileStateByFileId(info);
         return result;
     }
 
     @Override
     public Map<String, Object> findSystemList(Common common) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("pageIndex", common.getPageIndex());
         common.setPageIndex((common.getPageIndex() - 1) * Fixed.PAGE_SIZE);
         common.setPageSize(Fixed.PAGE_SIZE);
         List<Word> sysList = wordDao.findSystemWord(common);
@@ -75,10 +86,10 @@ public class WordServiceImpl implements WordService {
                 pageCount = SystemCount / Fixed.PAGE_SIZE;
             }
         }
-        Map<String, Object> map = new HashMap<>();
         map.put("list", sysList);
         map.put("pageCount", pageCount);
-        map.put("pageIndex", common.getPageIndex());
+
+
         return map;
     }
 
@@ -131,7 +142,6 @@ public class WordServiceImpl implements WordService {
 
     @Override
     public List<Folder> findFolderByDeptId(Integer deptId) {
-        System.out.println(deptId+"**************************");
         List<Folder> folders=wordDao.findFolderByDeptId(deptId);
         return folders;
     }
@@ -156,9 +166,6 @@ public class WordServiceImpl implements WordService {
         }else {
             folder.setFoldAp(ap);
             folder.setFoldRp(rp);
-
-        }
-        if (!file.exists()) {
             file.mkdirs();
         }
         Integer result=wordDao.addFold(folder);
@@ -174,7 +181,6 @@ public class WordServiceImpl implements WordService {
     @Override
     public Folder findfoldApByUserId(Integer id) {
         Folder folder=wordDao.findFileApByUserId(id);
-
         return folder;
     }
 
@@ -191,12 +197,14 @@ public class WordServiceImpl implements WordService {
         if (result>0){
             String ap=wordDao.findFileAPByid(id);
             File file=new File(ap);
-
-            if (file.delete()){
-                return 1;
+            if (file!=null){
+                if (file.delete()){
+                    return 1;
+                }
             }
+
         }
-            return 0;
+        return 0;
 
     }
 
@@ -210,7 +218,6 @@ public class WordServiceImpl implements WordService {
     @Override
     public Integer findUserZCById(Integer id) {
         Integer result=wordDao.findUserZCByUserId(id);
-
         return result;
     }
 

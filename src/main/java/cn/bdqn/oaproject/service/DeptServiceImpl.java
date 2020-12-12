@@ -108,5 +108,30 @@ public class DeptServiceImpl implements DeptService{
     public Dept findDeptByIDD(Integer id) {
         return deptDao.findDeptByIDD(id);
     }
+    @Override
+    public int addDept(Dept dept,HttpSession session) {
+
+        int rel1=deptDao.addDept(dept);
+        Log log=new Log();
+        Long userId=((Users)session.getAttribute(Constants.USER_SESSION)).getId();
+        log.setUserId(userId);
+        Long roleId=((Users)session.getAttribute(Constants.USER_SESSION)).getRoleId();
+        log.setRoleId(roleId);
+        log.setIncident("添加了部门");
+        log.setOpedate(new Date());
+        int rel2=logdao.addLog(log);
+        int rel=-1;
+        List<Integer> nums=new ArrayList<>();
+        nums.add(rel1);
+        nums.add(rel2);
+        for(int i:nums){
+            if(i>0){
+                rel=1;
+            }
+        }
+
+        return rel;
+    }
+
 
 }

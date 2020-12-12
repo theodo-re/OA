@@ -1,6 +1,9 @@
 package cn.bdqn.oaproject.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Word {
@@ -13,6 +16,8 @@ public class Word {
   private String fileMsg;
   private long fileAdd;
   private Integer createdBy;
+  @JsonFormat(locale = "yyyy-MM-dd")
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date createdTime;
   private long modifyBy;
   private Date modifyTime;

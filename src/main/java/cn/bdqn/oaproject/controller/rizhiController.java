@@ -28,9 +28,8 @@ public class rizhiController {
     public Map<String,Object> findLog(
             LogUtil logUtil
     ){
-        System.out.println(logUtil.getRealName()+"----------------");
         int pageSize= Constants.pageSize;//获取当前页大小
-        int currentPageNo = logUtil.getPageIndex();//设置当前页码
+        int currentPageNo = logUtil.getLogPageIndex();//设置当前页码
         int totalCount=logService.findLogCount(logUtil);//总条数
         PageSupport pages=new PageSupport();
         pages.setCurrentPageNo(currentPageNo);
@@ -38,15 +37,13 @@ public class rizhiController {
         pages.setTotalCount(totalCount);
         logUtil.setPageSize(pages.getPageSize());
         int totalPageCount = pages.getTotalPageCount();//计算总页数
-        int currentPageNo1=(logUtil.getPageIndex()-1)*pageSize;
-        logUtil.setPageIndex(currentPageNo1);
-
+        int currentPageNo1=(logUtil.getLogPageIndex()-1)*pageSize;
+        logUtil.setLogPageIndex(currentPageNo1);
         List<Log> logList=logService.findLog(logUtil);
-
         Map<String,Object> map=new HashMap<String,Object>();
         map.put("logList",logList);
         map.put("pages",pages);
-        map.put("pageIndex", logUtil.getPageIndex());
+        map.put("pageIndex", currentPageNo);
         //回显
         String logName=logUtil.getRealName();
         map.put("logName",logName);

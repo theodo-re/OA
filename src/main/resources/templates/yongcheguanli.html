@@ -173,7 +173,7 @@
                    aria-controls="home"
                    aria-selected="true">用车申请</a>
             </li>
-            <li class="flex-sm-fill text-sm-center nav-item">
+            <li th:if="${user}!=5" class="flex-sm-fill text-sm-center nav-item">
                 <a class="nav-link" id="photos-tab" data-toggle="tab" href="#photos" role="tab" aria-controls="profile"
                    aria-selected="false">车辆信息管理</a>
             </li>

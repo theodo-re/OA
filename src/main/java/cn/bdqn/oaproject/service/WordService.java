@@ -5,6 +5,7 @@ import cn.bdqn.oaproject.entity.Users;
 import cn.bdqn.oaproject.entity.Word;
 import cn.bdqn.oaproject.param.Common;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,7 @@ public interface WordService {
     /*根据后缀名查询后缀id*/
     Integer findFileTypeByLastName(String lastName);
     /*根据id 修改文件状态为回收站*/
-    Integer updateFileStateByFileId(Integer id);
+    Integer updateFileStateByFileId(Integer id, Integer userId, Integer state);
     /*查询规章制度*/
     Map<String ,Object> findSystemList(Common common);
     /*根据id查询规章制度绝对路径*/

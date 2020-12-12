@@ -1,8 +1,10 @@
 package cn.bdqn.oaproject.controller;
 
+import cn.bdqn.oaproject.entity.Dept;
 import cn.bdqn.oaproject.entity.Folder;
 import cn.bdqn.oaproject.entity.Users;
 import cn.bdqn.oaproject.entity.Word;
+import cn.bdqn.oaproject.service.DeptService;
 import cn.bdqn.oaproject.service.WordService;
 import cn.bdqn.oaproject.util.Constants;
 import org.springframework.stereotype.Controller;
@@ -26,11 +28,27 @@ public class PartController {
     @Resource
     WordService wordService;
 
+    @Resource
+    DeptService deptService;
+
+
+    @PostMapping("/dept")
+    @ResponseBody
+    public Dept findDept(HttpSession session){
+        Users user=(Users) session.getAttribute(Constants.USER_SESSION);
+        int deptId=0;
+        if (user!=null){
+            deptId=(int) user.getDeptId();
+        }
+        Dept dept=deptService.findDeptById(deptId);
+
+        return dept;
+    }
+
 
     @PostMapping("/Folder")
     @ResponseBody
     public String addFolder(Folder folder,HttpSession session){
-        System.out.println("进入了控制器"+folder.getUser()+"0000000000000000");
         Users user=(Users) session.getAttribute(Constants.USER_SESSION);
         folder.setDept((int) user.getDeptId());
         Integer result=wordService.addFold(folder);
@@ -48,20 +66,17 @@ public class PartController {
     @ResponseBody
     public Map<String ,Object> findPart(HttpSession session){
         Users user=(Users)session.getAttribute(Constants.USER_SESSION);
-        Integer ZC=wordService.findUserZCById((int) user.getId());
+        Integer ZC=0;
+        if (user!=null){
+            ZC=wordService.findUserZCById((int) user.getId());
+        }
         Map<String ,Object> map=new HashMap<>();
         if (user!=null){
             List<Folder> folderList=wordService.findFolderByDeptId((int) user.getDeptId());
             List<Word> wordList=wordService.findDeptWordByDeptId((int) user.getDeptId());
             List<Word> wordList2=wordService.findWordListByUserId((int) user.getId());
-            for (Folder folder : folderList) {
-                System.out.println("人名:"+folder.getUser());
-            }
-            for (Word word : wordList2) {
-                System.out.println("文档名："+word.getFileName());
-            }
-            System.out.println("用户 id +++++++++"+user.getId());
-            map.put("user",user.getId());
+
+            map.put("user",user);
             map.put("foldlist",folderList);
             map.put("ZC",ZC);
             map.put("wordlist1",wordList);

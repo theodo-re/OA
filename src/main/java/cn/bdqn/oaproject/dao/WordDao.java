@@ -4,6 +4,7 @@ import cn.bdqn.oaproject.entity.Folder;
 import cn.bdqn.oaproject.entity.Users;
 import cn.bdqn.oaproject.entity.Word;
 import cn.bdqn.oaproject.param.Common;
+import cn.bdqn.oaproject.param.UpdateInfo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public interface WordDao {
     /*根据后缀查询文件类型id*/
     Integer findFileTypeByLastName(@Param("lastName") String lastname);
     /*根据id将文件状态改为回收站*/
-    Integer updateFileStateByFileId(@Param("id")Integer id,@Param("state")Integer state);
+    Integer updateFileStateByFileId(UpdateInfo info);
     /*查询规章制度*/
     List<Word> findSystemWord(Common common);
     /*查询规章制度总条数*/
@@ -49,6 +50,7 @@ public interface WordDao {
     Integer findUserZCByUserId(@Param("id")Integer id);
     /*根据用户id查询本人的文档*/
     List<Word> findWordByUserId(@Param("id")Integer id);
+
 
 
 

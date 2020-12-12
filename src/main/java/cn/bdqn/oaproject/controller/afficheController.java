@@ -59,7 +59,7 @@ public class afficheController {
         Log log = new Log();
         log.setUserId(users.getId());
         log.setRoleId(users.getRoleId());
-        log.setIncident("张三添加了通告");
+        log.setIncident(users.getRealName()+"添加了通告");
         log.setOpedate(new Date());
         int rel = afficheService.insertAff(affiche,log);
         if (rel>0){

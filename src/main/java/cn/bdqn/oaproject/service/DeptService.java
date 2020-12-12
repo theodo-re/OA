@@ -36,4 +36,8 @@ public interface DeptService {
      * 没有负责人查询部门信息
      */
     Dept findDeptByIDD(Integer id);
+    /**
+     * 添加部门
+     */
+    int addDept(Dept dept,HttpSession session);
 }

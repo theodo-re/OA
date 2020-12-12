@@ -60,4 +60,8 @@
          JOIN `organization` o ON o.id=d.organId
          where d.organId=#{id}
     </select>
+    <insert id="addDept" parameterType="Dept">
+        insert into Dept(dName,organId,userId,telephone,phone,fax,createdby,createdtime)
+        values(#{dName},#{organId},#{userId},#{telephone},#{phone},#{fax},#{createdby},#{createdtime})
+    </insert>
 </mapper>

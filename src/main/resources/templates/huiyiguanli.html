@@ -154,10 +154,10 @@
             <li class="flex-sm-fill text-sm-center nav-item">
                 <a class="nav-link active" id="hometimeline-tab" data-toggle="tab" href="#timeline" role="tab" aria-controls="home" aria-selected="true">会议室预定</a>
             </li>
-            <li class="flex-sm-fill text-sm-center nav-item">
+            <li  th:if="${user}==4" class="flex-sm-fill text-sm-center nav-item">
                 <a class="nav-link" id="photos-tab" data-toggle="tab" href="#photos" role="tab" aria-controls="profile" aria-selected="false">会议室预定管理</a>
             </li>
-            <li class="flex-sm-fill text-sm-center nav-item">
+            <li  th:if="${user}!=5" class="flex-sm-fill text-sm-center nav-item">
                 <a class="nav-link" id="followers-tab1" data-toggle="tab" href="#followers" role="tab" aria-controls="followers" aria-selected="false">
                     会议室管理
                 </a>

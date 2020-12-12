@@ -66,13 +66,11 @@ public class dictionaryController {
      * 添加角色
      */
     @RequestMapping("addRole")
-    public String addRole(@RequestParam(required = false) Integer valueId,
+    @ResponseBody
+    public int addRole(@RequestParam(required = false) Integer valueId,
                           @RequestParam(required = false) String valueName, HttpSession session){
         int rel=DictionaryService.addRole(valueId,valueName,session);
-        if(rel>0){
-            return "redirect:xitongguanli";
-        }
-        return "xitongguanli";
+        return rel;
     }
     /**
      * 根据id查找角色
@@ -88,13 +86,11 @@ public class dictionaryController {
      * 修改角色
      */
     @RequestMapping("updateRole")
-    public String updateRole(@RequestParam(required = false)Integer valueId,
+    @ResponseBody
+    public int updateRole(@RequestParam(required = false)Integer valueId,
             @RequestParam(required = false) String valueName, HttpSession session){
         int rel=DictionaryService.updateRoleById(valueId,valueName,session);
-        if(rel>0){
-            return "redirect:xitongguanli";
-        }
-        return "xitongguanli";
+       return rel;
     }
     /**
      * 根据id删除角色

@@ -32,7 +32,7 @@
                 and #{endDate}>=l.`opedate`
             </if>
         </where>
-        limit #{pageIndex},#{pageSize}
+        limit #{logPageIndex},#{pageSize}
     </select>
     <select id="findLogCount" resultType="Integer" parameterType="cn.bdqn.oaproject.util.LogUtil">
         select count(0) from log l  JOIN users u ON u.id=l.userId

@@ -14,13 +14,8 @@ public class OrganizationController {
     @Resource
     private OrganizationService organizationService;
     @RequestMapping("addOrganization")
-    public String addOrganization(Organization Organization, HttpSession session){
+    public int addOrganization(Organization Organization, HttpSession session){
         int rel=organizationService.addOrganization(Organization,session);
-        if(rel>0){
-            System.out.println("添加成功！");
-            return "redirect:/xitongguanli";
-        }
-        return "redirect:/xitongguanli";
-
+        return rel;
     }
 }

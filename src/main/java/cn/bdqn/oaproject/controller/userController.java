@@ -10,10 +10,7 @@ import cn.bdqn.oaproject.util.Constants;
 import cn.bdqn.oaproject.util.PageSupport;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -37,9 +34,9 @@ public class userController {
     @RequestMapping("/Users")
     @ResponseBody
     public Map<String,Object> findUsers(@RequestParam(required = false) String uName,
-                            @RequestParam(required = false) String realName,
-                            @RequestParam(defaultValue = "1",required = false) Integer pageIndex
-                           ){
+                                        @RequestParam(required = false) String realName,
+                                        @RequestParam(defaultValue = "1",required = false) Integer pageIndex
+    ){
         int pageSize= Constants.pageSize;//获取当前页大小
         int currentPageNo = pageIndex;//设置当前页码
         Users user=new Users();
@@ -67,12 +64,12 @@ public class userController {
      * @param
      * @return
      */
-   @RequestMapping("/findOrganization")
-   @ResponseBody
-   public List<Organization> findOrganization(){
-       List<Organization> OrganizationList=organizationService.findOrganization();
+    @RequestMapping("/findOrganization")
+    @ResponseBody
+    public List<Organization> findOrganization(){
+        List<Organization> OrganizationList=organizationService.findOrganization();
         return OrganizationList;
-   }
+    }
     /**
      * 查询所在部门
      */
@@ -99,15 +96,10 @@ public class userController {
      * 添加用户
      */
     @RequestMapping("/addusers")
-    public String addUsers(Users user,HttpSession session){
+    @ResponseBody
+    public int addUsers(Users user,HttpSession session){
         int rel=userService.addUsers(user,session);
-        if(rel>0){
-            System.out.println("添加成功");
-        }else{
-            System.out.println("添加失败！");
-            return "../deng/xitongguanli\"";
-        }
-        return "redirect:../deng/xitongguanli\"";
+        return rel;
     }
     /**
      * 根据id查找用户
@@ -132,12 +124,10 @@ public class userController {
      * 修改用户
      */
     @RequestMapping("/updateUsers")
-    public String updateUser(Users users, HttpSession session){
+    @ResponseBody
+    public int updateUser(Users users, HttpSession session){
         int rel=userService.updateUsers(users,session);
-        if(rel>0){
-            return "redirect:../deng/xitongguanli";
-        }
-        return "../deng/xitongguanli";
+        return rel;
     }
     //
     @RequestMapping("/findDeptById")
@@ -146,9 +136,7 @@ public class userController {
         String num=id.toString();
         Long deptid=Long.parseLong(num);
         List<Dept> deptList=deptService.findDeptByCreatedId(deptid);
-        for(Dept dept:deptList){
-            System.out.println(dept.getCreatedby()+"*******************");
-        }
+
         return deptList;
     }
 

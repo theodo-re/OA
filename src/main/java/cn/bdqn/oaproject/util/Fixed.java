@@ -8,11 +8,11 @@ package cn.bdqn.oaproject.util;
  */
 public class Fixed {
     public static int PAGE_SIZE=5;//页大小
-    public static String COMPANY_FILE_AP="E:\\WorkSpaces\\IDEA\\OA\\src\\main\\resources\\static\\file\\company\\";
+    public static String COMPANY_FILE_AP="D:\\WorkSpaces\\IDEA\\OA\\src\\main\\resources\\static\\file\\company\\";
     public static String COMPANY_FILE_RP="file\\company\\";
-    public static String SYSTEM_FILE_AP="E:\\WorkSpaces\\IDEA\\OA\\src\\main\\resources\\static\\file\\regime\\";
+    public static String SYSTEM_FILE_AP="D:\\WorkSpaces\\IDEA\\OA\\src\\main\\resources\\static\\file\\regime\\";
     public static String SYSTEM_FILE_RP="file\\regime\\";
-    public static String DEPT_FILE_AP="E:\\WorkSpaces\\IDEA\\OA\\src\\main\\resources\\static\\file\\dept\\";
+    public static String DEPT_FILE_AP="D:\\WorkSpaces\\IDEA\\OA\\src\\main\\resources\\static\\file\\dept\\";
     public static String DEPT_FILE_RP="file\\dept\\";
 
 }

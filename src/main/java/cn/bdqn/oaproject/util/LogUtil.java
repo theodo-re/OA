@@ -13,8 +13,9 @@ public class LogUtil {
     @JsonFormat(locale = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
-    private Integer pageIndex=1;
+    private Integer logPageIndex=1;
     private Integer pageSize;
+
 
     public String getRealName() {
         return realName;
@@ -40,12 +41,20 @@ public class LogUtil {
         this.endDate = endDate;
     }
 
-    public Integer getPageIndex() {
+    /*public Integer getPageIndex() {
         return pageIndex;
     }
 
     public void setPageIndex(Integer pageIndex) {
         this.pageIndex = pageIndex;
+    }*/
+
+    public Integer getLogPageIndex() {
+        return logPageIndex;
+    }
+
+    public void setLogPageIndex(Integer logPageIndex) {
+        this.logPageIndex = logPageIndex;
     }
 
     public Integer getPageSize() {
