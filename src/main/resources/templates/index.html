@@ -33,6 +33,27 @@
             $("#shouye").click(function () {
                 $("#pic").remove()
             });
+            $("#tonggaoguanli").click(function () {
+                $("#pic").remove()
+            });
+            $("#wendangliebiao").click(function () {
+                $("#pic").remove()
+            });
+            $("#wendanghuishouzhan").click(function () {
+                $("#pic").remove()
+            });
+            $("#huiyiguanli").click(function () {
+                $("#pic").remove()
+            });
+            $("#yongcheguanli").click(function () {
+                $("#pic").remove()
+            });
+            $("#renshiguanli").click(function () {
+                $("#pic").remove()
+            });
+            $("#xitongguanli").click(function () {
+                $("#pic").remove()
+            });
         });
 
     </script>
@@ -61,23 +82,23 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="../wendang" target="box" class="wendangliebiao">文档列表</a>
+                        <a href="../wendang" target="box" class="wendangliebiao" id="wendangliebiao">文档列表</a>
                     </li>
-                    <li><a href="../Trash" target="box" class="wendanghuishouzhan">文档回收站</a></li>
+                    <li><a href="../Trash" target="box" class="wendanghuishouzhan" id="wendanghuishouzhan">文档回收站</a></li>
                 </ul>
             </li>
             <li><a href="#"><i class="icon ti-rocket"></i> <span>行政管理</span> </a>
                 <ul>
-                    <li><a href="../huiyiguanli" target="box" class="huiyiguanli">会议管理 </a></li>
-                    <li><a href="../yongcheguanli.html" target="box" class="yongcheguanli">用车管理 </a></li>
+                    <li><a href="../huiyiguanli" target="box" class="huiyiguanli" id="huiyiguanli">会议管理 </a></li>
+                    <li><a href="../yongcheguanli.html" target="box" class="yongcheguanli" id="yongcheguanli">用车管理 </a></li>
                 </ul>
             </li>
-            <li><a th:href="@{/renshiguanli.html}" target="box" class="renshiguanli"><i class="icon ti-layers-alt"></i> <span>人事管理</span>
+            <li><a th:href="@{/renshiguanli.html}" target="box" class="renshiguanli" id="renshiguanli"><i class="icon ti-layers-alt"></i> <span>人事管理</span>
             </a>
 
             </li>
             <li th:if="${user}==1">
-                <a href="xitongguanli" target="box" class="xitongguanli"><i class="icon ti-paint-roller"></i>
+                <a href="xitongguanli" target="box" class="xitongguanli" id="xitongguanli"><i class="icon ti-paint-roller"></i>
                 <span>系统管理</span> </a>
 
             </li>

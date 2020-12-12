@@ -48,4 +48,13 @@ class OaprojectApplicationTests {
             System.out.println();
         }
     }
+
+    @Test
+    void xiangjia() {
+        int[] num={2,7,11,15};
+        int[] num1=new int[5];
+        for(int i=0;i<num.length-1;i=i+2){
+            System.out.println(i);
+        }
+    }
 }

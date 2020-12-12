@@ -1,6 +1,7 @@
 package cn.bdqn.oaproject.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -10,13 +11,16 @@ public class Reserve {
   private Integer id;
   private long meetId;
   @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern = "yyyy-MM-dd")
   private Date startdate;
   @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern = "yyyy-MM-dd")
   private Date enddate;
   private String rContent;
   private long recordby;
   private long reserveby;
   @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern = "yyyy-MM-dd")
   private Date recordtime;
 
   //

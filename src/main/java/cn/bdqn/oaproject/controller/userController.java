@@ -178,10 +178,18 @@ public class userController {
         List<Users> userList=userService.findUserByOrganId(OrganId);
         return userList;
     }
+
     @RequestMapping("/findDeptBydeptId")
     @ResponseBody
     public Dept findDeptbyId(Integer id){
-        Dept dept=deptService.findDeptById(id);
+        Dept dept;
+        int rel=deptService.findDeptFuZeUsers(id);
+        if(rel>0){
+            dept=deptService.findDeptById(id);
+        }else{
+            dept=deptService.findDeptByIDD(id);
+        }
+
         return dept;
     }
 

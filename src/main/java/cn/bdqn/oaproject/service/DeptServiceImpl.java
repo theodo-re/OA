@@ -99,6 +99,14 @@ public class DeptServiceImpl implements DeptService{
     public Dept findDeptById(Integer id) {
         return deptDao.findDeptById(id);
     }
+    @Override
+    public int findDeptFuZeUsers(Integer id) {
+        return deptDao.findDeptFuZeUsers(id);
+    }
 
+    @Override
+    public Dept findDeptByIDD(Integer id) {
+        return deptDao.findDeptByIDD(id);
+    }
 
 }

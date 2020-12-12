@@ -10,6 +10,7 @@ import cn.bdqn.oaproject.util.Constants;
 import cn.bdqn.oaproject.util.PageSupport;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.apache.ibatis.annotations.Param;
+import org.json.HTTP;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -100,9 +101,9 @@ public class MeetingController {
     //点击预定
     @RequestMapping(value = "/huiyiguanliYD.html",method = RequestMethod.POST)
     public String yuDing( @RequestParam(required = false)Integer meetId, Model model,
-                         @RequestParam(required = false) String  mName,
-                         @RequestParam(required = false) String  reserveby,
-                         @RequestParam(required = false) String  rContent, HttpSession session) throws ParseException {
+                          @RequestParam(required = false) String  mName,
+                          @RequestParam(required = false) String  reserveby,
+                          @RequestParam(required = false) String  rContent, HttpSession session) throws ParseException {
         List<Meeting> metList=meetingService.findAllMeeting();
         model.addAttribute("metList",metList);
         //获取sesison的时间
@@ -111,9 +112,9 @@ public class MeetingController {
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
         Date Startdate=new Date();
 
-            Startdate=simpleDateFormat.parse(firstTime);
-            //根据姓名获得预订人的ID
-            int reservebyID=usersService.findIdName(reserveby);
+        Startdate=simpleDateFormat.parse(firstTime);
+        //根据姓名获得预订人的ID
+        int reservebyID=usersService.findIdName(reserveby);
         //创建对象，传值
         Reserve reserve=new Reserve();
         reserve.setMeetId(meetId);
@@ -145,11 +146,12 @@ public class MeetingController {
         }
 
     }
-    @RequestMapping("/ydGuanLi.html")
-    public String ydGuanli(@RequestParam(required = false)String ydTime,
-                           @RequestParam(required = false)String ydpeople,
-                           @RequestParam(required = false)String ydHuiyi,
-                           @RequestParam(required = false)String ydLeixing,Model model) throws ParseException {
+    @RequestMapping(value = "/ydGuanLi.html",method =RequestMethod.POST)
+    @ResponseBody
+    public List<Reserve> ydGuanli(@RequestParam(required = false)String ydTime,
+                                  @RequestParam(required = false)String ydpeople,
+                                  @RequestParam(required = false)String ydHuiyi,
+                                  @RequestParam(required = false)String ydLeixing,Model model) throws ParseException {
         //进行时间格式转换
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
         Date date=new Date();
@@ -164,45 +166,41 @@ public class MeetingController {
             //根据会议室名称获得对应id
             int meetingID=meetingService.findIdBynameMeeting(ydHuiyi);
             reserve.setMeetId(meetingID);
-        }else{
-            reserve.setMeetId(0);
         }
         if(!ydLeixing.equals("请选择类型")) {
             reserve.setrContent(ydLeixing);
         }
         List<Reserve> reserveList=reserveService.findAllreserve(reserve);
-        model.addAttribute("reserveList",reserveList);
-        List<Meeting> metList=meetingService.findAllMeeting();
-        model.addAttribute("metList",metList);
-        List<Meeting> meetingLists=meetingService.findAllMet(0,2);
-        model.addAttribute("meetList",meetingLists);
-        //
-        int pageCount=meetingService.findAllPage();//总数据
-        PageSupport pageSupport=new PageSupport();
-        pageSupport.setPageSize(2);
-        pageSupport.setTotalCount(pageCount);
-        model.addAttribute("pageSupport",pageSupport);
-        //
-        return "huiyiguanli.html";
+        System.out.println(reserveList.size()+"查询的大小");
+        return reserveList;
+    }
+
+    //判断是否为空
+    @RequestMapping(value = "yudingChaXun.html",method = RequestMethod.POST)
+    @ResponseBody
+    public List<Reserve> hycx(HttpSession session){
+        List<Reserve> reserveList= (List<Reserve>) session.getAttribute("reserveList");
+        return  reserveList;
+
     }
     @RequestMapping("/ydQuXiao.html")
     public String ydQuxiao(@RequestParam(required = false)Integer reserveId,Model model){
         Reserve reserve=reserveService.findAllById(reserveId);
         int metId= (int) reserve.getMeetId();
-       int rel=meetingService.updateLesureById(metId);
+        int rel=meetingService.updateLesureById(metId);
         System.out.println(rel+"返回的id");
-       if(rel>0){
-           System.out.println("取消预定成功：）");
-           int delRel=reserveService.delReserveById(reserveId);
-           if(delRel>0){
-               System.out.println("删除成功：）");
-           }
-           else {
-               System.out.println("删除失败！：（");
-           }
-       }else{
-           System.out.println("取消预定失败！：（");
-       }
+        if(rel>0){
+            System.out.println("取消预定成功：）");
+            int delRel=reserveService.delReserveById(reserveId);
+            if(delRel>0){
+                System.out.println("删除成功：）");
+            }
+            else {
+                System.out.println("删除失败！：（");
+            }
+        }else{
+            System.out.println("取消预定失败！：（");
+        }
         List<Meeting> metList=meetingService.findAllMeeting();
         model.addAttribute("metList",metList);
         //

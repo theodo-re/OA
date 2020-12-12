@@ -41,6 +41,13 @@
                     return false;
                 }
             })
+
+            $("#followers-tab1").click(function () {
+                var shijian = new Date()
+                var yuefen = new Date().getMonth()+1;
+                $("#applydate").val(shijian.getFullYear()+"年"+yuefen+"月"+shijian.getDate()+"日");
+            })
+
             $("#qingjiatijiao").click(function () {
                 $.ajax({
                     type:'post',
@@ -170,7 +177,6 @@
                     </div>
                 </div>
 
-
             </div>
 
 
@@ -183,7 +189,7 @@
 
                                 姓名：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="userId" th:value="${renshi.realName}"
                                                                   readonly="readonly"/><br/><br/>
-                                申请时间：&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" name="applydate" value=""/><br/><br/>
+                                申请时间：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="applydate" name="applydate" value="" readonly/><br/><br/>
 
                                 部门：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="deptId" th:value="${renshi.dept.dName}"
                                                                   readonly="readonly"/><br/><br/>

@@ -64,7 +64,7 @@ public class CarController {
 
 
         List<Vehicle> mo=vehicleService.findAllVmodel();
-       model.addAttribute("vmodelList",mo);
+        model.addAttribute("vmodelList",mo);
         return "yongcheguanli";
     }
     //
@@ -72,7 +72,7 @@ public class CarController {
     @ResponseBody
     public Map<String,Object> page(Integer index){
         int pageSize=2;
-      Map<String ,Object> map=new HashMap<>();
+        Map<String ,Object> map=new HashMap<>();
         map.put("index",index);
         index=(index-1)*pageSize;
         List<Vehicle> vehicleList=vehicleService.findAllVehicle(index,pageSize);
@@ -85,7 +85,7 @@ public class CarController {
     @RequestMapping(value = "majer.html",method = RequestMethod.POST)
     @ResponseBody
     public int majer(String mejName){
-       //根据姓名查询id
+        //根据姓名查询id
         int checkid=usersService.findIdName(mejName);
         return checkid;
     }
@@ -109,16 +109,8 @@ public class CarController {
             System.out.println("添加成功：(");
         }
         //分页信息
-        int pageCount=vehicleService.findPage();//
-        int pageSize=2;
-        PageSupport pageSupport=new PageSupport();
-        //pageSupport.setCurrentPageNo(pageIndex);
-        pageSupport.setPageSize(pageSize);
-        pageSupport.setTotalCount(pageCount);
-        model.addAttribute("pageSupport",pageSupport);
-        List<Vehicle> vehicleList=vehicleService.findAllVehicle(0,pageSize);
-        model.addAttribute("vehicleList",vehicleList);
-        return "yongcheguanli";
+
+        return "redirect:/yongcheguanli.html";
     }
     /**
      * 车辆信息管理
@@ -129,7 +121,7 @@ public class CarController {
                             @RequestParam(required = false)Integer vehId,Model model){
 
         //添加车辆信息
-       int vnumber=(int)((Math.random()*9+1)*10000);//随机生成车辆编号
+        int vnumber=(int)((Math.random()*9+1)*10000);//随机生成车辆编号
         //车辆编码不能重复
         //查询全部车辆编码
         List<Vehicle> vehList=vehicleService.findAllVnumber();
@@ -161,7 +153,7 @@ public class CarController {
             }else{
                 System.out.println("添加成功：（");
             }
-            }else{
+        }else{
 
         }
         //显示车辆
@@ -177,14 +169,14 @@ public class CarController {
         model.addAttribute("pageSupport",pageSupport);
         List<Vehicle> vehicleList=vehicleService.findAllVehicle(0,pageSize);
         model.addAttribute("vehicleList",vehicleList);
-        return "yongcheguanli";
+        return "redirect:/yongcheguanli.html";
     }
     //删除
     @RequestMapping(value = "deltCar.html",method = RequestMethod.POST)
     @ResponseBody
     public String del(Integer vehid){
 
-       int rel=vehicleService.delVehicleById(vehid);
+        int rel=vehicleService.delVehicleById(vehid);
         if(rel > 0) {
             System.out.println("删除成功：）");
             return "删除成功：）";
@@ -225,8 +217,8 @@ public class CarController {
     @RequestMapping("vplate.html")
     @ResponseBody
     public String showvpt(String vplate){
-       Vehicle vehicle=new Vehicle();
-       vehicle.setVplate(vplate);
+        Vehicle vehicle=new Vehicle();
+        vehicle.setVplate(vplate);
         if(vehicleService.findByAjax(vehicle)!=null){
             return"";
         }else{
@@ -245,7 +237,7 @@ public class CarController {
         System.out.println(carName+":获取的车名");
         System.out.println(vehicleapply.getStartdate()+":获取的开始时间");
         System.out.println(vehicleapply.getEnddate()+"：获取的结束时间");
-       return vehicleapplyList;
+        return vehicleapplyList;
 
 
     }

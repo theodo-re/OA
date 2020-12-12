@@ -44,7 +44,7 @@ public class IncomeController {
         income.setPostId(((Users) session.getAttribute(Constants.USER_SESSION)).getProId());
         //申请时间
         if (applydate!=null && !applydate.equals("")){
-            income.setApplydate(new SimpleDateFormat("yyyy-MM-dd").parse(applydate));
+            income.setApplydate(new Date());
         }
         //申请事由
         if (applyment!=null && !applyment.equals("")){

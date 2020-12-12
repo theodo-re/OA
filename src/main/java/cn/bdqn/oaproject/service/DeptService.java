@@ -28,4 +28,12 @@ public interface DeptService {
      * 根据id查询部门信息
      */
     Dept findDeptById(Integer id);
+    /**
+     * 根据部门id看有没有负责人
+     */
+    int findDeptFuZeUsers(Integer id);
+    /**
+     * 没有负责人查询部门信息
+     */
+    Dept findDeptByIDD(Integer id);
 }
