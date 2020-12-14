@@ -25,6 +25,12 @@
 
     <script>
         $(function () {
+            $("#qingjiaostartdate").blur(function () {
+                if (new Date() > new Date($("#qingjiaostartdate").val()) &&
+                    ((new Date()-new Date($("#qingjiaostartdate").val()))/1000/3600)>24){
+                    alert("开始时间不得小于现在时间！")
+                }
+            })
             $("#qingjiaoenddate").blur(function () {
                 if($("#qingjiaostartdate").val()>$("#qingjiaoenddate").val()){
                     alert("结束时间不得小于开始时间！");
@@ -35,10 +41,25 @@
                 }
             })
 
+            $("#chuchaistartdate").blur(function () {
+                if (new Date() > new Date($("#chuchaistartdate").val()) &&
+                    ((new Date()-new Date($("#chuchaistartdate").val()))/1000/3600)>24){
+                    alert("出差日期不得小于当前日期！")
+                }
+            })
             $("#chuchaienddate").blur(function () {
-                if($("#qingjiaostartdate").val()>$("#qingjiaoenddate").val()){
+                if($("#chuchaistartdate").val()>$("#chuchaienddate").val()){
                     alert("结束日期不得小于出差日期！")
                     return false;
+                }
+            })
+
+            $("#chuchaimoney").blur(function () {
+                var str =/^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$/;
+                if(str.test($("#chuchaimoney").val())){
+                    return;
+                }else {
+                    alert("借款金额格式不正确！")
                 }
             })
 
@@ -49,37 +70,64 @@
             })
 
             $("#qingjiatijiao").click(function () {
-                $.ajax({
-                    type:'post',
-                    url:"leave.html",
-                    data:$("#qingjiabiaodan").serialize(),
-                    dataType:"text",
-                    success:function (data) {
-                        alert(data)
-                    }
-                })
+                var a = $("#qingjiaostartdate").val();
+                var b = $("#qingjiaoenddate").val();
+                var c = $("#qingjiaodestination").val();
+                if (!a || !b || !c){
+                    alert("不得为空！")
+                    return false;
+                }else{
+                    $.ajax({
+                        type:'post',
+                        url:"leave.html",
+                        data:$("#qingjiabiaodan").serialize(),
+                        dataType:"text",
+                        success:function (data) {
+                            alert(data)
+                        }
+                    })
+                }
+
             })
             $("#chuchaitijiao").click(function () {
-                $.ajax({
-                    type:'post',
-                    url:"evection/evection.html",
-                    data:$("#chuchaibiaodan").serialize(),
-                    dataType:"text",
-                    success:function (data) {
-                        alert(data)
-                    }
-                })
+                var d = $("#chuchaistartdate").val();
+                var e = $("#chuchaienddate").val();
+                var f = $("#chuchaidestination");
+                var g = $("#chuchaiincident").val();
+                var h = $("#chuchaietask").val();
+                var i = $("#chuchaimoney").val();
+                if (!d || !e || !f || !g || !h || !i){
+                    alert("不得为空！")
+                    return false;
+                }else {
+                    $.ajax({
+                        type:'post',
+                        url:"evection/evection.html",
+                        data:$("#chuchaibiaodan").serialize(),
+                        dataType:"text",
+                        success:function (data) {
+                            alert(data)
+                        }
+                    })
+                }
+
             })
             $("#shourutijiao").click(function () {
-                $.ajax({
-                    type:'post',
-                    url:"income/income.html",
-                    data:$("#shourubiaodan").serialize(),
-                    dataType:"text",
-                    success:function (data) {
-                        alert(data)
-                    }
-                })
+                var j = $("#applyment").val();
+                if (!j){
+                    alert("不得为空！")
+                    return false;
+                }else {
+                    $.ajax({
+                        type:'post',
+                        url:"income/income.html",
+                        data:$("#shourubiaodan").serialize(),
+                        dataType:"text",
+                        success:function (data) {
+                            alert(data)
+                        }
+                    })
+                }
             })
         })
     </script>
@@ -116,22 +164,19 @@
                         <div class="form-group" style="text-align: center;">
                             姓名：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="qingjiaouserId" th:value="${renshi.realName}" readonly="readonly"/>&nbsp;&nbsp;&nbsp;&nbsp;
                             部门：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="qingjiaodeptId" th:value="${renshi.dept.dName}" readonly="readonly"/><br/><br/>
-                            开始时间：<input type="date" id="qingjiaostartdate" name="qingjiaostartdate" value=""/>&nbsp;&nbsp;&nbsp;&nbsp;
-                            结束时间：&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" id="qingjiaoenddate" name="qingjiaoenddate" value=""/><br/><br/>
+                            开始时间：<input type="date" id="qingjiaostartdate" name="qingjiaostartdate" value=""/>&nbsp;&nbsp;<span style="color: red">*</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                            结束时间：&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" id="qingjiaoenddate" name="qingjiaoenddate" value=""/>&nbsp;&nbsp;<span style="color: red">*</span><br/><br/>
                             请假天数：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="qingjiaoleaveday" name="qingjiaoleaveday" value="" readonly="readonly"/>&nbsp;&nbsp;&nbsp;&nbsp;
                             <span style="vertical-align: middle;">请假类型：</span>&nbsp;&nbsp;&nbsp;&nbsp;<select name="qingjiaoltype">
                             <option value="1">病假</option>
                             <option value="2">事假</option>
                             <option value="3">婚假</option>
                             <option value="4">丧假</option>
-                        </select><br/><br/>
+                        </select>&nbsp;&nbsp;<span style="color: red">*</span><br/><br/>
 
-                            请假事由： <textarea name="qingjiaodestination" rows="3" cols="50"></textarea><br/><br/>
+                            请假事由： <textarea name="qingjiaodestination" id="qingjiaodestination" rows="3" cols="50"></textarea>&nbsp;&nbsp;<span style="color: red">*</span><br/><br/>
                             <span style="font-size: 10px; color: red;">
-                                说明：<br/>
-                                1、普通员工请假小于2天的，须部门经理审批<br/>
-                                2、3-5天的需总监审批<br/>
-                                3、大于5天的需总经理审批<br/><br/>
+                                说明：&nbsp;&nbsp;*&nbsp;&nbsp;  为 必 填 项<br/>
                             </span>
                             <hr/>
                             下一步审批人：<input type="text" name="qingjiaocheckId" placeholder="请选择" th:value="${renshi.shangsi}" readonly="readonly"/> <br/> <br/>
@@ -152,20 +197,20 @@
                                 姓名：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="chuchaiuserId" th:value="${renshi.realName}" readonly="readonly"/>&nbsp;&nbsp;&nbsp;&nbsp;
                                 部门：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="chuchaideptId" th:value="${renshi.dept.dName}"
                                                                   readonly="readonly"/><br/><br/>
-                                出差日期：&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" name="chuchaistartdate" value=""/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                结束日期：&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" id="chuchaienddate" name="chuchaienddate" value=""/><br/><br/>
-                                出差地点：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="chuchaidestination" value=""/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                出差日期：&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" id="chuchaistartdate" name="chuchaistartdate" value=""/>&nbsp;&nbsp;<span style="color: red">*</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                结束日期：&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" id="chuchaienddate" name="chuchaienddate" value=""/>&nbsp;&nbsp;<span style="color: red">*</span><br/><br/>
+                                出差地点：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="chuchaidestination" name="chuchaidestination" value=""/>&nbsp;&nbsp;<span style="color: red">*</span>&nbsp;&nbsp;&nbsp;&nbsp;
                                 <span style="vertical-align: middle">出差方式：</span>&nbsp;&nbsp;&nbsp;&nbsp;<select
                                     name="chuchaitraffic">
                                 <option value="1">汽车</option>
                                 <option value="2">火车</option>
                                 <option value="3">飞机</option>
                                 <option value="4">轮船</option>
-                            </select><br/><br/>
+                            </select>&nbsp;&nbsp;<span style="color: red">*</span><br/><br/>
 
-                                出差事由：&nbsp;&nbsp;&nbsp;&nbsp; <textarea name="chuchaiincident" rows="3" cols="50"></textarea><br/><br/>
-                                工作任务：&nbsp;&nbsp;&nbsp;&nbsp; <textarea name="chuchaietask" rows="3" cols="50"></textarea><br/><br/>
-                                借款金额：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="chuchaimoney" value=""/> <br/> <br/>
+                                出差事由：&nbsp;&nbsp;&nbsp;&nbsp; <textarea name="chuchaiincident" id="chuchaiincident" rows="3" cols="50"></textarea>&nbsp;&nbsp;<span style="color: red">*</span><br/><br/>
+                                工作任务：&nbsp;&nbsp;&nbsp;&nbsp; <textarea name="chuchaietask" id="chuchaietask" rows="3" cols="50"></textarea>&nbsp;&nbsp;<span style="color: red">*</span><br/><br/>
+                                借款金额：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="chuchaimoney" name="chuchaimoney" value=""/>&nbsp;&nbsp;<span style="color: red">*</span> <br/> <br/>
                                 <hr/>
                                 下一步审批人：<input type="text" name="chuchaicheckId" placeholder="请选择" th:value="${renshi.shangsi}" readonly="readonly"/>
                                 <input type="button" id="chuchaitijiao" class="btn btn-primary" value="确定"/>
@@ -196,7 +241,7 @@
                                 职位：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="postId" th:value="${renshi.dictionary.valueName}"
                                                                   readonly="readonly"/><br/><br/>
 
-                                申请事由：&nbsp;&nbsp;&nbsp;&nbsp; <textarea name="applyment" rows="3" cols="50"></textarea><br/><br/>
+                                申请事由：&nbsp;&nbsp;&nbsp;&nbsp; <textarea name="applyment" id="applyment" rows="3" cols="50"></textarea>&nbsp;&nbsp;<span style="color: red">*</span><br/><br/>
                                 <hr/>
                                 下一步审批人：<input type="text" name="checkId" th:value="${renshi.shangsi}" placeholder="请选择" readonly="readonly"/>
                                 <input type="button" id="shourutijiao" class="btn btn-primary" value="确定"/>

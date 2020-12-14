@@ -42,7 +42,7 @@
                     hideDuration: 200
                 };
 
-                toastr.success('Welcome! ÕÅÈý.');
+                toastr.success('æ¬¢è¿Ž.');
             }, 1000);
 
         });

@@ -45,10 +45,10 @@ public class MeetingController {
         //分页数据
         int pageCount=meetingService.findAllPage();//总数据
         PageSupport pageSupport=new PageSupport();
-        pageSupport.setPageSize(2);
+        pageSupport.setPageSize(3);
         pageSupport.setTotalCount(pageCount);
         model.addAttribute("pageSupport",pageSupport);
-        List<Meeting> meetingList=meetingService.findAllMet(0,2);
+        List<Meeting> meetingList=meetingService.findAllMet(0,3);
         model.addAttribute("meetList",meetingList);
         Users user = (Users) session.getAttribute(Constants.USER_SESSION);
         model.addAttribute("user",user.getRoleId());
@@ -61,7 +61,7 @@ public class MeetingController {
     @ResponseBody
     public Map<String,Object> fenYe(Integer index){
         Map<String,Object> map=new HashMap<>();
-        int pageSize=2;
+        int pageSize=3;
         map.put("index",index);//计算之前传index的值
         index=(index-1)*pageSize;
         List<Meeting> meetingList=meetingService.findAllMet(index,pageSize);
@@ -92,61 +92,47 @@ public class MeetingController {
         //
         int pageCount=meetingService.findAllPage();//总数据
         PageSupport pageSupport=new PageSupport();
-        pageSupport.setPageSize(2);
+        pageSupport.setPageSize(3);
         pageSupport.setTotalCount(pageCount);
         model.addAttribute("pageSupport",pageSupport);
-        List<Meeting> meetingLists=meetingService.findAllMet(0,2);
+        List<Meeting> meetingLists=meetingService.findAllMet(0,3);
         model.addAttribute("meetList",meetingLists);
         //
         return "huiyiguanli";
     }
     //点击预定
     @RequestMapping(value = "/huiyiguanliYD.html",method = RequestMethod.POST)
-    public String yuDing( @RequestParam(required = false)Integer meetId, Model model,
-                          @RequestParam(required = false) String  mName,
-                          @RequestParam(required = false) String  reserveby,
-                          @RequestParam(required = false) String  rContent, HttpSession session) throws ParseException {
-        List<Meeting> metList=meetingService.findAllMeeting();
-        model.addAttribute("metList",metList);
-        //获取sesison的时间
-        String firstTime=(String )session.getAttribute("firstTime");
+    @ResponseBody
+    public String yuDing(@RequestParam(required = false)Integer metid,
+                         @RequestParam(required = false)String firstTime,
+                         @RequestParam(required = false)String yudRen,
+                         @RequestParam(required = false)String huiYiLeix) throws ParseException {
         //进行时间格式转换
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
-        Date Startdate=new Date();
+        Date date=new Date();
+        date=simpleDateFormat.parse(firstTime);
+        //
 
-        Startdate=simpleDateFormat.parse(firstTime);
         //根据姓名获得预订人的ID
-        int reservebyID=usersService.findIdName(reserveby);
+        int reservebyID=usersService.findIdName(yudRen);
         //创建对象，传值
         Reserve reserve=new Reserve();
-        reserve.setMeetId(meetId);
-        reserve.setStartdate(new Date());
-        reserve.setEnddate(new Date());
-        reserve.setrContent(rContent);
+        reserve.setMeetId(metid);
+        reserve.setStartdate(date);
+        reserve.setEnddate(date);
+        reserve.setrContent(huiYiLeix);
         reserve.setRecordby(reservebyID);
         reserve.setReserveby(reservebyID);
         reserve.setRecordtime(new Date());
-        //调用添加方法
+        //调用会议室添加方法
         int rel=reserveService.addReserve(reserve);
-        //
-        int pageCount=meetingService.findAllPage();//总数据
-        PageSupport pageSupport=new PageSupport();
-        pageSupport.setPageSize(2);
-        pageSupport.setTotalCount(pageCount);
-        model.addAttribute("pageSupport",pageSupport);
-        List<Meeting> meetingLists=meetingService.findAllMet(0,2);
-        model.addAttribute("meetList",meetingLists);
-        //
         if(rel>0){
             //添加成功后给会议室表修改数据
-            meetingService.updateById(meetId,reservebyID,new Date());
-            System.out.println("添加成功！");
-            return "huiyiguanli.html";
+            meetingService.updateById(metid,reservebyID,new Date());
+            return "会议室预定成功！";
         }else {
-            System.out.println("添加失败！！");
-            return "huiyiguanli";
+            return "会议室预定失败！！";
         }
-
     }
     @RequestMapping(value = "/ydGuanLi.html",method =RequestMethod.POST)
     @ResponseBody
@@ -173,7 +159,6 @@ public class MeetingController {
             reserve.setrContent(ydLeixing);
         }
         List<Reserve> reserveList=reserveService.findAllreserve(reserve);
-        System.out.println(reserveList.size()+"查询的大小");
         return reserveList;
     }
 
@@ -190,7 +175,6 @@ public class MeetingController {
         Reserve reserve=reserveService.findAllById(reserveId);
         int metId= (int) reserve.getMeetId();
         int rel=meetingService.updateLesureById(metId);
-        System.out.println(rel+"返回的id");
         if(rel>0){
             System.out.println("取消预定成功：）");
             int delRel=reserveService.delReserveById(reserveId);
@@ -208,16 +192,40 @@ public class MeetingController {
         //
         int pageCount=meetingService.findAllPage();//总数据
         PageSupport pageSupport=new PageSupport();
-        pageSupport.setPageSize(2);
+        pageSupport.setPageSize(3);
         pageSupport.setTotalCount(pageCount);
         model.addAttribute("pageSupport",pageSupport);
-        List<Meeting> meetingLists=meetingService.findAllMet(0,2);
+        List<Meeting> meetingLists=meetingService.findAllMet(0,3);
         model.addAttribute("meetList",meetingLists);
         //
         return "huiyiguanli";
     }
     //会议室添加
     @RequestMapping(value = "/addHuiyi.html",method = RequestMethod.POST)
+    @ResponseBody
+    public String addhuiyi(@RequestParam(required = false)String huiname,
+                           @RequestParam(required = false)String huims,HttpSession session){
+        System.out.println(huiname+"会议室名称");
+        System.out.println(huims+"会议室描述");
+
+        Meeting meeting = new Meeting();
+        meeting.setmName(huiname);
+        meeting.setMdescribe(huims);
+        meeting.setLeisure(1);
+        //获取登录人信息
+        Users user = (Users) session.getAttribute(Constants.USER_SESSION);
+        meeting.setCreatedby(user.getId());
+        meeting.setCreatedtime(new Date());
+        meeting.setModifyby(user.getId());
+        meeting.setModifytime(new Date());
+        int rel = meetingService.addMeeting(meeting);
+        if (rel > 0) {
+            return "添加成功：）";
+        } else {
+            return "添加失败！：（";
+        }
+    }
+    /*@RequestMapping(value = "/addHuiyi.html",method = RequestMethod.POST)
     public String addhuiyi(@RequestParam(required = false)String meetingName,
                            @RequestParam(required = false)String meetingMdescribe,
                            @RequestParam(required = false)Integer upMetid,Model model){
@@ -240,8 +248,8 @@ public class MeetingController {
             } else {
                 System.out.println("添加失败！：（");
             }
-        }
-        //显示会议室管理列表
+        }*/
+        /*//显示会议室管理列表
         List<Meeting> metList = meetingService.findAllMeeting();
         model.addAttribute("metList", metList);
         //
@@ -254,7 +262,7 @@ public class MeetingController {
         model.addAttribute("meetList",meetingLists);
         //
         return "huiyiguanli";
-    }
+    }*/
     //修改
     @RequestMapping(value = "changeMet.html",method = RequestMethod.POST)
     public String changeMet(Meeting meeting,HttpSession session,Model model){
@@ -270,11 +278,11 @@ public class MeetingController {
         }
         int pageCount=meetingService.findAllPage();//总数据
         PageSupport pageSupport=new PageSupport();
-        pageSupport.setPageSize(2);
+        pageSupport.setPageSize(3);
         pageSupport.setTotalCount(pageCount);
         model.addAttribute("pageSupport",pageSupport);
         //
-        List<Meeting> meetingLists=meetingService.findAllMet(0,2);
+        List<Meeting> meetingLists=meetingService.findAllMet(0,3);
         model.addAttribute("meetList",meetingLists);
         return "huiyiguanli";
     }
