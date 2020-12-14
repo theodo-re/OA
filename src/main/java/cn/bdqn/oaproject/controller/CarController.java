@@ -1,13 +1,7 @@
 package cn.bdqn.oaproject.controller;
 
-import cn.bdqn.oaproject.entity.Dept;
-import cn.bdqn.oaproject.entity.Users;
-import cn.bdqn.oaproject.entity.Vehicle;
-import cn.bdqn.oaproject.entity.Vehicleapply;
-import cn.bdqn.oaproject.service.DeptService;
-import cn.bdqn.oaproject.service.UsersService;
-import cn.bdqn.oaproject.service.VehicleService;
-import cn.bdqn.oaproject.service.VehicleapplyService;
+import cn.bdqn.oaproject.entity.*;
+import cn.bdqn.oaproject.service.*;
 import cn.bdqn.oaproject.util.Constants;
 import cn.bdqn.oaproject.util.PageSupport;
 import org.springframework.stereotype.Controller;
@@ -19,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.thymeleaf.spring5.context.SpringContextUtils;
 
 import javax.annotation.Resource;
+import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpSession;
 import java.util.*;
@@ -33,6 +28,8 @@ public class CarController {
     UsersService usersService;
     @Resource
     VehicleService vehicleService;
+    @Resource
+    TaskService taskService;
 
     /**
      * 用车申请页面
@@ -66,6 +63,7 @@ public class CarController {
         List<Vehicle> mo=vehicleService.findAllVmodel();
         model.addAttribute("vmodelList",mo);
         model.addAttribute("user",user.getRoleId());
+        model.addAttribute("adds","");
         return "yongcheguanli";
     }
     //
@@ -96,7 +94,8 @@ public class CarController {
      * @return
      */
     @RequestMapping(value = "disposeCar.html",method = RequestMethod.POST)
-    public String get(Vehicleapply vehicleapply,Model model,@RequestParam(required = false) String cheLiang){
+    public String get(Vehicleapply vehicleapply, Model model, @RequestParam(required = false) String cheLiang,HttpSession session){
+
         //通过车辆名称获取车辆编码
         Vehicle vehicle=vehicleService.findVnumberByVmodel(cheLiang);
         vehicleapply.setVnumber(vehicle.getVnumber());
@@ -106,8 +105,28 @@ public class CarController {
         int rel=vehicleapplyService.addVehapply(vehicleapply);
         if(rel>0){
             System.out.println("添加成功：）");
+            //申请表添加______________
+            //获得登陆人信息
+            Users user = (Users) session.getAttribute(Constants.USER_SESSION);
+            //根据用户名获取部门领导
+            String majer=usersService.findMajerByName(user.getRealName());
+            Task task=new Task();
+            task.settName(user.getRealName()+"用车申请");
+            task.setStatusId(1);//待审核初始为1
+            //审核人为登陆人领导
+            task.setAuditId(usersService.findByrealName(majer));
+            //创建人
+            task.setCreatedby(user.getId());
+            //创建时间
+            task.setCreatedtime(new Date());
+            int tas=taskService.add(task);
+            if(tas>0){
+                model.addAttribute("adds","申请表添加成功");
+            }else{
+                model.addAttribute("adds","申请表添加失败");
+            }
         }else {
-            System.out.println("添加成功：(");
+            System.out.println("添加失败：(");
         }
         //分页信息
 
@@ -235,9 +254,6 @@ public class CarController {
         vehicleapply.setId(id);
         //根据id查找时间
         List<Vehicleapply> vehicleapplyList=vehicleapplyService.findBehByidTime(vehicleapply);
-        System.out.println(carName+":获取的车名");
-        System.out.println(vehicleapply.getStartdate()+":获取的开始时间");
-        System.out.println(vehicleapply.getEnddate()+"：获取的结束时间");
         return vehicleapplyList;
 
 

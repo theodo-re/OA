@@ -15,6 +15,10 @@ public interface DeptDao {
      */
     List<Dept> findDeptByCreatedId(Long id);
     /**
+     * 没有部门负责人查询部门
+     */
+    List<Dept> findDeptByCreatedIdd(Long id);
+    /**
      * 修改部门
      */
     int updateDept(Dept dept);

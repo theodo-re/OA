@@ -24,6 +24,23 @@
     <script th:src="@{/vendors/jquery/jquery-3.4.1.js}" type="text/javascript"></script>
     <script>
         $(function () {
+            //
+            $("#add").change(function () {
+                alert(this.val());
+
+            })
+            //
+            $("#subm").click(function () {
+                if($("#shenhe").val()=="请选择"){
+
+                    alert("请先选择审核人！")
+                    $("#subm").attr('disabled',true);//提交按钮禁用
+                    return false;
+
+                }
+
+            })
+            //
             var sel = document.getElementById("shenhe");
             $("#subm").attr('disabled',true);//提交按钮禁用
             /*获取当前页码的值*/
@@ -210,6 +227,7 @@
                             <br/>
                             <input type="submit" class="btn btn-primary" value="确定" id="subm"/>
                             <input type="reset" class="btn btn-primary" value="取消"/>
+                            <input type="hidden" id="add" th:value="${adds}">
                         </div>
                     </form>
 

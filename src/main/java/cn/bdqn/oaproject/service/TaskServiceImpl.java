@@ -43,4 +43,9 @@ public class TaskServiceImpl implements TaskService{
         pageIndex=(pageIndex-1)*pageSize;
         return tdao.findAllfen(pageIndex,pageSize,auditId);
     }
+
+    @Override
+    public int add(Task task) {
+        return tdao.add(task);
+    }
 }

@@ -29,11 +29,17 @@
     </select>
     <select id="findDeptByCreatedId" resultMap="DD" parameterType="Long">
         SELECT d.id,d.dName,d.organId,d.userId,d.telephone,d.phone,d.fax,d.createdby,
-	     u1.realName,u2.realName,o.organName,o.id
-         FROM Dept d JOIN users u1 ON u1.id=d.userId
-         JOIN users u2 ON u2.id=d.createdby
+	     o.organName,o.id
+         FROM Dept d
          JOIN `organization` o ON o.id=d.organId
          where d.organId=#{id}
+    </select>
+    <select id="findDeptByCreatedIdd" resultMap="DD" parameterType="Long">
+         SELECT d.id,d.dName,d.organId,d.userId,d.telephone,d.phone,d.fax,d.createdby,
+	     o.organName,o.id
+         FROM Dept d
+         JOIN `organization` o ON o.id=d.organId
+         where  d.organId=#{id}
     </select>
     <update id="updateDept" parameterType="Dept">
         update dept set dName=#{deptName},userId=#{userId},telephone=#{telephone},
@@ -58,7 +64,7 @@
 	     o.organName,o.id
          FROM Dept d
          JOIN `organization` o ON o.id=d.organId
-         where d.organId=#{id}
+         where  d.id=#{id}
     </select>
     <insert id="addDept" parameterType="Dept">
         insert into Dept(dName,organId,userId,telephone,phone,fax,createdby,createdtime)

@@ -24,4 +24,8 @@ public interface TaskService {
      * 分页查询所有任务
      */
     List<Task> findAllfen(Integer pageIndex,Integer pageSize,Integer auditId);
+    /**
+     *添加任务
+     */
+    int add(Task task);
 }

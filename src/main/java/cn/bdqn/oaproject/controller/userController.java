@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -133,9 +134,10 @@ public class userController {
     @RequestMapping("/findDeptById")
     @ResponseBody
     public List<Dept> findDept(Integer id){
-        String num=id.toString();
-        Long deptid=Long.parseLong(num);
-        List<Dept> deptList=deptService.findDeptByCreatedId(deptid);
+
+            String num=id.toString();
+            Long deptid=Long.parseLong(num);
+            List<Dept> deptList=deptService.findDeptByCreatedId(deptid);
 
         return deptList;
     }

@@ -110,7 +110,6 @@ public class DeptServiceImpl implements DeptService{
     }
     @Override
     public int addDept(Dept dept,HttpSession session) {
-
         int rel1=deptDao.addDept(dept);
         Log log=new Log();
         Long userId=((Users)session.getAttribute(Constants.USER_SESSION)).getId();
@@ -131,6 +130,11 @@ public class DeptServiceImpl implements DeptService{
         }
 
         return rel;
+    }
+
+    @Override
+    public List<Dept> findDeptByCreatedIdd(Long id) {
+        return deptDao.findDeptByCreatedIdd(id);
     }
 
 

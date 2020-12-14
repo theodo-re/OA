@@ -2,6 +2,7 @@ package cn.bdqn.oaproject.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -12,6 +13,7 @@ public class Task {
   private long statusId;
   private long auditId;
   private long createdby;
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   @JsonFormat(pattern = "yyyy-MM-dd")
   private Date createdtime;
   private Dictionary dic;

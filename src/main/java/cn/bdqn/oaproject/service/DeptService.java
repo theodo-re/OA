@@ -40,4 +40,8 @@ public interface DeptService {
      * 添加部门
      */
     int addDept(Dept dept,HttpSession session);
+    /**
+     * 没有部门负责人查询部门
+     */
+    List<Dept> findDeptByCreatedIdd(Long id);
 }

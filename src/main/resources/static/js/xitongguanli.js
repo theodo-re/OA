@@ -164,7 +164,6 @@ function logNext() {
     if(j==i){
         alert("已经是最后一页了！")
     }else{
-        alert(j+1+"liusujun")
         logList(j+1);
     }
 
@@ -577,6 +576,7 @@ $(function(){
             $("[update='proId']").val(data.proId);
             $("[update='roleId']").val(data.roleId);
             $("[update='status']").val(data.status);
+            $("[update='phone']").val(data.phone);
         },"json")
     })
     //删除用户
