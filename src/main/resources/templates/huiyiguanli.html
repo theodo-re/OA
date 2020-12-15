@@ -31,6 +31,14 @@
                 }
 
             })
+            $("#yudRen").change(function () {
+                if($(this).val()!=""&&$(this).val()!=null){
+                    $("#yuding").attr('disabled',false);//提交按钮可用
+                }else{
+                    $("#yuding").attr('disabled',true);//提交按钮禁用
+                }
+
+            })
             //异步会议预定
             $("#yuding").click(function () {
 
@@ -38,7 +46,10 @@
                 var yudRen=$("#yudRen").val();//获取会议室预订人
                 var  huiYiLeix=$("#hylx").val();
                 if(huiYiLeix=="请选择类型"){
-                    alert("请选择会议室类型！")
+                    alert("请先选择会议室类型！")
+                    $("#yuding").attr('disabled',true);//提交按钮禁用
+                }else if (yudRen==""||yudRen==null){
+                    alert("预订人不能为空")
                     $("#yuding").attr('disabled',true);//提交按钮禁用
                 }else{
                     //获取会议室的id
@@ -53,7 +64,7 @@
                             //获取会议室的id
                             $.post("huiyiguanliYD.html","metid="+meetId[i].value+"&firstTime="+firstTime+"&yudRen="+yudRen+"&huiYiLeix="+huiYiLeix,function (data) {
                                 alert(data);
-                                window.location.reload();
+                                window.location.reload()
                             },"text")
                         }
                     }
@@ -117,6 +128,27 @@
                         $("#tr1").after(str);
                     }
                 },"json")
+
+            });
+            //点击取消预定
+            $("#qux").click(function () {
+                //获取会议室的id
+                var meetId=document.getElementsByName("reserveId");
+                for(var i=0;i<meetId.length;i++)
+                {
+                    //判断那个单选按钮为选中状态
+                    if(meetId[i].checked)
+                    {
+                        //弹出选中单选按钮的值
+                        // alert(radios[i].value);
+                        //获取会议室的id
+                        $.post("ydQuXiao.html","reserveId="+meetId[i].value,function (data) {
+                            alert(data);
+                            window.location.reload()
+                        },"text")
+                    }
+                }
+
 
             })
         })
@@ -222,7 +254,7 @@
             <div class="tab-pane fade show active" id="timeline" role="tabpanel" aria-labelledby="timeline-tab">
                 <div class="timeline">
 
-                    <form action="huiyiguanli.html" method="post">
+                    <form action="huiyicx.html" method="post">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">预定时间段：</label>
                             <input type="date" placeholder="开始时间" id="firstTime" name="firstTime" th:value="${firstTime}" required="required"> 提示：预定时间段必须为同一天&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -309,7 +341,7 @@
                             <div class="card">
                                 <div class="card-header d-flex align-items-center justify-content-between">查询结果：
                                 </div>
-                                <form action="ydQuXiao.html" method="post">
+                               <!-- <form action="ydQuXiao.html" method="post">-->
                                     <div class="card-body">
                                         <div class="table-responsive">
                                             <table class="table table-borderless" id="tab">
@@ -329,8 +361,8 @@
                             </div>
                         </div>
                         <input type="hidden" id="reId">
-                        <button type="submit" class="btn btn-primary" id="qux">取消预定</button>
-                        </form>
+                        <button type="button" class="btn btn-primary" id="qux">取消预定</button>
+                       <!-- </form>-->
                     </div>
                 </div>
 

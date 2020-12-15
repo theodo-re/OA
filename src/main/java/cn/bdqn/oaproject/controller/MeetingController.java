@@ -37,18 +37,19 @@ public class MeetingController {
     UsersService usersService;
 
     //会议管理
-    @RequestMapping(value = "/huiyiguanli",method = RequestMethod.GET)
+    @RequestMapping(value = "/huiyiguanli.html",method = RequestMethod.GET)
     public String meeting(Model model,HttpSession session){
         List<Meeting> metList=meetingService.findAllMeeting();
         model.addAttribute("metList",metList);
         //进入页面显示出全部的会议室
         //分页数据
+        int pageSize=3;
         int pageCount=meetingService.findAllPage();//总数据
         PageSupport pageSupport=new PageSupport();
-        pageSupport.setPageSize(3);
+        pageSupport.setPageSize(pageSize);
         pageSupport.setTotalCount(pageCount);
         model.addAttribute("pageSupport",pageSupport);
-        List<Meeting> meetingList=meetingService.findAllMet(0,3);
+        List<Meeting> meetingList=meetingService.findAllMet(0,pageSize);
         model.addAttribute("meetList",meetingList);
         Users user = (Users) session.getAttribute(Constants.USER_SESSION);
         model.addAttribute("user",user.getRoleId());
@@ -74,7 +75,7 @@ public class MeetingController {
     //
 
     //处理管理
-    @RequestMapping(value = "/huiyiguanli.html",method = RequestMethod.POST)
+    @RequestMapping(value = "/huiyicx.html")
     public String meetingShow(@RequestParam(required = false) String  firstTime,
                               @RequestParam(required = false)Integer meetId, Model model,
                               @RequestParam(required = false) String  mName,
@@ -112,7 +113,6 @@ public class MeetingController {
         Date date=new Date();
         date=simpleDateFormat.parse(firstTime);
         //
-
         //根据姓名获得预订人的ID
         int reservebyID=usersService.findIdName(yudRen);
         //创建对象，传值
@@ -170,35 +170,21 @@ public class MeetingController {
         return  reserveList;
 
     }
-    @RequestMapping("/ydQuXiao.html")
+    @RequestMapping(value = "/ydQuXiao.html")
+    @ResponseBody
     public String ydQuxiao(@RequestParam(required = false)Integer reserveId,Model model){
         Reserve reserve=reserveService.findAllById(reserveId);
         int metId= (int) reserve.getMeetId();
         int rel=meetingService.updateLesureById(metId);
         if(rel>0){
-            System.out.println("取消预定成功：）");
             int delRel=reserveService.delReserveById(reserveId);
-            if(delRel>0){
-                System.out.println("删除成功：）");
-            }
-            else {
-                System.out.println("删除失败！：（");
-            }
+           return "取消预定成功：）";
         }else{
-            System.out.println("取消预定失败！：（");
+            return "取消预定失败！：（";
         }
-        List<Meeting> metList=meetingService.findAllMeeting();
-        model.addAttribute("metList",metList);
-        //
-        int pageCount=meetingService.findAllPage();//总数据
-        PageSupport pageSupport=new PageSupport();
-        pageSupport.setPageSize(3);
-        pageSupport.setTotalCount(pageCount);
-        model.addAttribute("pageSupport",pageSupport);
-        List<Meeting> meetingLists=meetingService.findAllMet(0,3);
-        model.addAttribute("meetList",meetingLists);
-        //
-        return "huiyiguanli";
+        /*List<Meeting> metList=meetingService.findAllMeeting();
+        model.addAttribute("metList",metList);*/
+        /*return "redirect:/huiyiguanli.html";*/
     }
     //会议室添加
     @RequestMapping(value = "/addHuiyi.html",method = RequestMethod.POST)
@@ -276,15 +262,15 @@ public class MeetingController {
         } else {
             System.out.println("修改失败！：（");
         }
-        int pageCount=meetingService.findAllPage();//总数据
+        /*int pageCount=meetingService.findAllPage();//总数据
         PageSupport pageSupport=new PageSupport();
         pageSupport.setPageSize(3);
         pageSupport.setTotalCount(pageCount);
         model.addAttribute("pageSupport",pageSupport);
         //
         List<Meeting> meetingLists=meetingService.findAllMet(0,3);
-        model.addAttribute("meetList",meetingLists);
-        return "huiyiguanli";
+        model.addAttribute("meetList",meetingLists);*/
+        return "redirect:/huiyiguanli.html";
     }
     //异步处理修改
     @RequestMapping(value = "/xiugaiHy.html",method = RequestMethod.POST)

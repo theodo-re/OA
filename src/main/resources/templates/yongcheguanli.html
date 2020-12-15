@@ -24,6 +24,12 @@
     <script th:src="@{/vendors/jquery/jquery-3.4.1.js}" type="text/javascript"></script>
     <script>
         $(function () {
+            $("#cheliang").change(function () {
+                if($(this).val()!="请选择"){
+                    $("#subm").attr('disabled',false);//提交按钮可用
+                }
+
+            })
             //
             $("#add").change(function () {
                 alert(this.val());
@@ -32,11 +38,13 @@
             //
             $("#subm").click(function () {
                 if($("#shenhe").val()=="请选择"){
-
                     alert("请先选择审核人！")
                     $("#subm").attr('disabled',true);//提交按钮禁用
                     return false;
-
+                }else if($("#cheliang").val()=="请选择"){
+                    alert("请先选择要使用的车辆")
+                    $("#subm").attr('disabled',true);//提交按钮禁用
+                    return false;
                 }
 
             })
@@ -55,10 +63,11 @@
                     $("#subm").attr('disabled',true);//提交按钮禁用
                     alert("请选择审核人！")
                 }else {
-                    $.post("majer.html", "mejName=" + majer, function (data) {
-                        $("#checkid").val(data);
-                    }, "text")
-                    $("#subm").attr('disabled',false);//提交按钮禁用
+                        $.post("majer.html", "mejName=" + majer, function (data) {
+                            $("#checkid").val(data);
+                        }, "text")
+                        $("#subm").attr('disabled', false);//提交按钮可用
+
                 }
             });
             //获取单选框
@@ -79,7 +88,7 @@
                 var str = "<tr ><th>车牌号<input type=\'text\' value=\'" + (data.vplate) + "\' name='vplate' placeholder='请输入要修改的内容' class=\"form-control\" id='vplat'></th></tr><br/>" +
                     "<tr><th><input type=\'hidden\' value=\'" + (data.id) + "\' name='id'></th></tr>" +
                     "<tr ><th >车型<input type=\'text\' value=\'" + (data.vmodel) + "\' placeholder='请输入要修改的内容' name='vmodel' class=\"form-control\" id=\"vmodel\"></th></tr>" +
-                    "<tr ><th >编号<input type=\'text\' value=\'" + (data.vnumber) + "\' placeholder='请输入要修改的内容' name='vnumber' class=\"form-control\" id=\"vnumber\"></th></tr>" +
+                    "<tr ><th >编号<span   placeholder='请输入要修改的内容' name='vnumber' class=\"form-control\" id=\"vnumber\">" + (data.vnumber) + "</span></th></tr>" +
                     "<tr ><th >备注<input type=\'text\' value=\'" + (data.vcomment) + "\' name='vcomment' placeholder='请输入要修改的内容' class=\"form-control\" id=\"recipient-name\"></th></tr>";
                 $("#div1").append(str);
             }, "json")

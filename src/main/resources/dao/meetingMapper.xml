@@ -14,18 +14,11 @@
 
     <!--根据时间查询-->
     <select id="findMeetingByTime" resultType="Meeting">
-        SELECT DISTINCT m.*,r.`enddate` FROM meeting m
-LEFT JOIN reserve r
-ON m.`id`=r.`meetId`
-<where>
-    <if test="firstTiem!=null and firstTiem!=''">
-         r.`enddate`!=#{firstTiem} AND m.`modifytime`!=#{firstTiem} OR r.`enddate` IS NULL
-    </if>
-    <if test="firstTiem=='' or firstTiem==null">
-          m.`leisure`=1
-    </if>
-    GROUP BY m.`id`
-</where>
+        SELECT  m.* FROM meeting m
+        WHERE id NOT IN(
+        SELECT  me.`id` FROM meeting me
+        LEFT JOIN reserve r ON me.`id`=r.`meetId`
+        WHERE r.`enddate`=#{firstTiem}   GROUP BY me.`id`)
     </select>
 
     <!--根据id修改是否空闲-->

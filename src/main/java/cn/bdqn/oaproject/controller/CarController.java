@@ -45,10 +45,15 @@ public class CarController {
         model.addAttribute("dname",dept.getDeptName());
         //根据用户名获取部门领导
         String majer=usersService.findMajerByName(user.getRealName());
-        model.addAttribute("majer",majer);
+        if(majer!=null){
+            model.addAttribute("majer",majer);
+        }else{
+            model.addAttribute("majer",user.getRealName());
+        }
+
         //显示全部的车辆信息
         //分页
-        int pageSize=2;
+        int pageSize=3;
         List<Vehicle> vehicleList=vehicleService.findAllVehicle(0,pageSize);
         model.addAttribute("vehicleList",vehicleList);
         //设置每页条数
@@ -70,7 +75,7 @@ public class CarController {
     @RequestMapping(value = "fenye.html",method=RequestMethod.GET)
     @ResponseBody
     public Map<String,Object> page(Integer index){
-        int pageSize=2;
+        int pageSize=3;
         Map<String ,Object> map=new HashMap<>();
         map.put("index",index);
         index=(index-1)*pageSize;
@@ -138,7 +143,7 @@ public class CarController {
     @RequestMapping("/guanLiCar.html")
     public String cheGuanLi(@RequestParam(required = false) String chePai,
                             @RequestParam(required = false)String cheXing,
-                            @RequestParam(required = false)Integer vehId,Model model){
+                            @RequestParam(required = false)Integer vehId,Model model,HttpSession session){
 
         //添加车辆信息
         int vnumber=(int)((Math.random()*9+1)*10000);//随机生成车辆编号
@@ -157,15 +162,17 @@ public class CarController {
             }
         }
         if((chePai!=null&&!chePai.equals(""))||(cheXing!=null&&!cheXing.equals(""))){
+            //获取登录人信息
+            Users user = (Users) session.getAttribute(Constants.USER_SESSION);
             Vehicle vehicle=new Vehicle();
             vehicle.setVplate(chePai);
             vehicle.setVmodel(cheXing);
             vehicle.setVnumber(""+vnumber);
             vehicle.setCallId(2);
             vehicle.setVcomment(null);
-            vehicle.setCreatedby(1);
+            vehicle.setCreatedby(user.getId());
             vehicle.setCreatedtime(new Date());
-            vehicle.setModifyby(1);
+            vehicle.setModifyby(user.getId());
             vehicle.setModifytime(new Date());
             int rel=vehicleService.addVehicle(vehicle);
             if(rel>0){
@@ -180,7 +187,7 @@ public class CarController {
         /*List<Vehicle> vehicleList=vehicleService.findAllVehicle();
         model.addAttribute("vehicleList",vehicleList);*/
         //分页信息
-        int pageCount=vehicleService.findPage();//
+       /* int pageCount=vehicleService.findPage();//
         int pageSize=2;
         PageSupport pageSupport=new PageSupport();
         //pageSupport.setCurrentPageNo(pageIndex);
@@ -188,7 +195,7 @@ public class CarController {
         pageSupport.setTotalCount(pageCount);
         model.addAttribute("pageSupport",pageSupport);
         List<Vehicle> vehicleList=vehicleService.findAllVehicle(0,pageSize);
-        model.addAttribute("vehicleList",vehicleList);
+        model.addAttribute("vehicleList",vehicleList);*/
         return "redirect:/yongcheguanli.html";
     }
     //删除
@@ -221,7 +228,7 @@ public class CarController {
         vehicle.setModifytime(new Date());
         vehicle.setModifyby(users.getId());
         vehicleService.updateVehicle(vehicle);
-        //分页信息
+        /*//分页信息
         int pageCount=vehicleService.findPage();//
         int pageSize=2;
         PageSupport pageSupport=new PageSupport();
@@ -230,8 +237,8 @@ public class CarController {
         pageSupport.setTotalCount(pageCount);
         model.addAttribute("pageSupport",pageSupport);
         List<Vehicle> vehicleList=vehicleService.findAllVehicle(0,pageSize);
-        model.addAttribute("vehicleList",vehicleList);
-        return "yongcheguanli";
+        model.addAttribute("vehicleList",vehicleList);*/
+        return "redirect:/yongcheguanli.html";
     }
     //异步判断是否修改的数据已存在
     @RequestMapping("vplate.html")
